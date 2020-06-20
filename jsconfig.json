@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
+      "api": ["./source/app/api.js"],
+      "components/*": ["./source/app/components/*"],
+      "flux/*": ["./source/app/flux/*"],
+      "hooks/*": ["./source/app/hooks/*"],
+      "helpers/*": ["./source/app/helpers/*"],
+      "config/*": ["./source/config/*"],
+      "models/*": ["./source/api/models/*"],
+      "core/*": ["./source/app/core/*"],
+    }
+  },
+  //Add any build/compiled folders here to stop vscode searching those
+  "exclude": ["node_modules", "build"]
+}

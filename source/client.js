@@ -1,5 +1,12 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
+import { render } from 'react-dom'
 import App from './app/app'
+import { BrowserRouter } from 'react-router-dom'
 
-hydrate(<App />, document.getElementById('render_target'))
+const Client = () => (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
+
+render(<Client />, document.getElementById('render_target'))

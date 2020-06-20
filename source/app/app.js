@@ -1,12 +1,19 @@
 import React from 'react'
-import Logo from './logo.png'
+import { Switch, Route } from 'react-router-dom'
+import { Normalize } from 'styled-normalize'
+import './styles.css'
+
+// pages
+import Home from './pages/home'
 
 const App = props => {
   return (
-    <div>
-      <img src={Logo} />
-      <h1>helo</h1>
-    </div>
+    <>
+      <Normalize />
+      <Switch>
+        <Route path='/' exact component={Home} />
+      </Switch>
+    </>
   )
 }
 

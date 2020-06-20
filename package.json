@@ -1,5 +1,5 @@
 {
-  "name": "lambda",
+  "name": "chiapas",
   "version": "1.0.0",
   "description": "",
   "main": "/",
@@ -11,7 +11,7 @@
     "build:front": "webpack --config webpack/client.js",
     "watch": "set NODE_ENV=development&& concurrently  \"npm run build:localserver\" \"npm run watch:front\" ",
     "server": "nodemon build/server",
-    "prod": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front && npm run server"
+    "prod": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front && vercel dev"
   },
   "author": "armandojes",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "babel-loader": "^8.0.6",
     "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.4",
+    "css-loader": "^3.6.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-config-standard-react": "^9.2.0",
@@ -36,16 +37,26 @@
     "nodemon": "^2.0.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "style-loader": "^1.2.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.10.2",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "express": "^4.17.1",
     "latest": "^0.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "mongoose": "^5.9.15",
+    "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-fetch-ssr": "^3.0.5"
+    "react-fetch-ssr": "^3.0.5",
+    "styled": "^1.0.0",
+    "styled-components": "^5.1.1",
+    "styled-normalize": "^8.0.7",
+    "vercel": "^19.1.1"
   }
 }
