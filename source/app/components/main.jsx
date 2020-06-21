@@ -18,3 +18,9 @@ export const FullWidthCentered = styled.div`
   align-items: center;
   min-height: 80vh;
 `
+export const FlexCentered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: ${props => props.minHeight || '0px'}
+`

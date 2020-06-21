@@ -6,6 +6,7 @@ import './styles.css'
 // pages
 import Home from './pages/home'
 import Login from './pages/login'
+import Register from './pages/register'
 
 const App = props => {
   return (
@@ -14,6 +15,7 @@ const App = props => {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/login' exact component={Login} />
+        <Route path='/register' exact component={Register} />
       </Switch>
     </>
   )
