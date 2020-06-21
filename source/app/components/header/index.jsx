@@ -23,7 +23,7 @@ const Header = () => {
       </Primary>
       <Seconday>
         <Container>
-          <Title>Artesanias Chiapas</Title>
+          <Title>ARTS</Title>
           <MenuHeader>
             Categoria
             <LinkStyled to='/' as={Link}>Galeria de artesanias</LinkStyled>

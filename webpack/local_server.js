@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const env = process.env.NODE_ENV
 const ExtracCssPlugin = require('mini-css-extract-plugin')
+var ip = require('ip')
 
 const config = {
   entry: ['regenerator-runtime/runtime', path.resolve(__dirname, '../source/localserver.js')],
@@ -9,7 +10,7 @@ const config = {
     path: path.resolve(__dirname, '../build'),
     filename: 'server.js',
     libraryTarget: 'commonjs',
-    publicPath: env === 'development' ? 'http://localhost:8080/public/' : 'http://localhost:3000/public/'
+    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'http://localhost:3000/public/'
   },
   mode: 'development',
   module: {
@@ -49,7 +50,7 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
-      publicPath: JSON.stringify(env === 'development' ? 'http://localhost:8080/public' : 'http://localhost:3000/public')
+      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public` : 'http://localhost:3000/public')
     }),
     new ExtracCssPlugin({
       filename: 'styles.css'

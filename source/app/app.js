@@ -5,6 +5,7 @@ import './styles.css'
 
 // pages
 import Home from './pages/home'
+import Login from './pages/login'
 
 const App = props => {
   return (
@@ -12,6 +13,7 @@ const App = props => {
       <Normalize />
       <Switch>
         <Route path='/' exact component={Home} />
+        <Route path='/login' exact component={Login} />
       </Switch>
     </>
   )

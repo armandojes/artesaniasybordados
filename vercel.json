@@ -1,4 +1,4 @@
-{
+{ "alias": "art",
   "version": 2,
   "rewrites": [
     {"source": "/api/(.*)",  "destination": "/api/api"},
