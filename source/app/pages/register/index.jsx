@@ -5,15 +5,14 @@ import Container from 'components/container'
 import { Grid, Box, Button, CircularProgress } from '@material-ui/core'
 import InputGroup from 'components/inputs/group'
 import useObjectState from 'hooks/useState'
+import { Alert } from '@material-ui/lab'
 
 const Register = props => {
   const [state, setState] = useObjectState({
-    loading: true
+    loading: false,
+    errors: ['name'],
+    errorMessage: 'Todos los campos son requeridos'
   })
-
-  const onAnyInputChange = event => {
-    setState({ [event.target.name]: event.target.value })
-  }
 
   return (
     <Layout>
@@ -34,23 +33,28 @@ const Register = props => {
                       <Box p={3}>
                         <form>
                           <Grid container spacing={2}>
+                            {state.errorMessage && (
+                              <Grid item xs={12}>
+                                <Alert severity='error'>{state.errorMessage}</Alert>
+                              </Grid>
+                            )}
                             <Grid item xs={12} md={6}>
-                              <InputGroup name='name' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Nombre' />
+                              <InputGroup name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre' />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                              <InputGroup name='lastname' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Apellidos' />
+                              <InputGroup name='lastname' setState={setState} state={state} variant='outlined' fullWidth label='Apellidos' />
                             </Grid>
                             <Grid item xs={12}>
-                              <InputGroup name='email' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Correo electronico' />
+                              <InputGroup name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
                             </Grid>
                             <Grid item xs={12}>
-                              <InputGroup name='number' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
+                              <InputGroup name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
                             </Grid>
                             <Grid item xs={12}>
-                              <InputGroup name='password' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Contraseña' />
+                              <InputGroup name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
                             </Grid>
                             <Grid item xs={12}>
-                              <InputGroup name='repassword' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
+                              <InputGroup name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
                             </Grid>
                             <Grid item xs={12}>
                               <Button fullWidth variant='contained' color='primary'>Registrarme</Button>

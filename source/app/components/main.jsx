@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Text = styled.div`
   font-size: ${props => props.fontSize ? props.fontSize : '1em'};
+  text-align: ${props => props.align || 'left'}
 `
 export const Paper = styled.div`
   padding: 10px;

@@ -8,7 +8,7 @@
       "flux/*": ["./source/app/flux/*"],
       "hooks/*": ["./source/app/hooks/*"],
       "helpers/*": ["./source/app/helpers/*"],
-      "config/*": ["./source/config/*"],
+      "config*": ["./source/config/*"],
       "models/*": ["./source/api/models/*"],
       "core/*": ["./source/app/core/*"],
     }
