@@ -1,36 +1,36 @@
-import React from 'react'
-import { Header as HeaderP, Primary, Seconday, ActionsContainer, Item, Title, MenuHeader, LinkStyled } from './styled'
+import React from 'React'
+import { AppBar, Toolbar, Grid } from '@material-ui/core'
+import { Content, Logo } from './styled'
+import Input from 'components/inputs/textfiled'
 import Container from 'components/container'
-import { ShoppingCart, Call } from '@material-ui/icons'
-import { Text } from 'components/main'
-import { Link } from 'react-router-dom'
+import LogoSrc from '../../assets/logo.png'
 
 const Header = () => {
   return (
-    <HeaderP>
-      <Primary>
+    <Content position='sticky' as={AppBar}>
+      <Toolbar>
         <Container>
-          <ActionsContainer>
-            <Item>
-              <Call />
-              <Text>9671198782</Text>
-            </Item>
-            <Item>
-              <ShoppingCart />
-            </Item>
-          </ActionsContainer>
+          <Grid container spacing={2}>
+            <Grid item xs={6} container>
+              <Grid item xs={3}>
+                <Logo src={LogoSrc} />
+              </Grid>
+              <Grid item xs={9}>
+                <Input
+                  fullWidth
+                  variant='outlined'
+                  placeholder='Search…'
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item xs={6}>
+              hello
+            </Grid>
+          </Grid>
         </Container>
-      </Primary>
-      <Seconday>
-        <Container>
-          <Title>ARTS</Title>
-          <MenuHeader>
-            Categoria
-            <LinkStyled to='/' as={Link}>Galeria de artesanias</LinkStyled>
-          </MenuHeader>
-        </Container>
-      </Seconday>
-    </HeaderP>
+      </Toolbar>
+    </Content>
   )
 }
 

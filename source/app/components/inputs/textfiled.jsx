@@ -1,6 +1,5 @@
 import { TextField } from '@material-ui/core'
 import React from 'react'
-import styled from 'styled-components'
 import { func, string, number } from 'prop-types'
 
 const TextFiled = props => {
@@ -25,7 +24,7 @@ const TextFiled = props => {
   }
 
   return (
-    <TextFiledStyled {...otherProps} onChange={handleChange} />
+    <TextField fullWidth variant='outlined' color='primary' margin='normal' {...otherProps} onChange={handleChange} />
   )
 }
 
@@ -36,12 +35,3 @@ TextFiled.propTypes = {
 }
 
 export default TextFiled
-
-const TextFiledStyled = styled(TextField)`
-  & .MuiOutlinedInput-input {
-    padding: 10px
-  }
-  & .MuiInputLabel-outlined {
-    transform: translate(14px, 13px) scale(1);
-  }
-`

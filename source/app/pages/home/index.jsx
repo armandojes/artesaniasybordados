@@ -4,7 +4,7 @@ import Container from 'components/container'
 import { getList } from 'core/articles'
 import useObjectState from 'hooks/useState'
 import useFetch from 'hooks/useFetch'
-import Skeleton from './skeleton'
+import Skeleton from 'components/skeletonGrid'
 import { Grid } from '@material-ui/core'
 import Article from 'components/article'
 

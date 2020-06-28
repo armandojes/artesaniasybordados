@@ -10,9 +10,9 @@
       "helpers/*": ["./source/app/helpers/*"],
       "config*": ["./source/config/*"],
       "models/*": ["./source/api/models/*"],
-      "core/*": ["./source/app/core/*"],
+      "core/*": ["./source/app/core/*"]
     }
   },
-  //Add any build/compiled folders here to stop vscode searching those
-  "exclude": ["node_modules", "build"]
+  "include": ["source/**/*"],
+  "exclude": ["node_modules"]
 }

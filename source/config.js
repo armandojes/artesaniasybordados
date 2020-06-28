@@ -13,3 +13,12 @@ export const firebaseConfig = {
 export default {
   secret
 }
+
+// Inputs
+export const genders = {
+  male: 'Hombre',
+  female: 'Mujer',
+  both: 'ambos'
+}
+
+export const limitPictures = 5

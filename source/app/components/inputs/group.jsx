@@ -1,23 +1,20 @@
 import TextFiled from 'components/inputs/textfiled'
 import React from 'react'
 import { array, string, object, func } from 'prop-types'
+import { Select, MenuItem, FormControl, InputLabel } from '@material-ui/core'
 
 const GroupInput = props => {
-  const { state, setState, ...otherProps } = props
-
-  const inputProps = {
-    ...otherProps,
-    value: state[props.name] || '',
-    error: state.errors.includes(props.name)
-  }
+  const { state = {}, setState, ...otherProps } = props
+  state.errors = state.errors || []
 
   const onAnyInputChange = event => {
     setState({ [event.target.name]: event.target.value })
   }
 
   const handleRemoveError = event => {
-    console.log(event.target.name)
-    const newErrors = props.state.errors.filter(error => event.target.name !== error)
+    console.log(event.target)
+    const newErrors = state.errors.filter(error => event.target.name !== error)
+    if (state.errors.length === newErrors.length) return true
     setState({
       ...state,
       errors: newErrors,
@@ -25,9 +22,33 @@ const GroupInput = props => {
     })
   }
 
+  const inputProps = {
+    value: state[props.name] || '',
+    error: state.errors ? state.errors.includes(props.name) : false,
+    onChange: onAnyInputChange,
+    onFocus: handleRemoveError,
+    ...otherProps
+  }
+
   if (!props.type || props.type === 'string' || props.type === 'password') {
     return (
-      <TextFiled {...inputProps} onChange={onAnyInputChange} onFocus={handleRemoveError} />
+      <TextFiled
+        {...inputProps}
+      />
+    )
+  }
+
+  if (props.type === 'select') {
+    const { onFocus, options, label, ...otherSelectProps } = inputProps
+    return (
+      <FormControl fullWidth variant='outlined' margin='normal'>
+        <InputLabel>{label}</InputLabel>
+        <Select {...otherSelectProps} label={label} onFocus={() => onFocus({ target: { name: otherSelectProps.name } })}>
+          {Object.keys(options).map((keyname) => (
+            <MenuItem key={keyname} value={keyname}>{options[keyname]}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     )
   }
 
