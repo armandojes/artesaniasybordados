@@ -1,37 +1,37 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Admin from 'components/admin'
 import Container from 'components/container'
 import { TitlePage } from 'components/main'
 import { Grid } from '@material-ui/core'
-import { getListAll } from 'core/articles'
-import useState from 'hooks/useState'
+import { getListAll, drop } from 'core/articles'
+import useObjectState from 'hooks/useState'
 import Skeleton from 'components/skeletonGrid'
 import Card from './card'
+import { setAlert } from 'flux/alert'
+import { useDispatch } from 'react-redux'
 
 const List = props => {
-  const [state, setState] = useState({
-    limit: 10,
+  const limit = 5
+  const dispatch = useDispatch()
+  const [fetchNextpage, setHandleNext] = useState(() => getListAll(limit))
+  const [state, setState] = useObjectState({
     items: [],
     finished: false
   })
 
-  const fetchNextpage = useMemo(() => getListAll(10), [])
-
   const handlefetch = async () => {
-    console.log('fetched')
     setState({ loading: true })
     const items = await fetchNextpage()
-    console.log(items)
     setState({
       items: [...state.items, ...items],
-      finished: items.length < state.limit,
+      finished: items.length < limit,
       loading: false
     })
   }
 
   useEffect(() => {
     handlefetch()
-  }, [])
+  }, [fetchNextpage])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -44,8 +44,20 @@ const List = props => {
     const viewportHeight = window.innerHeight
     const fullHeight = document.getElementById('render_target').clientHeight
     if ((scrolled + viewportHeight + 100) < fullHeight) return false
+    console.log('loading: false')
     if (state.finished) return false
     handlefetch()
+  }
+
+  const handleDelete = data => {
+    dispatch(setAlert({
+      description: '¿Seguro quieres borrar este articulo?',
+      action: async () => {
+        await drop(data)
+        setState({ limit: 10, items: [], finished: false, loading: false })
+        setHandleNext(() => getListAll(limit))
+      }
+    }))
   }
 
   return (
@@ -55,7 +67,7 @@ const List = props => {
         <Grid container spacing={2}>
           {state.items.map(item => (
             <Grid key={item.id} item xs={6} sm={4} md={3}>
-              <Card {...item} />
+              <Card {...item} handleDelete={handleDelete} />
             </Grid>
           ))}
         </Grid>

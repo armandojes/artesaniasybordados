@@ -1,9 +1,10 @@
-import DB, { snapShotParser } from './index'
+import db, { snapShotParser } from './index'
 import { filterObject } from 'helpers/validate'
+import { drop as dropFile } from './storage'
 
 export const getList = async _param => {
   try {
-    const snapshot = await DB.collection('articles').get()
+    const snapshot = await db.collection('articles').get()
     return snapShotParser(snapshot)
   } catch (error) {
     console.log('__error__', error)
@@ -18,7 +19,7 @@ export const getListAll = (limit = 5) => {
   return async () => {
     if (finished) return []
     try {
-      let query = DB.collection('articles')
+      let query = db.collection('articles')
       if (last) query = query.startAfter(last)
       if (limit) query = query.limit(limit)
       const snapshot = await query.get()
@@ -36,7 +37,7 @@ export const add = async data_ => {
   const allow = ['title', 'price', 'gender', 'description']
   const data = filterObject(data_, allow)
   try {
-    const result = await DB.collection('articles').add({ ...data, date: new Date() })
+    const result = await db.collection('articles').add({ ...data, date: new Date() })
     return result.id
   } catch (error) {
     console.log('_error_', error)
@@ -49,10 +50,21 @@ export const update = async (id, data_) => {
   const data = filterObject(data_, allow)
 
   try {
-    await DB.doc(`articles/${id}`).update({ ...data, date: new Date() })
+    await db.doc(`articles/${id}`).update({ ...data, date: new Date() })
     return id
   } catch (error) {
     console.log('_error_', error)
     return null
+  }
+}
+
+export const drop = async data => {
+  try {
+    await db.doc(`articles/${data.id}`).delete()
+    await Promise.all(data.pictures.map(picture => dropFile(picture)))
+    await dropFile(data.picture)
+    return true
+  } catch (error) {
+    return false
   }
 }

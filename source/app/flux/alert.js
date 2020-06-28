@@ -31,7 +31,7 @@ export const setLoading = flux.createAction('SET_LOADING', (state, payload) => {
 export const action = () => async (dispatch, getState) => {
   const state = getState()
   dispatch(setLoading(true))
-  await dispatch(state.action.action)
+  await dispatch(state.alert.action)
   dispatch(setInitialState())
 }
 

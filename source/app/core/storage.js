@@ -17,3 +17,15 @@ export const uploadPicture = async (path, file, isPrimary = false) => {
     return null
   }
 }
+
+export const drop = async url => {
+  try {
+    var filePath = decodeURIComponent(url)
+    filePath = filePath.split('/o/')[1]
+    filePath = filePath.split('?alt=media')[0]
+    await storageRef.child(filePath).delete()
+    return true
+  } catch (error) {
+    return false
+  }
+}
