@@ -8,14 +8,19 @@ import Multimedia from './multimedia'
 import { requires } from 'helpers/validate'
 import propTypes from 'prop-types'
 import { add, update } from 'core/articles'
-import { uploadPicture } from 'core/storage'
+import { uploadPicture, drop } from 'core/storage'
+import { useLocation } from 'react-router-dom'
 
 const Form = props => {
+  const location = useLocation()
   const steps = ['Datos generales', 'Descripcion', 'Multimedia', 'Confirmacion']
-  const [state, setState] = useObjectState({})
-  const [currentStep, setCurrentStep] = useState(0)
-  const totalToUpload = state.pictures ? (state.pictures.length + 1) : 0
+  const initialState = location.state
   var indexUploading = 1
+  const [state, setState] = useObjectState(initialState || {})
+  const [currentStep, setCurrentStep] = useState(0)
+  const fileToUpload = state.pictures ? state.pictures.filter(picture => typeof picture !== 'string') : []
+  var totalToUpload = state.pictures ? (fileToUpload.length) : 0
+  if (state && typeof state.picture === 'object') totalToUpload++
 
   const handleUpdateMessage = () => {
     if (totalToUpload >= indexUploading) props.setMessage(`Subiendo imagenes ${indexUploading} de ${totalToUpload}`)
@@ -36,20 +41,44 @@ const Form = props => {
       return setState({ errors, errorMessage: 'existen campos vacios' })
     }
     props.setView('loading')
-    const picturesUrl = []
-    const articleId = await add(state)
-    props.setId(articleId)
+    var articleId = initialState ? initialState.id : null
+    if (!initialState) {
+      articleId = await add(state)
+      props.setId(articleId)
+    } else {
+      props.setId(initialState.id)
+    }
 
-    for (let index = 0; index < state.pictures.length; index++) {
+    // delete pictures if exist
+    if (initialState) {
+      const filesToDelete = initialState.pictures.filter(src => !state.pictures.includes(src))
+      await Promise.all(filesToDelete.map(src => drop(src)))
+    }
+
+    // delete principal picture
+    if (initialState && typeof state.picture === 'object') {
+      await drop(initialState.picture)
+    }
+
+    const picturesUrl = initialState ? initialState.pictures.filter(src => state.pictures.includes(src)) : []
+    console.log('fileToUpload 1', fileToUpload)
+    for (let index = 0; index < fileToUpload.length; index++) {
+      console.log('fileToUpload 2', fileToUpload)
       handleUpdateMessage()
-      const currentFile = state.pictures[index]
+      const currentFile = fileToUpload[index]
       const url = await uploadPicture(articleId, currentFile)
       picturesUrl.push(url)
     }
 
-    const pictureUrl = await uploadPicture(articleId, state.picture, true)
-    handleUpdateMessage()
+    // upload principal photo
+    var pictureUrl = initialState ? initialState.picture : null
+    if (typeof state.picture === 'object') {
+      pictureUrl = await uploadPicture(articleId, state.picture, true)
+      handleUpdateMessage()
+    }
+
     await update(articleId, {
+      ...state,
       picture: pictureUrl,
       pictures: picturesUrl.filter(url => !!url)
     })

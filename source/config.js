@@ -21,4 +21,4 @@ export const genders = {
   both: 'ambos'
 }
 
-export const limitPictures = 5
+export const limitPictures = 15

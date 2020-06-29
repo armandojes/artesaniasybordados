@@ -4,6 +4,7 @@ import { Paper, Menu } from 'components/main'
 import Picture from 'components/Picture'
 import { Typography, MenuItem } from '@material-ui/core'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const PaperStyled = styled(Paper)`
   height: 100%;
@@ -16,15 +17,18 @@ const MenuStyled = styled(Menu)`
   top: 15px;
 `
 const ArticleCard = props => {
+  const { handleDelete, ...data } = props
+  const history = useHistory()
+
   return (
     <PaperStyled>
       <MenuStyled>
-        <MenuItem onClick={() => props.handleDelete(props)}>Eliminar</MenuItem>
-        <MenuItem>Editar</MenuItem>
+        <MenuItem onClick={() => props.handleDelete(data)}>Eliminar</MenuItem>
+        <MenuItem onClick={() => history.push('/admin/create', { ...data })}>Editar</MenuItem>
       </MenuStyled>
-      <Picture src={props.picture} id={props.id} />
-      <Typography variant='h6'>{props.price}</Typography>
-      <Typography variant='h6'>{props.title}</Typography>
+      <Picture src={data.picture} id={data.id} />
+      <Typography variant='h6'>{data.price}</Typography>
+      <Typography variant='h6'>{data.title}</Typography>
     </PaperStyled>
   )
 }

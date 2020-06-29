@@ -26,7 +26,7 @@ const Success = props => (
             </Link>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Link to='admin/articles'>
+            <Link to='/admin/articles'>
               <Button fullWidth color='primary' variant='outlined'>Ver lista de articulos</Button>
             </Link>
           </Grid>

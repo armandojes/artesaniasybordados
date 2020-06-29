@@ -7,19 +7,21 @@ import propTypes from 'prop-types'
 
 const DropZoneComp = (props) => {
   const { pictures = [] } = props.state
-  const preNames = pictures.map(pic => pic.name)
+  const picturesToMerge = props.name === 'pictures' ? pictures : []
+  const preNames = picturesToMerge.map(pic => pic.name)
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/jpeg, image/png, image/jpg',
     onDrop: (acceptedFiles) => {
       const FilteresRepited = acceptedFiles.filter(file => !preNames.includes(file.name))
-      const picturesMerged = [...pictures, ...FilteresRepited]
-      const filesLimited = picturesMerged.filter((_file, index) => (index + 1) <= limitPictures)
-      const transformedFiles = filesLimited.map(file => {
+      const transformedFiles = FilteresRepited.map(file => {
+        console.log('transformedFiles', file)
         file.preview = URL.createObjectURL(file)
         return file
       })
-      props.setState({ [props.name]: props.multiple ? transformedFiles : transformedFiles[0] })
+      const picturesMerged = [...picturesToMerge, ...transformedFiles]
+      const filesLimited = picturesMerged.filter((_file, index) => (index + 1) <= limitPictures)
+      props.setState({ [props.name]: props.multiple ? filesLimited : transformedFiles[0] })
     }
   })
 
