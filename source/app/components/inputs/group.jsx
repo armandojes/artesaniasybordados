@@ -41,7 +41,7 @@ const GroupInput = props => {
   if (props.type === 'select') {
     const { onFocus, options, label, ...otherSelectProps } = inputProps
     return (
-      <FormControl fullWidth variant='outlined' margin='normal'>
+      <FormControl fullWidth variant='outlined'>
         <InputLabel>{label}</InputLabel>
         <Select {...otherSelectProps} label={label} onFocus={() => onFocus({ target: { name: otherSelectProps.name } })}>
           {Object.keys(options).map((keyname) => (

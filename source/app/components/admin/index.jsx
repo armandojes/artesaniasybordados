@@ -8,7 +8,7 @@ const Layout = props => {
   return (
     <>
       <Header />
-      <div style={{ overflow: 'hidden' }}>
+      <div style={{ overflow: 'hidden', backgroundColor: '#fff' }}>
         <Grid container spacing={2}>
           <Hidden smDown>
             <Grid item lg={2} md={3}>
@@ -28,4 +28,5 @@ const Layout = props => {
 Layout.propTypes = {
   children: oneOfType([string, array, object, element])
 }
+
 export default Layout

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Stepper from './stepper'
-import { Grid, Button } from '@material-ui/core'
+import { Grid, Button, Container, Box } from '@material-ui/core'
 import useObjectState from 'hooks/useState'
 import GeneralData from './generalData'
 import Description from './description'
@@ -10,6 +10,7 @@ import propTypes from 'prop-types'
 import { add, update } from 'core/articles'
 import { uploadPicture, drop } from 'core/storage'
 import { useLocation } from 'react-router-dom'
+import { FullWidthCentered } from 'components/main'
 
 const Form = props => {
   const location = useLocation()
@@ -40,7 +41,7 @@ const Form = props => {
       window.alert('hay un error')
       return setState({ errors, errorMessage: 'existen campos vacios' })
     }
-    props.setView('loading')
+
     var articleId = initialState ? initialState.id : null
     if (!initialState) {
       articleId = await add(state)
@@ -87,33 +88,40 @@ const Form = props => {
   }
 
   return (
-    <form>
-      <Stepper steps={steps} activeStep={currentStep} />
+    <FullWidthCentered>
+      <Container maxWidth='md'>
+        <form>
+          <Stepper steps={steps} activeStep={currentStep} />
 
-      {currentStep === 0 && (
-        <GeneralData state={state} setState={setState} />
-      )}
-      {currentStep === 1 && (
-        <Description state={state} setState={setState} />
-      )}
-      {currentStep === 2 && (
-        <Multimedia state={state} setState={setState} />
-      )}
+          <Box pt={5} pb={5}>
+            {currentStep === 0 && (
+              <GeneralData state={state} setState={setState} />
+            )}
+            {currentStep === 1 && (
+              <Description state={state} setState={setState} />
+            )}
+            {currentStep === 2 && (
+              <Multimedia state={state} setState={setState} />
+            )}
+          </Box>
 
-      <Grid container justify='center' spacing={2}>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Button size='large' color='primary' variant='outlined' fullWidth onClick={handleback}>Atras</Button>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          {(currentStep + 1) < steps.length && (
-            <Button size='large' color='primary' variant='contained' fullWidth onClick={handleNext}>Siguente</Button>
-          )}
-          {(currentStep + 1) >= steps.length && (
-            <Button size='large' color='primary' variant='contained' fullWidth onClick={handleSave}>Publicar</Button>
-          )}
-        </Grid>
-      </Grid>
-    </form>
+          <Grid container justify='flex-end' spacing={2}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Button disabled={!currentStep} size='large' color='primary' variant='outlined' fullWidth onClick={handleback}>Atras</Button>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              {(currentStep + 1) < steps.length && (
+                <Button size='large' color='primary' variant='contained' fullWidth onClick={handleNext}>Siguente</Button>
+              )}
+              {(currentStep + 1) >= steps.length && (
+                <Button size='large' color='primary' variant='contained' fullWidth onClick={handleSave}>Publicar</Button>
+              )}
+            </Grid>
+          </Grid>
+
+        </form>
+      </Container>
+    </FullWidthCentered>
   )
 }
 

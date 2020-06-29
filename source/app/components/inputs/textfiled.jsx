@@ -24,7 +24,15 @@ const TextFiled = props => {
   }
 
   return (
-    <TextField fullWidth variant='outlined' color='primary' margin='normal' {...otherProps} onChange={handleChange} />
+    <TextField
+      autoComplete='off'
+      fullWidth
+      variant='outlined'
+      color='primary'
+      margin='normal'
+      {...otherProps}
+      onChange={handleChange}
+    />
   )
 }
 
