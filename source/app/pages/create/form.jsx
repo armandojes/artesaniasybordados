@@ -42,6 +42,7 @@ const Form = props => {
       return setState({ errors, errorMessage: 'existen campos vacios' })
     }
 
+    props.setView('loading')
     var articleId = initialState ? initialState.id : null
     if (!initialState) {
       articleId = await add(state)

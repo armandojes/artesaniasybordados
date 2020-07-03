@@ -7,6 +7,7 @@ import useFetch from 'hooks/useFetch'
 import Skeleton from 'components/skeletonGrid'
 import { Grid } from '@material-ui/core'
 import Article from 'components/article'
+import styled from 'styled-components'
 
 const Home = props => {
   const [state, setState] = useObjectState({
@@ -22,21 +23,45 @@ const Home = props => {
   return (
     <Layout>
       <Container page>
-        {state.loading && (
-          <Skeleton />
-        )}
-        {!state.loading && (
-          <Grid container justify='center' spacing={3}>
-            {state.items.map(item => (
-              <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
-                <Article {...item} />
+        <ContainerBody>
+          <MenuWrapper>
+            hello
+          </MenuWrapper>
+          <BodyWrapper>
+            {state.loading && (
+              <Skeleton />
+            )}
+            {!state.loading && (
+              <Grid container spacing={3}>
+                {state.items.map(item => (
+                  <Grid key={item.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                    <Article {...item} />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        )}
+            )}
+          </BodyWrapper>
+        </ContainerBody>
       </Container>
     </Layout>
   )
 }
+
+const ContainerBody = styled.section`
+  display: flex;
+`
+
+const MenuWrapper = styled.div`
+  border: 1px dashed #cdcdcd;
+  width: 20%;
+  margin-right: 20px;
+`
+const BodyWrapper = styled.div`
+  border: 1px dashed #cdcdcd;
+  width: 80%;
+  @media (max-width:600px) {
+    width: 100%;
+  }
+`
 
 export default Home
