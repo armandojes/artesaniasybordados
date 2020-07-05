@@ -5,8 +5,11 @@ import ReduxThunk from 'redux-thunk'
 
 // r e d u c e  r s
 import alert from 'flux/alert'
+import session from 'flux/session'
+
 const reducer = combineReducers({
-  alert
+  alert,
+  session
 })
 
 const configureStore = (type = 'client', session = null) => {

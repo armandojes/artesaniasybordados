@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import { Normalize } from 'styled-normalize'
 import ThemeProvider from './theme'
 import Alert from 'components/alert'
+import Definers from './definers'
 
 import './styles.css'
 
@@ -18,6 +19,7 @@ import AdminArticles from './pages/admin_articles'
 const App = props => {
   return (
     <ThemeProvider>
+      <Definers />
       <Normalize />
       <Alert />
       <Switch>

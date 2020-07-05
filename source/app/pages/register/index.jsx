@@ -1,80 +1,120 @@
 import React from 'react'
-import { Paper, SectionTitle, FullWidthCentered, FlexCentered } from 'components/main'
+import { Paper, SectionTitle, FullWidthCentered, FlexCentered, Button } from 'components/main'
 import Layout from 'components/layout'
-import Container from 'components/container'
-import { Grid, Box, Button, CircularProgress } from '@material-ui/core'
+import ContainerPage from 'components/container'
+import { Grid, Box, CircularProgress, Container } from '@material-ui/core'
 import InputGroup from 'components/inputs/group'
 import useObjectState from 'hooks/useState'
 import { Alert } from '@material-ui/lab'
+import { Facebook } from '@material-ui/icons'
+import GoogleImageSrc from '../../assets/google.png'
+import styled from 'styled-components'
+import { registerOrLoginWidthGoogle, register, registerOrLoginWithFacebook } from 'core/user'
 
 const Register = props => {
   const [state, setState] = useObjectState({
     loading: false,
-    errors: ['name'],
-    errorMessage: 'Todos los campos son requeridos'
+    errors: [],
+    errorMessage: ''
   })
+
+  const handleRegister = async _event => {
+    setState({ loading: true })
+    const result = await register(state)
+    result ? window.alert('registrado') : window.alert('no registrado')
+    setState({ loading: false })
+  }
+
+  const handleRegisterWithFacebook = async _event => {
+    await registerOrLoginWithFacebook()
+  }
+
+  const handleResgisterWithGoogle = async _event => {
+    setState({ loading: true })
+    await registerOrLoginWidthGoogle()
+    setState({ loading: false })
+  }
 
   return (
     <Layout>
-      <Container page>
+      <ContainerPage page>
         <FullWidthCentered>
-          <Grid container justify='center' alignItems='center'>
-            <Grid item xs={12} sm={8} md={6} lg={5}>
-              <Paper as={Grid} container justify='center'>
-                <Grid item xs={12} md={10}>
-                  {state.loading && (
-                    <FlexCentered minHeight='450px'>
-                      <CircularProgress />
-                    </FlexCentered>
-                  )}
-                  {!state.loading && (
-                    <>
-                      <SectionTitle align='center'>Registrate</SectionTitle>
-                      <Box p={3}>
-                        <form>
-                          <Grid container spacing={2}>
-                            {state.errorMessage && (
-                              <Grid item xs={12}>
-                                <Alert severity='error'>{state.errorMessage}</Alert>
-                              </Grid>
-                            )}
-                            <Grid item xs={12} md={6}>
-                              <InputGroup name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre' />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                              <InputGroup name='lastname' setState={setState} state={state} variant='outlined' fullWidth label='Apellidos' />
-                            </Grid>
+          <Container maxWidth='sm'>
+            <Paper as={Grid} container justify='center'>
+              <Grid item xs={12} md={10}>
+                {state.loading && (
+                  <FlexCentered minHeight='450px'>
+                    <CircularProgress />
+                  </FlexCentered>
+                )}
+                {!state.loading && (
+                  <>
+                    <SectionTitle align='center'>Registrate</SectionTitle>
+                    <Box p={3}>
+                      <form>
+                        <Grid container spacing={2}>
+                          {state.errorMessage && (
                             <Grid item xs={12}>
-                              <InputGroup name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
+                              <Alert severity='error'>{state.errorMessage}</Alert>
                             </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <Button fullWidth variant='contained' color='primary'>Registrarme</Button>
-                            </Grid>
-                            <Grid item xs={12}>
-                              <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
-                            </Grid>
+                          )}
+
+                          <Grid item xs={12}>
+                            <Button
+                              color='default'
+                              fullWidth
+                              startIcon={<GoogleIcon src={GoogleImageSrc} />}
+                              onClick={handleResgisterWithGoogle}
+                            >Entrar con Google
+                            </Button>
                           </Grid>
-                        </form>
-                      </Box>
-                    </>
-                  )}
-                </Grid>
-              </Paper>
-            </Grid>
-          </Grid>
+                          <Grid item xs={12}>
+                            <Button
+                              onClick={handleRegisterWithFacebook}
+                              color='default'
+                              fullWidth
+                              startIcon={<Facebook />}
+                            >Entrar con Facebook
+                            </Button>
+                          </Grid>
+
+                          <Grid item xs={12}>
+                            <InputGroup margin='none' name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre completo' />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <InputGroup margin='none' name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <InputGroup margin='none' name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <InputGroup margin='none' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <InputGroup margin='none' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Button fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
+                          </Grid>
+                        </Grid>
+                      </form>
+                    </Box>
+                  </>
+                )}
+              </Grid>
+            </Paper>
+          </Container>
         </FullWidthCentered>
-      </Container>
+      </ContainerPage>
     </Layout>
   )
 }
+
+const GoogleIcon = styled.img`
+  width: 30px;
+`
 
 export default Register

@@ -19,7 +19,7 @@ export const snapShotParser = (snapshot) => {
     const data = snapshot.data()
     return {
       ...data,
-      id: data._id
+      id: data._id || snapshot.id
     }
   }
 }
