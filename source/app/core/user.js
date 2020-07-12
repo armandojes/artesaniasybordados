@@ -11,12 +11,13 @@ export const registerOrLoginWidthGoogle = async props => {
   provider.addScope('profile')
   provider.addScope('email')
   const result = await firebase.auth().signInWithPopup(provider)
-  const { phoneNumber = '', uid = '', email = '', displayName = '' } = result.user
+  console.log(result)
+  const { phoneNumber = '', uid = '', email = '', displayName = '', photoURL = null } = result.user
 
   // register if no exist user on DB
   const dataFromDb = await getData(uid)
   if (!dataFromDb) {
-    await add(uid, { number: phoneNumber, name: displayName, email, id: uid })
+    await add(uid, { number: phoneNumber, name: displayName, email, id: uid, photo: photoURL })
   }
 
   return true
@@ -50,10 +51,6 @@ export const register = async data => {
   }
 }
 
-export default {
-  registerOrLoginWidthGoogle
-}
-
 export const getData = async (userId = '') => {
   const snapshot = await db.doc(`users/${userId}`).get()
   return snapShotParser(snapshot)
@@ -61,7 +58,7 @@ export const getData = async (userId = '') => {
 
 export const add = async (id, data) => {
   try {
-    const dataFiltered = filterObject(data, ['name', 'email', 'number', 'state', 'adress', 'city', 'gender'])
+    const dataFiltered = filterObject(data, ['name', 'email', 'number', 'state', 'adress', 'city', 'gender', 'photo'])
     await db.doc(`users/${id}`).set(dataFiltered)
     return id
   } catch (error) {
@@ -82,4 +79,8 @@ export const onSessionChange = (handler) => {
   } catch (error) {
     handler(null)
   }
+}
+
+export default {
+  registerOrLoginWidthGoogle
 }

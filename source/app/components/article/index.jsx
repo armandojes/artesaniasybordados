@@ -6,10 +6,20 @@ import { Paper } from 'components/main'
 import { Link } from 'react-router-dom'
 import Picture from 'components/Picture'
 import { toPrice } from 'helpers/currency'
+import { useDispatch } from 'react-redux'
+import { add } from 'flux/cart'
 
 const Article = props => {
+  const dispatch = useDispatch()
+
+  const handleAddTocart = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    dispatch(add({ ...props, quiantity: 1 }))
+  }
+
   return (
-    <LinkStyled to={`/article/${props.id}`}>
+    <LinkStyled to={`/article/${props.id}`} onClick={handleAddTocart}>
       <CardStyled variant='outlined'>
         <Picture src={props.picture} component='img' />
         <Box p={1}>

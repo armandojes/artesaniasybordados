@@ -6,9 +6,11 @@ export const Content = styled.div`
   color: gray!important;
 `
 export const Logo = styled.img`
-  width: 60px;
+  width: 40px;
   margin-right: 20px;
 `
 export const Body = styled.div`
   min-height: 50px;
+  display: flex;
+  align-items: center;
 `

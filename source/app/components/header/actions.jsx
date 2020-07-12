@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ButtonBase, IconButton, Typography, Avatar as AvatarBase, Grid } from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
+import { ButtonBase, IconButton, Typography, Avatar as AvatarBase, Grid, Badge } from '@material-ui/core'
+import { Menu, ShoppingCart } from '@material-ui/icons'
 import { Button, Link } from 'components/main'
 import { useSelector } from 'react-redux'
 
@@ -18,10 +18,15 @@ const Avatar = styled(AvatarBase)`
   margin-right: 10px;
 `
 
-const Actions = props => {
-  const { logged, name } = useSelector(state => state.session)
+const Actions = _props => {
+  const session = useSelector(state => state.session)
+  const itemsOnCart = useSelector(state => state.cart.items)
 
-  if (!logged) {
+  if (session === 'loading') {
+    return 'Cargando...'
+  }
+
+  if (!session) {
     return (
       <Grid container justify='flex-end' alignItems='center' spacing={1}>
         <Grid item>
@@ -41,9 +46,16 @@ const Actions = props => {
   return (
     <Grid container justify='flex-end' alignItems='center'>
       <UserContent>
-        <Avatar size='small'>A</Avatar>
-        <Typography color='primary' variant='subtitle1'>{name.split(' ')[0]}</Typography>
+        <Avatar size='small' src={session.photo} />
+        <Typography color='primary' variant='subtitle1'>{session.name.split(' ')[0]}</Typography>
       </UserContent>
+      <IconButton>
+        <Badge badgeContent={itemsOnCart.length} color='primary'>
+          <Link to='/mi-carrito'>
+            <ShoppingCart />
+          </Link>
+        </Badge>
+      </IconButton>
       <IconButton>
         <Menu />
       </IconButton>

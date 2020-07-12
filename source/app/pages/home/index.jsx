@@ -5,7 +5,7 @@ import { getList } from 'core/articles'
 import useObjectState from 'hooks/useState'
 import useFetch from 'hooks/useFetch'
 import Skeleton from 'components/skeletonGrid'
-import { Grid } from '@material-ui/core'
+import { Grid, Hidden } from '@material-ui/core'
 import Article from 'components/article'
 import styled from 'styled-components'
 
@@ -22,11 +22,13 @@ const Home = props => {
 
   return (
     <Layout>
-      <Container page>
+      <Container $page>
         <ContainerBody>
-          <MenuWrapper>
-            hello
-          </MenuWrapper>
+          <Hidden xsDown>
+            <MenuWrapper>
+              hello
+            </MenuWrapper>
+          </Hidden>
           <BodyWrapper>
             {state.loading && (
               <Skeleton />
@@ -55,6 +57,7 @@ const MenuWrapper = styled.div`
   border: 1px dashed #cdcdcd;
   width: 20%;
   margin-right: 20px;
+  
 `
 const BodyWrapper = styled.div`
   border: 1px dashed #cdcdcd;

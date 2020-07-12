@@ -1,5 +1,5 @@
 import React from 'React'
-import { AppBar, Grid } from '@material-ui/core'
+import { AppBar, Grid, Hidden } from '@material-ui/core'
 import { Content, Body, Logo } from './styled'
 import Container from 'components/container'
 import srclogo from '../../assets/logo.png'
@@ -14,19 +14,20 @@ const Header = () => {
         <Body>
           <Grid container justify='space-between' alignItems='center'>
 
-            <Grid itex xs={4} container alignItems='center'>
+            <Grid item xs={6} md={4} container alignItems='center'>
               <Logo src={srclogo} />
               <Grid item xs>
                 <Searcher />
               </Grid>
             </Grid>
-            <div>
-              <Button variant='text'>Inicio</Button>
-              <Button variant='text'>Acerca de nosotros</Button>
-              <Button variant='text'>Historia</Button>
-              <Button variant='text'>Contacto</Button>
-              <Button variant='text'>Galeria</Button>
-            </div>
+            <Hidden smDown>
+              <div>
+                <Button variant='text'>Inicio</Button>
+                <Button variant='text'>Ofertas</Button>
+                <Button variant='text'>Contacto</Button>
+                <Button variant='text'>Galeria</Button>
+              </div>
+            </Hidden>
 
             <div>
               <Action />

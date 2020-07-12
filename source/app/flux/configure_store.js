@@ -6,10 +6,12 @@ import ReduxThunk from 'redux-thunk'
 // r e d u c e  r s
 import alert from 'flux/alert'
 import session from 'flux/session'
+import cart from 'flux/cart'
 
 const reducer = combineReducers({
   alert,
-  session
+  session,
+  cart
 })
 
 const configureStore = (type = 'client', session = null) => {
