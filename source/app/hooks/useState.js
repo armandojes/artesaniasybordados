@@ -9,7 +9,8 @@ const useObjectState = initialState => {
       ...newPartState
     })
   }
-  return [state, updateState]
+
+  return [state, updateState, setState]
 }
 
 export default useObjectState

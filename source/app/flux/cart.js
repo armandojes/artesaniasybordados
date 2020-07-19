@@ -1,18 +1,18 @@
 import makeFlux from 'flux/makeflux'
 import cart from 'core/cart'
-import db from 'core/'
 
 const flux = makeFlux('CART')
 
 const initialState = {
   items: [],
-  loading: false
+  loading: true
 }
 
 export const setItems = flux.createAction('SET_ITEMS', (state, payload) => {
   return {
     ...state,
-    items: payload
+    items: payload,
+    loading: false
   }
 })
 
@@ -43,6 +43,5 @@ export const remove = id => async (dispatch, getState) => {
   dispatch(setItems(newItems))
   cart.add(userId, newItems)
 }
-
 
 export default flux.createReducer(initialState)

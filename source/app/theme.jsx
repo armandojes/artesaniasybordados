@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles'
 import { oneOfType, array, object, element, node } from 'prop-types'
@@ -6,7 +5,7 @@ import { oneOfType, array, object, element, node } from 'prop-types'
 let theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#ff385c'
+      main: '#3483fa'
     },
     secondary: {
       main: '#3483fa'
@@ -17,9 +16,9 @@ let theme = createMuiTheme({
 theme = responsiveFontSizes(theme)
 
 const MaterialUIThemeProvider = props => (
-  <>
+  <ThemeProvider theme={theme}>
     {props.children}
-  </>
+  </ThemeProvider>
 )
 
 MaterialUIThemeProvider.propTypes = {

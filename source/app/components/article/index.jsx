@@ -15,7 +15,7 @@ const Article = props => {
   const handleAddTocart = event => {
     event.preventDefault()
     event.stopPropagation()
-    dispatch(add({ ...props, quiantity: 1 }))
+    dispatch(add({ ...props, quantity: 1 }))
   }
 
   return (

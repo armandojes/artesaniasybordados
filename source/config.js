@@ -10,6 +10,8 @@ export const firebaseConfig = {
   appId: '1:804609683943:web:893f59b6de6d63e7c40d42'
 }
 
+export const shippingPrice = 50
+
 export default {
   secret
 }

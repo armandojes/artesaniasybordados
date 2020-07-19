@@ -11,6 +11,7 @@ import './styles.css'
 import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
+import Cart from './pages/my-cart'
 
 // admins pages
 import Create from './pages/create'
@@ -28,6 +29,7 @@ const App = props => {
         <Route path='/register' exact component={Register} />
         <Route path='/admin/create' exact component={Create} />
         <Route path='/admin/articles' exact component={AdminArticles} />
+        <Route path='/mi-carrito' exact component={Cart} />
       </Switch>
     </ThemeProvider>
   )
