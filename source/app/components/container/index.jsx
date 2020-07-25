@@ -17,6 +17,7 @@ Container.propTypes = {
 
 const GridStyled = styled('div')`
   padding: ${props => props.$page ? '10px 20px' : '0px 20px'};
+  /* margin: auto; */
 `
 
 export default Container

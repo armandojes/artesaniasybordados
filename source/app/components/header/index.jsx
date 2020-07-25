@@ -9,7 +9,7 @@ import { Button } from 'components/main'
 
 const Header = () => {
   return (
-    <Content position='sticky' as={AppBar}>
+    <Content position='sticky' as={AppBar} id='header'>
       <Container>
         <Body>
           <Grid container justify='space-between' alignItems='center'>

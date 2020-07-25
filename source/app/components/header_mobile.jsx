@@ -26,7 +26,7 @@ const HeaderMobile = props => {
   const itemsOnCart = useSelector(state => state.cart.items)
 
   return (
-    <Header>
+    <Header id='header'>
       <ContainerStyled>
         <IconButton>
           <Link to='/'>

@@ -3,8 +3,41 @@ import React from 'react'
 import { Box, Typography } from '@material-ui/core'
 import { object, func } from 'prop-types'
 import { menu } from '../../constants'
+import styled from 'styled-components'
+import useHeightHeader from 'hooks/useHeightHeader'
+
+const Content = styled.aside`
+  position: sticky;
+  top: 0px;
+  max-height: ${props => 'calc(100vh - ' + props.$headerHeight + 'px)'};
+  overflow-y: scroll;
+  &:hover {
+    ::-webkit-scrollbar {
+    display: initial;
+  }
+  }
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    display: none;
+  }
+
+  ::-webkit-scrollbar:vertical {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #cdcdcd;
+    border-radius: 10px;
+  }
+`
 
 const Menu = props => {
+  const top = useHeightHeader()
+
   const setSection = data => {
     console.log(props)
     props.setStrictFilters({ [data.keyname]: data.value })
@@ -18,16 +51,16 @@ const Menu = props => {
   }
 
   return (
-    <Box>
+    <Content style={{ top }} $headerHeight={top}>
       {menu.map((section, index) => (
-        <Box key={index} p={2}>
+        <Box key={index} p={1}>
           <Box onClick={event => setSection(section)}>
             <Typography variant='subtitle1'>{section.label}</Typography>
           </Box>
           {((props.filters.category === section.value && section.keyname === 'category') || (props.filters.gender === section.value && section.keyname === 'gender')) && (
             <Box>
               {section.filters.map((subSection, index) => (
-                <Box key={index} onClick={event => setSubSection(section, subSection)}>
+                <Box p={1} key={index} onClick={event => setSubSection(section, subSection)}>
                   <Typography varian='subtitle2'>{subSection.label}</Typography>
                 </Box>
               ))}
@@ -35,7 +68,7 @@ const Menu = props => {
           )}
         </Box>
       ))}
-    </Box>
+    </Content>
   )
 }
 
