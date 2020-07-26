@@ -1,9 +1,11 @@
 import { TextField } from '@material-ui/core'
 import React from 'react'
 import { func, string, number } from 'prop-types'
+import useResponsive from 'hooks/useResponsive'
 
 const TextFiled = props => {
   const { filter, limit, ...otherProps } = props
+  const responsive = useResponsive()
 
   const handleChange = event => {
     if (filter === 'number') {
@@ -25,6 +27,7 @@ const TextFiled = props => {
 
   return (
     <TextField
+      size={responsive({ xs: 'small', sm: 'medium' })}
       autoComplete='off'
       fullWidth
       variant='outlined'

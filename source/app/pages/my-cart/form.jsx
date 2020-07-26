@@ -3,10 +3,14 @@ import styled from 'styled-components'
 import { Grid, Typography, Box } from '@material-ui/core'
 import Input from 'components/inputs/group'
 import { Paper } from 'components/main'
-import { object, func } from 'prop-types'
+import { object, func, string } from 'prop-types'
+import { Alert } from '@material-ui/lab'
 
 const Limiter = styled.div`
   margin: 100px;
+  @media screen and (max-width:1000px) {
+    margin: 20px;
+  }
 `
 
 const Form = props => {
@@ -17,8 +21,15 @@ const Form = props => {
       </Box>
       <Paper>
         <Limiter>
+          {props.state.errorMessage && (
+            <Box mb={2}>
+              <Alert severity='error'>
+                {props.state.errorMessage}
+              </Alert>
+            </Box>
+          )}
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Input
                 margin='none'
                 state={props.state}
@@ -27,7 +38,7 @@ const Form = props => {
                 label='Nombre'
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Input
                 margin='none'
                 label='Apellidos'
@@ -36,7 +47,7 @@ const Form = props => {
                 name='lastname'
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Input
                 name='number'
                 margin='none'
@@ -47,7 +58,7 @@ const Form = props => {
                 limit={10}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Input
                 name='email'
                 margin='none'
@@ -121,7 +132,8 @@ const Form = props => {
 
 Form.propTypes = {
   state: object,
-  setState: func
+  setState: func,
+  errorMessage: string
 }
 
 export default Form

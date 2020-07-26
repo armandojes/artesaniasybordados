@@ -7,8 +7,10 @@ import ReduxThunk from 'redux-thunk'
 import alert from 'flux/alert'
 import session from 'flux/session'
 import cart from 'flux/cart'
+import loading from 'flux/loading'
 
 const reducer = combineReducers({
+  loading,
   alert,
   session,
   cart

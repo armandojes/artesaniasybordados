@@ -29,7 +29,7 @@ const Item = props => {
     <Content>
       <Picture src={props.picture} />
       <Data>
-        <Typography variant='subtitle1'>{props.title}</Typography>
+        <Typography style={{ lineHeight: '1.2em' }} variant='subtitle1'>{props.title}</Typography>
         <Typography color='primary' variant='subtitle1'>{currency.toPrice(props.price)}</Typography>
         <Typography style={{ color: 'gray' }} variant='subtitle2'><span>Cantidad:</span> {props.quantity}</Typography>
       </Data>

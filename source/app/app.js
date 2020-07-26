@@ -4,6 +4,7 @@ import { Normalize } from 'styled-normalize'
 import ThemeProvider from './theme'
 import Alert from 'components/alert'
 import Definers from './definers'
+import Loading from 'components/loading'
 
 import './styles.css'
 
@@ -24,6 +25,7 @@ const App = props => {
       <Definers />
       <Normalize />
       <Alert />
+      <Loading />
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/articulos' exact component={Producst} />
