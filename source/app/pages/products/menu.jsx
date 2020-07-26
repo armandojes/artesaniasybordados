@@ -53,14 +53,14 @@ const Menu = props => {
   return (
     <Content style={{ top }} $headerHeight={top}>
       {menu.map((section, index) => (
-        <Box key={index} p={1}>
+        <Box key={index} p={1} style={{ cursor: 'pointer' }}>
           <Box onClick={event => setSection(section)}>
             <Typography variant='subtitle1'>{section.label}</Typography>
           </Box>
           {((props.filters.category === section.value && section.keyname === 'category') || (props.filters.gender === section.value && section.keyname === 'gender')) && (
             <Box>
               {section.filters.map((subSection, index) => (
-                <Box p={1} key={index} onClick={event => setSubSection(section, subSection)}>
+                <Box p={1} style={{ cursor: 'pointer' }} key={index} onClick={event => setSubSection(section, subSection)}>
                   <Typography varian='subtitle2'>{subSection.label}</Typography>
                 </Box>
               ))}

@@ -1,9 +1,10 @@
 import { db, snapShotParser } from 'core/index'
 
 export const add = async (userId, data) => {
-  db.doc(`users/${userId}`).update({
+  await db.doc(`users/${userId}`).update({
     cart: data
   })
+  await new Promise(resolve => setTimeout(resolve, 1000))
 }
 
 export const onCartChange = (userId, handler) => {

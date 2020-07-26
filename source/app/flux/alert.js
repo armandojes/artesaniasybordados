@@ -1,5 +1,15 @@
 import makeFlux from 'flux/makeflux'
 
+// firm
+// dispatch(setAlert({
+//   description: '¿Seguro quieres borrar este articulo?',
+//   action: async () => {
+//     await drop(data)
+//     setState({ limit: 10, items: [], finished: false, loading: false })
+//     setHandleNext(() => getList(limit))
+//   }
+// }))
+
 const flux = makeFlux('ALERT')
 const initialState = {
   description: null,

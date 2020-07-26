@@ -10,7 +10,7 @@ export const getList = (limit = 10, filters = {}) => {
   return async () => {
     if (finished) return []
     try {
-      let query = db.collection('articles')
+      let query = db.collection('articles').orderBy('date', 'desc')
       if (filters.category) query = query.where('category', '==', filters.category)
       if (filters.subcategory) query = query.where('subcategory', '==', filters.subcategory)
       if (filters.gender) query = query.where('gender', '==', filters.gender)
@@ -30,7 +30,7 @@ export const getList = (limit = 10, filters = {}) => {
 // create a new article
 // return id or null
 export const add = async data_ => {
-  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'picture']
+  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity']
   const data = filterObject(data_, allow)
   try {
     const result = await db.collection('articles').add({ ...data, date: new Date() })
@@ -42,7 +42,7 @@ export const add = async data_ => {
 }
 
 export const update = async (id, data_) => {
-  const allow = ['title', 'price', 'gender', 'description', 'pictures', 'picture']
+  const allow = ['title', 'price', 'gender', 'description', 'pictures', 'picture', 'category', 'subcategory', 'quantity']
   const data = filterObject(data_, allow)
 
   try {

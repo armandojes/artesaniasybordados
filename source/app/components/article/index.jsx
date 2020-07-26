@@ -23,7 +23,7 @@ const Article = props => {
       <CardStyled variant='outlined'>
         <Picture src={props.picture} component='img' />
         <Box p={1}>
-          <Typography variant='subtitle1'>{props.title}</Typography>
+          <Typography variant='h6' style={{ lineHeight: '1.2em' }}>{props.title}</Typography>
           <Typography color='primary' variant='h6'>{toPrice(props.price)}</Typography>
         </Box>
       </CardStyled>

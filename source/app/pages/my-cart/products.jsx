@@ -4,6 +4,7 @@ import { Paper } from 'components/main'
 import { Typography, Divider, Box } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import Item from './item'
+import { func } from 'prop-types'
 
 const Products = props => {
   const { items, loading } = useSelector(state => state.cart)
@@ -20,7 +21,7 @@ const Products = props => {
         </Box>
         {items.map(item => (
           <>
-            <Item key={item.id} {...item} />
+            <Item key={item.id} {...item} onDelete={props.onDelete} />
             <Box mt={1} mb={1}>
               <Divider />
             </Box>
@@ -29,6 +30,10 @@ const Products = props => {
       </Box>
     </Paper>
   )
+}
+
+Products.propTypes = {
+  onDelete: func
 }
 
 export default Products

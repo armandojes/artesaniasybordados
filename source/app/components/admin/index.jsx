@@ -1,27 +1,39 @@
 import React from 'react'
 import { string, oneOfType, array, object, element } from 'prop-types'
-import Header from 'components/header'
-import Footer from 'components/footer'
-import { Grid, Hidden } from '@material-ui/core'
+import styled from 'styled-components'
+import Menu from './menu'
+import { Hidden } from '@material-ui/core'
+
+const ContainerBody = styled.section`
+  display: flex;
+`
+
+const MenuWrapper = styled.div`
+  border: 1px dashed #cdcdcd;
+  width: 20%;
+  margin-right: 20px;
+  
+`
+const BodyWrapper = styled.div`
+  border: 1px dashed #cdcdcd;
+  width: 80%;
+  @media (max-width:959px) {
+    width: 100%;
+  }
+`
 
 const Layout = props => {
   return (
-    <>
-      <Header />
-      <div style={{ overflow: 'hidden', backgroundColor: '#fff' }}>
-        <Grid container spacing={2}>
-          <Hidden smDown>
-            <Grid item lg={2} md={3}>
-              <div style={{ background: '#7fd0ff', minHeight: '100vh' }} />
-            </Grid>
-          </Hidden>
-          <Grid item xs={12} lg={10} md={9}>
-            {props.children}
-          </Grid>
-        </Grid>
-      </div>
-      <Footer />
-    </>
+    <ContainerBody>
+      <Hidden smDown>
+        <MenuWrapper>
+          <Menu />
+        </MenuWrapper>
+      </Hidden>
+      <BodyWrapper>
+        {props.children}
+      </BodyWrapper>
+    </ContainerBody>
   )
 }
 

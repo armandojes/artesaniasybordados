@@ -3,7 +3,7 @@ import Admin from 'components/admin'
 import Container from 'components/container'
 import { TitlePage } from 'components/main'
 import { Grid } from '@material-ui/core'
-import { getListAll, drop } from 'core/articles'
+import { getList, drop } from 'core/articles'
 import useObjectState from 'hooks/useState'
 import Skeleton from 'components/skeletonGrid'
 import Card from './card'
@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 const List = props => {
   const limit = 5
   const dispatch = useDispatch()
-  const [fetchNextpage, setHandleNext] = useState(() => getListAll(limit))
+  const [fetchNextpage, setHandleNext] = useState(() => getList(limit))
   const [state, setState] = useObjectState({
     items: [],
     finished: false
@@ -55,7 +55,7 @@ const List = props => {
       action: async () => {
         await drop(data)
         setState({ limit: 10, items: [], finished: false, loading: false })
-        setHandleNext(() => getListAll(limit))
+        setHandleNext(() => getList(limit))
       }
     }))
   }

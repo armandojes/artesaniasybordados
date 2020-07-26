@@ -3,6 +3,7 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import { object, func } from 'prop-types'
 import { genders } from 'config'
+import { categories, subCategories } from '../../constants'
 
 const GeneralData = props => {
   return (
@@ -14,10 +15,16 @@ const GeneralData = props => {
         <TextField margin='none' label='Precio' name='price' state={props.state} setState={props.setState} filter='number' limit={10} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Cantidad' name='quiantity' state={props.state} setState={props.setState} filter='number' limit={10} />
+        <TextField margin='none' label='Cantidad' name='quantity' state={props.state} setState={props.setState} filter='number' limit={10} />
       </Grid>
       <Grid item xs={12} md={6}>
         <TextField margin='none' label='Genero' name='gender' state={props.state} setState={props.setState} type='select' options={genders} />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField margin='none' label='Categoria' name='category' state={props.state} setState={props.setState} type='select' options={categories} />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField margin='none' label='Sub categoria' name='subcategory' state={props.state} setState={props.setState} type='select' options={subCategories} />
       </Grid>
     </Grid>
   )

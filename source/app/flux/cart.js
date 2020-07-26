@@ -1,5 +1,6 @@
 import makeFlux from 'flux/makeflux'
 import cart from 'core/cart'
+import { setAlert } from 'flux/alert'
 
 const flux = makeFlux('CART')
 
@@ -36,12 +37,17 @@ export const add = data => async (dispatch, getState) => {
 }
 
 export const remove = id => async (dispatch, getState) => {
-  const state = getState()
-  const userId = state.session.id
-  const currentItems = state.cart.items
-  const newItems = currentItems.filter(item => item.id !== id)
-  dispatch(setItems(newItems))
-  cart.add(userId, newItems)
+  dispatch(setAlert({
+    description: '¿Seguro quieres quitar este articulo de u carrito?',
+    action: async () => {
+      const state = getState()
+      const userId = state.session.id
+      const currentItems = state.cart.items
+      const newItems = currentItems.filter(item => item.id !== id)
+      dispatch(setItems(newItems))
+      await cart.add(userId, newItems)
+    }
+  }))
 }
 
 export default flux.createReducer(initialState)
