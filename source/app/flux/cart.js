@@ -50,4 +50,12 @@ export const remove = id => async (dispatch, getState) => {
   }))
 }
 
+export const removeAll = () => async (dispatch, getState) => {
+  const state = getState()
+  const userId = state.session.id
+  const newItems = []
+  dispatch(setItems(newItems))
+  await cart.add(userId, newItems)
+}
+
 export default flux.createReducer(initialState)

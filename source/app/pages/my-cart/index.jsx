@@ -4,13 +4,17 @@ import View from './view'
 import { shippingPrice } from '../../../config'
 import calculatePrice from 'helpers/calculatePrice'
 import useObjectState from 'hooks/useState'
-import { remove } from 'flux/cart'
+import { remove, removeAll } from 'flux/cart'
 import { useHistory } from 'react-router-dom'
 import { requires } from 'helpers/validate'
+import { active, desactive } from 'flux/loading'
+import { add } from 'core/sale'
 
 const Mycart = props => {
   const history = useHistory()
   const { items, loading } = useSelector(state => state.cart)
+  const session = useSelector(state => state.session)
+
   const [view, setView] = useState('finally') // products || form || methodPay || finally
   const subTotal = calculatePrice(items)
   const total = subTotal + shippingPrice
@@ -56,8 +60,48 @@ const Mycart = props => {
     if (view === 'finally') setView('methodPay')
   }
 
+  // on payment aproved
+  const handleSaveOperation = async (meta = {}) => {
+    await add({ userId: session.id, items, total, info: state, meta })
+    dispatch(removeAll())
+    dispatch(desactive())
+  }
+
+  // paypal config
+  const paypalConfig = props => {
+    return {
+      createOrder: function (data, actions) {
+        dispatch(active('Estamos procesando el pago'))
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: total }
+          }]
+        })
+      },
+      onApprove: (data, actions) => {
+        const status = actions.order.capture().then((details) => {
+          const { id, payer } = details
+          handleSaveOperation({ id, payer })
+        })
+        return status
+      }
+    }
+  }
+
+  // render button paypal
+  useEffect(any => {
+    setTimeout(() => {
+      try {
+        window.document.getElementById('render_button_paypal').innerHTML = ''
+        window.paypal.Buttons(paypalConfig({ ...props })).render('#render_button_paypal')
+      } catch (error) { console.log('_error_', error) }
+    }, 200)
+  }, [total, state.methodPay, view])
+
   return (
     <View
+      onSuccessOperation={handleSaveOperation}
+      paypalConfig={paypalConfig}
       onNext={handleNext}
       onBack={handleBack}
       onDelete={handleDelete}

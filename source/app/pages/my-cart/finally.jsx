@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Paper, Button } from 'components/main'
@@ -20,13 +21,6 @@ const ButtonStyled = styled(Button)`
 
 const MethodPay = props => {
   const dispath = useDispatch()
-
-  useEffect(() => {
-    setTimeout(() => {
-      dispath(active('we are procesing your payment'))
-      setTimeout(() => dispath(desactive()), 5000)
-    }, 2000)
-  }, [])
 
   return (
     <>

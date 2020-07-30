@@ -18,6 +18,8 @@ import Producst from './pages/products'
 // admins pages
 import Create from './pages/create'
 import AdminArticles from './pages/admin_articles'
+import Sales from './pages/sales'
+import Sale from './pages/sale'
 
 const App = props => {
   return (
@@ -28,12 +30,15 @@ const App = props => {
       <Loading />
       <Switch>
         <Route path='/' exact component={Home} />
+        <Route path='/mi-carrito' exact component={Cart} />
         <Route path='/articulos' exact component={Producst} />
         <Route path='/login' exact component={Login} />
         <Route path='/register' exact component={Register} />
+
         <Route path='/admin/create' exact component={Create} />
+        <Route path='/admin/sale/:id' exact component={Sale} />
+        <Route path='/admin/sales' exact component={Sales} />
         <Route path='/admin/articles' exact component={AdminArticles} />
-        <Route path='/mi-carrito' exact component={Cart} />
       </Switch>
     </ThemeProvider>
   )

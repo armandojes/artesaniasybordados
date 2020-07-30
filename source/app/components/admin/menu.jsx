@@ -53,6 +53,9 @@ const Menu = props => {
         <ListItem button onClick={handleRedirect('/admin/create')}>
           <ListItemText>Publicar articulo</ListItemText>
         </ListItem>
+        <ListItem button onClick={handleRedirect('/admin/sales')}>
+          <ListItemText>Ventas</ListItemText>
+        </ListItem>
       </List>
     </Content>
   )

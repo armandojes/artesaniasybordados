@@ -7,7 +7,7 @@ import Form from './form'
 import Products from './products'
 import MethodPay from './methodpay'
 import Finally from './finally'
-import { string, func } from 'prop-types'
+import { string, func, object } from 'prop-types'
 import { Button } from 'components/main'
 import { Box, Grid } from '@material-ui/core'
 import useResponsive from 'hooks/useResponsive'
@@ -62,6 +62,17 @@ const ButtonStyled = styled(Button)`
     margin-right: 0px!important;
   }
 `
+const ButtonShadow = styled.div`
+  background: red;
+  height: 47px;
+  position: absolute;
+  width: 300px;
+  opacity: 0.01;
+`
+const ButtonStyledPaypal = styled(ButtonStyled)`
+  position: relative;
+  overflow: hidden;
+`
 
 const View = props => {
   const responsive = useResponsive()
@@ -86,7 +97,15 @@ const View = props => {
               )}
               <Grid mt={2} component={Box} container justify={responsive({ xs: 'space-between', sm: 'flex-end', d: 'flex-end' })}>
                 <ButtonStyled onClick={props.onBack}>{props.view === 'products' ? 'Seguir comprando' : 'Atras'}</ButtonStyled>
-                <ButtonStyled onClick={props.onNext} variant='contained'>{props.view === 'finally' ? 'Pagar' : 'Siguiente'}</ButtonStyled>
+                {props.view !== 'finally' && (
+                  <ButtonStyled onClick={props.onNext} variant='contained'>Siguiente</ButtonStyled>
+                )}
+                {props.view === 'finally' && props.state.methodPay !== 'paypal' && (
+                  <ButtonStyled onClick={props.onNext} variant='contained'>Pagar</ButtonStyled>
+                )}
+                {props.view === 'finally' && props.state.methodPay === 'paypal' && (
+                  <ButtonStyledPaypal variant='contained'><ButtonShadow id='render_button_paypal' />Pagar con Paypal </ButtonStyledPaypal>
+                )}
               </Grid>
             </Body>
             <Aside>
@@ -102,7 +121,8 @@ const View = props => {
 View.propTypes = {
   view: string,
   onNext: func,
-  onBack: func
+  onBack: func,
+  state: object
 }
 
 export default View

@@ -16,11 +16,8 @@ export default {
   secret
 }
 
-// Inputs
-export const genders = {
-  male: 'Hombre',
-  female: 'Mujer',
-  both: 'ambos'
+export const paypal = {
+  token: 'AaSWKyX_04IYi1ka8A_Qxr-xddBNxbn_K0fzZukxjYHN1BR01dv6wykgLV_zoBL16adglxM6ixmC2jps'
 }
 
 export const limitPictures = 15

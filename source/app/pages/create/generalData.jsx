@@ -2,8 +2,7 @@ import TextField from 'components/inputs/group'
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import { object, func } from 'prop-types'
-import { genders } from 'config'
-import { categories, subCategories } from '../../constants'
+import { categories, subCategories, genders } from '../../constants'
 
 const GeneralData = props => {
   return (
