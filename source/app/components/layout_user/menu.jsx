@@ -1,10 +1,9 @@
 import React from 'react'
-// import styled from 'styled-components'
 import { Box, Typography } from '@material-ui/core'
-import { object, func } from 'prop-types'
 import { menu } from '../../constants'
 import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
+import { useHistory, useLocation } from 'react-router'
 
 const Content = styled.aside`
   position: sticky;
@@ -37,16 +36,21 @@ const Content = styled.aside`
 
 const Menu = props => {
   const top = useHeightHeader()
+  const history = useHistory()
+  const { state = {} } = useLocation()
 
   const setSection = data => {
     console.log(props)
-    props.setStrictFilters({ [data.keyname]: data.value })
+    history.replace({ pathname: '/articulos', state: { [data.keyname]: data.value } })
   }
 
   const setSubSection = (section, subSection) => {
-    props.setStrictFilters({
-      [section.keyname]: section.value,
-      [subSection.keyname]: subSection.value
+    history.replace({
+      pathname: '/articulos',
+      state: {
+        [section.keyname]: section.value,
+        [subSection.keyname]: subSection.value
+      }
     })
   }
 
@@ -57,7 +61,7 @@ const Menu = props => {
           <Box onClick={event => setSection(section)}>
             <Typography variant='subtitle1'>{section.label}</Typography>
           </Box>
-          {((props.filters.category === section.value && section.keyname === 'category') || (props.filters.gender === section.value && section.keyname === 'gender')) && (
+          {((state.category === section.value && section.keyname === 'category') || (state.gender === section.value && section.keyname === 'gender')) && (
             <Box>
               {section.filters.map((subSection, index) => (
                 <Box p={1} style={{ cursor: 'pointer' }} key={index} onClick={event => setSubSection(section, subSection)}>
@@ -70,11 +74,6 @@ const Menu = props => {
       ))}
     </Content>
   )
-}
-
-Menu.propTypes = {
-  filters: object,
-  setStrictFilters: func
 }
 
 export default Menu
