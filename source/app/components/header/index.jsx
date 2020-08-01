@@ -6,6 +6,7 @@ import srclogo from '../../assets/logo.png'
 import Searcher from './searcher'
 import Action from './actions'
 import { Button } from 'components/main'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -15,17 +16,17 @@ const Header = () => {
           <Grid container justify='space-between' alignItems='center'>
 
             <Grid item xs={6} md={4} container alignItems='center'>
-              <Logo src={srclogo} />
+              <Link to='/'><Logo src={srclogo} /></Link>
               <Grid item xs>
                 <Searcher />
               </Grid>
             </Grid>
             <Hidden smDown>
               <div>
-                <Button variant='text'>Inicio</Button>
-                <Button variant='text'>Ofertas</Button>
-                <Button variant='text'>Contacto</Button>
-                <Button variant='text'>Galeria</Button>
+                <Link to='/'><Button variant='text'>Inicio</Button></Link>
+                <Link to='/'><Button variant='text'>Ofertas</Button></Link>
+                <Link to='/'><Button variant='text'>Contacto</Button></Link>
+                <Link to='/'><Button variant='text'>Galeria</Button></Link>
               </div>
             </Hidden>
 

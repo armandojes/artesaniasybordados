@@ -13,7 +13,7 @@ import makeFlux from 'flux/makeflux'
 const flux = makeFlux('ALERT')
 const initialState = {
   description: null,
-  action: () => { console.log('accion ejecutado...') },
+  action: null,
   active: false
 }
 

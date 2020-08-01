@@ -10,28 +10,31 @@ import { Facebook } from '@material-ui/icons'
 import GoogleImageSrc from '../../assets/google.png'
 import styled from 'styled-components'
 import { registerOrLoginWidthGoogle, register, registerOrLoginWithFacebook } from 'core/user'
+import { useDispatch } from 'react-redux'
+import { setAlert } from 'flux/alert'
 
 const Register = props => {
-  const [state, setState] = useObjectState({
-    loading: false,
-    errors: [],
-    errorMessage: ''
-  })
+  const [state, setState] = useObjectState({ loading: false, errors: [], errorMessage: '' })
+  const dispatch = useDispatch()
 
   const handleRegister = async _event => {
     setState({ loading: true })
-    const result = await register(state)
-    result ? window.alert('registrado') : window.alert('no registrado')
+    const { errorMessage } = await register(state)
+    if (errorMessage) dispatch(setAlert({ description: errorMessage }))
     setState({ loading: false })
   }
 
   const handleRegisterWithFacebook = async _event => {
-    await registerOrLoginWithFacebook()
+    setState({ loading: true })
+    const { errorMessage } = await registerOrLoginWithFacebook()
+    if (errorMessage) dispatch(setAlert({ description: errorMessage }))
+    setState({ loading: false })
   }
 
   const handleResgisterWithGoogle = async _event => {
     setState({ loading: true })
-    await registerOrLoginWidthGoogle()
+    const { errorMessage } = await registerOrLoginWidthGoogle()
+    if (errorMessage) dispatch(setAlert({ description: errorMessage }))
     setState({ loading: false })
   }
 
@@ -88,10 +91,10 @@ const Register = props => {
                             <InputGroup margin='none' name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
                           </Grid>
                           <Grid item xs={12}>
-                            <InputGroup margin='none' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
+                            <InputGroup margin='none' type='password' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
                           </Grid>
                           <Grid item xs={12}>
-                            <InputGroup margin='none' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
+                            <InputGroup margin='none' type='password' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
                           </Grid>
                           <Grid item xs={12}>
                             <Button fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>

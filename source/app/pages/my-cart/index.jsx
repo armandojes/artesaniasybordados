@@ -15,7 +15,7 @@ const Mycart = props => {
   const { items, loading } = useSelector(state => state.cart)
   const session = useSelector(state => state.session)
 
-  const [view, setView] = useState('finally') // products || form || methodPay || finally
+  const [view, setView] = useState('products') // products || form || methodPay || finally
   const subTotal = calculatePrice(items)
   const total = subTotal + shippingPrice
   const [state, setState] = useObjectState({

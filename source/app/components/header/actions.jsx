@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ButtonBase, IconButton, Typography, Avatar as AvatarBase, Grid, Badge } from '@material-ui/core'
 import { Menu, ShoppingCart } from '@material-ui/icons'
 import { Button, Link } from 'components/main'
 import { useSelector } from 'react-redux'
+import MenuComponent from './menu'
 
 const UserContent = styled(ButtonBase)`
   background: #e7f3ff!important;
@@ -21,6 +22,7 @@ const Avatar = styled(AvatarBase)`
 const Actions = _props => {
   const session = useSelector(state => state.session)
   const itemsOnCart = useSelector(state => state.cart.items)
+  const [isMenuActive, setMenu] = useState(null)
 
   if (session === 'loading') {
     return 'Cargando...'
@@ -56,9 +58,15 @@ const Actions = _props => {
           </Link>
         </Badge>
       </IconButton>
-      <IconButton>
+      <IconButton onClick={event => setMenu(event.currentTarget)}>
         <Menu />
       </IconButton>
+      <MenuComponent
+        id='menu_primary'
+        anchorEl={isMenuActive}
+        open={Boolean(isMenuActive)}
+        onClose={event => setMenu(null)}
+      />
     </Grid>
   )
 }

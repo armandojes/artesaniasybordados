@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
-import { List, ListItem, ListItemText } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListItemIcon, Divider } from '@material-ui/core'
 import { menu } from '../../constants'
 import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
 import { useHistory, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
+import { ShoppingBasket, ExitToApp } from '@material-ui/icons'
+import { logOut } from 'core/user'
 
 const Content = styled.aside`
   position: sticky;
@@ -79,10 +81,22 @@ const Menu = props => {
             )}
           </Fragment>
         ))}
-        {session && (
-          <ListItem button onClick={handleRedirect('/mis-compras')}>
-            <ListItemText variant='subtitle1'>Mis compras </ListItemText>
-          </ListItem>
+        {session && typeof session === 'object' && (
+          <>
+            <Divider />
+            <ListItem button onClick={handleRedirect('/mis-compras')}>
+              <ListItemIcon>
+                <ShoppingBasket />
+              </ListItemIcon>
+              <ListItemText variant='subtitle1'>Mis compras </ListItemText>
+            </ListItem>
+            <ListItem button onClick={event => logOut()}>
+              <ListItemIcon>
+                <ExitToApp />
+              </ListItemIcon>
+              <ListItemText variant='subtitle1'>Cerrar session </ListItemText>
+            </ListItem>
+          </>
         )}
       </List>
     </Content>

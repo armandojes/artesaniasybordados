@@ -6,48 +6,62 @@ import { db, snapShotParser } from './'
 import { filterObject } from 'helpers/validate'
 
 export const registerOrLoginWidthGoogle = async props => {
-  const provider = new firebase.auth.GoogleAuthProvider()
-  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-  provider.addScope('profile')
-  provider.addScope('email')
-  const result = await firebase.auth().signInWithPopup(provider)
-  console.log(result)
-  const { phoneNumber = '', uid = '', email = '', displayName = '', photoURL = null } = result.user
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    provider.addScope('profile')
+    provider.addScope('email')
+    const result = await firebase.auth().signInWithPopup(provider)
+    console.log(result)
+    const { phoneNumber = '', uid = '', email = '', displayName = '', photoURL = null } = result.user
 
-  // register if no exist user on DB
-  const dataFromDb = await getData(uid)
-  if (!dataFromDb) {
-    await add(uid, { number: phoneNumber, name: displayName, email, id: uid, photo: photoURL })
+    // register if no exist user on DB
+    const dataFromDb = await getData(uid)
+    if (!dataFromDb) {
+      await add(uid, { number: phoneNumber, name: displayName, email, id: uid, photo: photoURL })
+    }
+    return { errorMessage: null }
+  } catch (error) {
+    if (error.code === 'auth/account-exists-with-different-credential') {
+      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
+    }
+    return { errorMessage: null }
   }
-
-  return true
 }
 
 export const registerOrLoginWithFacebook = async props => {
-  const provider = new firebase.auth.FacebookAuthProvider()
-  await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-  const result = await firebase.auth().signInWithPopup(provider)
-  console.log('result', result)
-  // const { phoneNumber = '', uid = '', email = '', displayName = '' } = result.user
+  try {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    const result = await firebase.auth().signInWithPopup(provider)
+    console.log('result', result)
+    const { phoneNumber = '', uid = '', email = '', displayName = '' } = result.user
 
-  // // register if no exist user on DB
-  // const dataFromDb = await getData(uid)
-  // if (!dataFromDb) {
-  //   await add(uid, { number: phoneNumber, name: displayName, email, id: uid })
-  // }
-
-  // return true
+    // register if no exist user on DB
+    const dataFromDb = await getData(uid)
+    if (!dataFromDb) {
+      await add(uid, { number: phoneNumber, name: displayName, email, id: uid })
+    }
+    return { errorMessage: null }
+  } catch (error) {
+    if (error.code === 'auth/account-exists-with-different-credential') {
+      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
+    }
+    return { errorMessage: null }
+  }
 }
 
 export const register = async data => {
   try {
     const result = await firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-    console.log(result)
     await add(result.user.uid, data)
-    return result.user.uid
+    return { id: result.user.uid, errorMessage: null }
   } catch (error) {
     console.log(error)
-    return null
+    if (error.code === 'auth/email-already-in-use') {
+      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
+    }
+    return { errorMessage: null }
   }
 }
 
@@ -70,6 +84,7 @@ export const onSessionChange = (handler) => {
   try {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
+        await new Promise(resolve => setTimeout(resolve, 3000))
         const data = await getData(user.uid)
         handler(data)
       } else {
@@ -81,6 +96,25 @@ export const onSessionChange = (handler) => {
   }
 }
 
+export const loginWidthEmailAndPassword = async (email, password) => {
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password)
+    return { errorMessage: null }
+  } catch (error) {
+    console.log('error login wirh email and password', error)
+    return { errorMessage: 'Correo o contraseña incorrecta' }
+  }
+}
+
+export const logOut = async () => {
+  try {
+    await firebase.auth().signOut()
+    return true
+  } catch (error) {
+    console.log('error_closing-session', error)
+    return false
+  }
+}
 export default {
   registerOrLoginWidthGoogle
 }

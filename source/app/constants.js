@@ -219,7 +219,7 @@ export const methodsPay = {
 export const status = {
   pending: 'Pago pendiente',
   payed: 'Pagado',
-  sent: 'Enviado',
+  sent: 'En camino',
   delivered: 'Entregado'
 }
 

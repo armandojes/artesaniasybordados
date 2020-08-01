@@ -12,8 +12,8 @@ const GroupInput = props => {
   }
 
   const handleRemoveError = event => {
-    console.log(event.target)
     const newErrors = state.errors.filter(error => event.target.name !== error)
+
     if (state.errors.length === newErrors.length) return true
     setState({
       ...state,

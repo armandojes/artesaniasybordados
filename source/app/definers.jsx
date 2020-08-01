@@ -21,6 +21,8 @@ const Definers = props => {
     if (session) {
       const unsubscrube = onCartChange(session.id, items => dispatch(setItemsOnCart(items)))
       return () => unsubscrube()
+    } else {
+      dispatch(setItemsOnCart([]))
     }
   }, [session])
   return null
