@@ -21,6 +21,8 @@ import AdminArticles from './pages/admin_articles'
 import Sales from './pages/sales'
 import Sale from './pages/sale'
 
+import MyShps from './pages/my_shops'
+
 const App = props => {
   return (
     <ThemeProvider>
@@ -39,6 +41,8 @@ const App = props => {
         <Route path='/admin/sale/:id' exact component={Sale} />
         <Route path='/admin/sales' exact component={Sales} />
         <Route path='/admin/articles' exact component={AdminArticles} />
+
+        <Route path='/mis-compras' exact component={MyShps} />
       </Switch>
     </ThemeProvider>
   )

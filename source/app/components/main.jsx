@@ -50,7 +50,7 @@ export const Link = styled(LinkBase)`
   text-decoration: none;`
 
 export const TitlePage = (props) => (
-  <Typography color='primary' variant='h4' {...props} />
+  <Typography color='primary' variant='h4' {...props} style={{ marginTop: '10px', marginBottom: '15px' }} />
 )
 
 export const Menu = props => {

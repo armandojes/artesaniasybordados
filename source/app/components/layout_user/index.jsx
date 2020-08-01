@@ -39,13 +39,11 @@ const ContainerBody = styled.section`
 `
 
 const MenuWrapper = styled.div`
-  border: 1px dashed #cdcdcd;
   width: 20%;
   margin-right: 20px;
   
 `
 const BodyWrapper = styled.div`
-  border: 1px dashed #cdcdcd;
   width: 80%;
   @media (max-width:960px) {
     width: 100%;

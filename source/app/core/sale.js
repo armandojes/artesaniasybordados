@@ -44,7 +44,7 @@ export const setSent = async (id, shippingInfo = {}) => {
   })
 }
 
-export const getList = (limit = 20) => {
+export const getList = (limit = 20, userId = null) => {
   var last = null
   var finished = false
 
@@ -54,6 +54,8 @@ export const getList = (limit = 20) => {
       let query = db.collection('sales').orderBy('date', 'desc')
       if (last) query = query.startAfter(last)
       if (limit) query = query.limit(limit)
+      if (userId) query = query.where('userId', '==', userId)
+
       const snapshot = await query.get()
       last = snapshot.docs[snapshot.docs.length - 1]
       if (snapshot.docs.length !== limit) finished = true

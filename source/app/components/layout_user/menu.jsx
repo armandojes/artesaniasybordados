@@ -1,9 +1,10 @@
-import React from 'react'
-import { Box, Typography } from '@material-ui/core'
+import React, { Fragment } from 'react'
+import { List, ListItem, ListItemText } from '@material-ui/core'
 import { menu } from '../../constants'
 import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
 import { useHistory, useLocation } from 'react-router'
+import { useSelector } from 'react-redux'
 
 const Content = styled.aside`
   position: sticky;
@@ -38,6 +39,7 @@ const Menu = props => {
   const top = useHeightHeader()
   const history = useHistory()
   const { state = {} } = useLocation()
+  const session = useSelector(state => state.session)
 
   const setSection = data => {
     console.log(props)
@@ -54,24 +56,35 @@ const Menu = props => {
     })
   }
 
+  const handleRedirect = pathname => event => {
+    history.push(pathname)
+  }
+
   return (
     <Content style={{ top }} $headerHeight={top}>
-      {menu.map((section, index) => (
-        <Box key={index} p={1} style={{ cursor: 'pointer' }}>
-          <Box onClick={event => setSection(section)}>
-            <Typography variant='subtitle1'>{section.label}</Typography>
-          </Box>
-          {((state.category === section.value && section.keyname === 'category') || (state.gender === section.value && section.keyname === 'gender')) && (
-            <Box>
-              {section.filters.map((subSection, index) => (
-                <Box p={1} style={{ cursor: 'pointer' }} key={index} onClick={event => setSubSection(section, subSection)}>
-                  <Typography varian='subtitle2'>{subSection.label}</Typography>
-                </Box>
-              ))}
-            </Box>
-          )}
-        </Box>
-      ))}
+      <List>
+        {menu.map((section, index) => (
+          <Fragment key={index}>
+            <ListItem button onClick={event => setSection(section)}>
+              <ListItemText variant='subtitle1'>{section.label}</ListItemText>
+            </ListItem>
+            {((state.category === section.value && section.keyname === 'category' && !!section.filters.length) || (state.gender === section.value && section.keyname === 'gender' && !!section.filters.length)) && (
+              <List>
+                {section.filters.map((subSection, index) => (
+                  <ListItem button key={index} onClick={event => setSubSection(section, subSection)}>
+                    <ListItemText varian='subtitle2'>{subSection.label}</ListItemText>
+                  </ListItem>
+                ))}
+              </List>
+            )}
+          </Fragment>
+        ))}
+        {session && (
+          <ListItem button onClick={handleRedirect('/mis-compras')}>
+            <ListItemText variant='subtitle1'>Mis compras </ListItemText>
+          </ListItem>
+        )}
+      </List>
     </Content>
   )
 }
