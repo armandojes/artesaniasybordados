@@ -1,11 +1,11 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Normalize } from 'styled-normalize'
 import ThemeProvider from './theme'
 import Alert from 'components/alert'
 import Definers from './definers'
 import Loading from 'components/loading'
-
+import session from 'components/session'
 import './styles.css'
 
 // pages
@@ -45,6 +45,7 @@ const App = props => {
 
         <Route path='/mis-compras' exact component={MyShps} />
         <Route path='/compra/:id' exact component={Shop} />
+        <Route path='/admin' exact component={session(props => <Redirect to='/admin/articles' />)} />
       </Switch>
     </ThemeProvider>
   )

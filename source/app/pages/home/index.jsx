@@ -3,11 +3,13 @@ import Layout from 'components/layout'
 import ContainerBase from 'components/container'
 import styled from 'styled-components'
 import { Paper } from 'components/main'
-import { Grid, Typography, Button, Box } from '@material-ui/core'
-import testSrc from '../../assets/test.png'
+import { Grid, Typography, Button, Box, Hidden } from '@material-ui/core'
 import useResponsive from 'hooks/useResponsive'
-import { menuHome } from '../../constants'
 import { Link } from 'react-router-dom'
+import woman from '../../assets/woman.png'
+import man from '../../assets/man.png'
+import jewelry from '../../assets/jewelry.png'
+import calzado from '../../assets/calzado.png'
 
 const Container = styled(ContainerBase)`
   padding: 15px;
@@ -20,11 +22,10 @@ const SectionBoxes = styled(Paper)`
   background-size: contain;
   background-position: right;
   transition: all 500ms;
+  height: 100%;
+  box-sizing: border-box;
   :hover {
     box-shadow: 6px 6px 15px #cdcdcd;
-  }
-  :hover button{
-    text-decoration: underline;
   }
 `
 const Picture = styled.img`
@@ -41,6 +42,8 @@ const Picture = styled.img`
   }
 `
 const ButtonStyled = styled(Button)`
+  width: 50%;
+  max-width: 200px;
   font-weight: bold!important;
   display: block!important;
   margin: auto!important;
@@ -71,12 +74,17 @@ const home = props => {
               <SectionBoxes>
                 <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
                   <Grid item xs>
-                    <Typography align='center' variant='h5'>Prueba de seccion 1</Typography>
+                    <Typography align='center' variant='h5'>Para ellas</Typography>
+                    <Hidden xsDown>
+                      <Typography variant='subtitle1' align='center'>Viste con blusas, huipiles, vestidos y ropa artesanal</Typography>
+                    </Hidden>
                     <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                      <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      <Link to={{ pathname: '/articulos', state: { gender: 'female' } }}>
+                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      </Link>
                     </Box>
                   </Grid>
-                  <Picture src={testSrc} />
+                  <Picture src={woman} />
                 </Grid>
               </SectionBoxes>
             </Grid>
@@ -84,46 +92,58 @@ const home = props => {
               <SectionBoxes>
                 <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
                   <Grid item xs>
-                    <Typography align='center' variant='h5'>Prueba de seccion 2</Typography>
+                    <Typography align='center' variant='h5'>Para el</Typography>
+                    <Hidden xsDown>
+                      <Typography variant='subtitle1' align='center'>Moda con bordados mexicanos</Typography>
+                    </Hidden>
                     <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                      <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      <Link to={{ pathname: '/articulos', state: { gender: 'male' } }}>
+                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      </Link>
                     </Box>
                   </Grid>
-                  <Picture src={testSrc} />
+                  <Picture src={man} />
+                </Grid>
+              </SectionBoxes>
+            </Grid>
+
+            <Grid item xs={6}>
+              <SectionBoxes>
+                <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                  <Grid item xs>
+                    <Typography align='center' variant='h5'>Joyeria y accesorios</Typography>
+                    <Hidden xsDown>
+                      <Typography variant='subtitle1' align='center'>Detalles y piezas personalizables con estilo mexicano</Typography>
+                    </Hidden>
+                    <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                      <Link to={{ pathname: '/articulos', state: { category: 'accesorio' } }}>
+                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      </Link>
+                    </Box>
+                  </Grid>
+                  <Picture src={jewelry} />
+                </Grid>
+              </SectionBoxes>
+            </Grid>
+
+            <Grid item xs={6}>
+              <SectionBoxes>
+                <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                  <Grid item xs>
+                    <Typography align='center' variant='h5'>Calzado</Typography>
+                    <Typography variant='subtitle1' align='center'> </Typography>
+                    <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                      <Link to={{ pathname: '/articulos', state: { category: 'calzado' } }}>
+                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      </Link>
+                    </Box>
+                  </Grid>
+                  <Picture src={calzado} />
                 </Grid>
               </SectionBoxes>
             </Grid>
           </Grid>
         </Box>
-        {menuHome.map((section, index) => (
-          <Box mb={5} key={index}>
-            <Grid container spacing={responsive({ xs: 1, md: 2 })}>
-              <Grid item xs={12}>
-                <Typography variant='h4'> {section.label} </Typography>
-              </Grid>
-              {section.filters.map((subcategory, index) => (
-                <Grid item xs={6} md={4} lg={2} key={index}>
-                  <SectionBoxes>
-                    <Box mb={2}>
-                      <Picture src={testSrc} />
-                    </Box>
-                    <Grid container alignItems='center' direction='row'>
-                      <Grid item xs={12}>
-                        <Typography align='center' variant='h5'>{subcategory.label}</Typography>
-                        <Box mt={responsive({ xs: 1, md: 2 })} mb={responsive({ xs: 1, md: 2 })}>
-                          <Link to={{ pathname: '/articulos', state: { category: section.value, subcategory: subcategory.value } }}>
-                            <ButtonStyled variant='text' color='primary'>Ver mas</ButtonStyled>
-                          </Link>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </SectionBoxes>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        ))}
-
       </Container>
     </Layout>
   )

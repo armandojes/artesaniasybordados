@@ -9,6 +9,7 @@ import { CircularProgress, Grid, Box } from '@material-ui/core'
 import { TitlePage } from 'components/main'
 import Item from 'components/sale'
 import useResponsive from 'hooks/useResponsive'
+import Session from 'components/session'
 
 const MyShops = props => {
   const session = useSelector(state => state.session)
@@ -46,4 +47,4 @@ const MyShops = props => {
   )
 }
 
-export default MyShops
+export default Session(MyShops)

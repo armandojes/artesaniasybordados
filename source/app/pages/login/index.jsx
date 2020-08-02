@@ -11,9 +11,13 @@ import GoogleImageSrc from '../../assets/google.png'
 import { loginWidthEmailAndPassword, registerOrLoginWidthGoogle, registerOrLoginWithFacebook } from 'core/user'
 import { Alert } from '@material-ui/lab'
 import { setAlert } from 'flux/alert'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from 'flux/session'
+import { useLocation, Redirect } from 'react-router'
 
 const Login = props => {
+  const session = useSelector(state => state.session)
+  const location = useLocation()
   const dispatch = useDispatch()
   const [state, setState] = useObjectState({
     loading: false
@@ -27,12 +31,14 @@ const Login = props => {
     setState({ loading: true })
     const { errorMessage } = await loginWidthEmailAndPassword(state.email, state.password)
     if (errorMessage) return setState({ errorMessage, loading: false })
+    if (!errorMessage) dispatch(setLoading())
   }
 
   const handleLoginWithFacebook = async _event => {
     setState({ loading: true })
     const { errorMessage } = await registerOrLoginWithFacebook()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
+    if (!errorMessage) dispatch(setLoading())
     setState({ loading: false })
   }
 
@@ -41,8 +47,30 @@ const Login = props => {
     const { errorMessage } = await registerOrLoginWidthGoogle()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
     setState({ loading: false })
+    if (!errorMessage) dispatch(setLoading())
   }
 
+  // redirect to home
+  if (location.pathname === '/login' && typeof session === 'object' && !!session) {
+    return (
+      <Redirect to='/' />
+    )
+  }
+
+  // render loading
+  if (session === 'loading') {
+    return (
+      <Layout>
+        <ContainerPage page>
+          <FullWidthCentered>
+            <CircularProgress />
+          </FullWidthCentered>
+        </ContainerPage>
+      </Layout>
+    )
+  }
+
+  // render form
   return (
     <Layout>
       <ContainerPage page>

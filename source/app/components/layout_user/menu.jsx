@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { List, ListItem, ListItemText, ListItemIcon, Divider } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListItemIcon, Divider, Box } from '@material-ui/core'
 import { menu } from '../../constants'
 import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
@@ -71,13 +71,15 @@ const Menu = props => {
               <ListItemText variant='subtitle1'>{section.label}</ListItemText>
             </ListItem>
             {((state.category === section.value && section.keyname === 'category' && !!section.filters.length) || (state.gender === section.value && section.keyname === 'gender' && !!section.filters.length)) && (
-              <List>
-                {section.filters.map((subSection, index) => (
-                  <ListItem button key={index} onClick={event => setSubSection(section, subSection)}>
-                    <ListItemText varian='subtitle2'>{subSection.label}</ListItemText>
-                  </ListItem>
-                ))}
-              </List>
+              <Box pl={2}>
+                <List>
+                  {section.filters.map((subSection, index) => (
+                    <ListItem button key={index} onClick={event => setSubSection(section, subSection)}>
+                      <ListItemText varian='subtitle2'>{subSection.label}</ListItemText>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
             )}
           </Fragment>
         ))}

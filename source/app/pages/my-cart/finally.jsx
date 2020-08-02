@@ -12,6 +12,7 @@ const Boxes = styled(Paper)`
   margin-bottom: 10px;
   position: relative;
   padding-right: 100px;
+  padding: 30px;
 `
 const ButtonStyled = styled(Button)`
   position: absolute!important;

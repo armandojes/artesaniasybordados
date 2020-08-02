@@ -33,7 +33,14 @@ const ContainerBody = styled.section`
 const MenuWrapper = styled.div`
   width: 20%;
   margin-right: 20px;
-  
+  padding-left: 5%;
+  box-sizing: border-box;
+  @media screen and (max-width:1380px) {
+    padding-left: 3%;
+  }
+  @media screen and (max-width:1180px) {
+    padding-left: 1%;
+  }
 `
 const BodyWrapper = styled.div`
   width: 80%;

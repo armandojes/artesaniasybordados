@@ -11,6 +11,7 @@ import { FullWidthCentered, TitlePage, Paper } from 'components/main'
 import styled from 'styled-components'
 import { toString } from 'helpers/date'
 import { toPrice } from 'helpers/currency'
+import useResponsive from 'hooks/useResponsive'
 
 const PaperStyled = styled(Paper)`
   padding: 30px;
@@ -29,6 +30,7 @@ const Shop = props => {
   const [state, setState] = useObjectState({ loading: true, data: {} })
   const activeStep = state.data.status ? Object.keys(status).indexOf(state.data.status) : 0
   const numberArticles = state.data.items ? state.data.items.reduce((acumulator = 0, current) => acumulator + current.quantity, 0) : 0
+  const responsive = useResponsive()
 
   useFetch(async () => {
     const data = await get(id)
@@ -45,7 +47,7 @@ const Shop = props => {
               <Grid item xs={12}>
                 <PaperStyled>
                   <Typography variant='h6'>Estado:</Typography>
-                  <Stepper activeStep={activeStep} alternativeLabel style={{ backgroundColor: 'transparent' }}>
+                  <Stepper activeStep={activeStep} alternativeLabel={responsive({ xs: false, sm: true })} style={{ backgroundColor: 'transparent' }} orientation={responsive({ xs: 'vertical', sm: 'horizontal' })}>
                     {steps.map((label) => (
                       <Step key={label}>
                         <StepLabel>{label}</StepLabel>

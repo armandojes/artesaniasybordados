@@ -7,7 +7,9 @@ export const add = async data => {
     userId: data.userId,
     total: data.total,
     info: data.info,
+    shipping: data.shipping,
     items,
+    status: data.status,
     date: new Date()
   }
   const { id } = await db.collection('sales').add(dateToSave)

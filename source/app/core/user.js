@@ -73,6 +73,7 @@ export const getData = async (userId = '') => {
 export const add = async (id, data) => {
   try {
     const dataFiltered = filterObject(data, ['name', 'email', 'number', 'state', 'adress', 'city', 'gender', 'photo'])
+    dataFiltered.admin = false
     await db.doc(`users/${id}`).set(dataFiltered)
     return id
   } catch (error) {

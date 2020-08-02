@@ -8,10 +8,10 @@ import { Hidden } from '@material-ui/core'
 const Layout = props => {
   return (
     <>
-      <Hidden xsDown>
+      <Hidden smDown>
         <Header />
       </Hidden>
-      <Hidden smUp>
+      <Hidden mdUp>
         <HeaderMobile />
       </Hidden>
       {props.children}

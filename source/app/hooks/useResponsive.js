@@ -13,7 +13,7 @@ const useResponsive = () => {
     if (md && values.md) return values.md
     if (sm && values.sm) return values.sm
     if (xs && values.xs) return values.xs
-    return 0
+    return values.xs
   }
 }
 

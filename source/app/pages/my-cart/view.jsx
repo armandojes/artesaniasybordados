@@ -13,6 +13,7 @@ import { Box, Grid } from '@material-ui/core'
 import useResponsive from 'hooks/useResponsive'
 
 const Wrapper = styled.section`
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: stretch;

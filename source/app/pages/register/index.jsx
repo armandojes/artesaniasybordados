@@ -10,18 +10,23 @@ import { Facebook } from '@material-ui/icons'
 import GoogleImageSrc from '../../assets/google.png'
 import styled from 'styled-components'
 import { registerOrLoginWidthGoogle, register, registerOrLoginWithFacebook } from 'core/user'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from 'flux/alert'
+import { setLoading } from 'flux/session'
+import { useLocation, Redirect } from 'react-router'
 
 const Register = props => {
   const [state, setState] = useObjectState({ loading: false, errors: [], errorMessage: '' })
+  const location = useLocation()
   const dispatch = useDispatch()
+  const session = useSelector(state => state.session)
 
   const handleRegister = async _event => {
     setState({ loading: true })
     const { errorMessage } = await register(state)
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
     setState({ loading: false })
+    if (!errorMessage) dispatch(setLoading())
   }
 
   const handleRegisterWithFacebook = async _event => {
@@ -29,6 +34,7 @@ const Register = props => {
     const { errorMessage } = await registerOrLoginWithFacebook()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
     setState({ loading: false })
+    if (!errorMessage) dispatch(setLoading())
   }
 
   const handleResgisterWithGoogle = async _event => {
@@ -36,6 +42,14 @@ const Register = props => {
     const { errorMessage } = await registerOrLoginWidthGoogle()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
     setState({ loading: false })
+    if (!errorMessage) dispatch(setLoading())
+  }
+
+  // redirect to home
+  if (location.pathname === '/register' && typeof session === 'object' && !!session) {
+    return (
+      <Redirect to='/' />
+    )
   }
 
   return (

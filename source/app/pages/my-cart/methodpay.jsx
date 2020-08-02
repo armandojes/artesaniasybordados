@@ -12,10 +12,13 @@ const MethodPayItem = styled(Paper)`
   align-items: center;
   cursor: pointer;
   min-height: 50px;
+  padding: 30px;
+  border-left: ${props => props.$checked ? '5px solid #3483fa' : 'none'};
+  box-sizing: border-box;
 `
 
 const MethodPay = props => {
-  const handleChangeMethodPay = value => event => {
+  const handleChangeMethodPay = value => () => {
     props.setState({
       methodPay: value,
       errorMessage: null
@@ -35,7 +38,7 @@ const MethodPay = props => {
         </Box>
       )}
       {Object.keys(methodsPay).map(methdPay => (
-        <MethodPayItem key={methdPay} onClick={handleChangeMethodPay(methdPay)}>
+        <MethodPayItem key={methdPay} onClick={handleChangeMethodPay(methdPay)} $checked={props.state.methodPay === methdPay}>
           <Radio checked={props.state.methodPay === methdPay} />
           {methodsPay[methdPay]}
         </MethodPayItem>

@@ -7,8 +7,7 @@ import currency from 'helpers/currency'
 
 const Content = styled(Paper)`
   position: sticky;
-  top: 90px;
-  top: 100px;
+  top: 160px;
   padding: 50px;
   box-sizing: border-box;
 `

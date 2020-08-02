@@ -9,6 +9,7 @@ import Skeleton from 'components/skeletonGrid'
 import Card from './card'
 import { setAlert } from 'flux/alert'
 import { useDispatch } from 'react-redux'
+import session from 'components/session'
 
 const List = props => {
   const limit = 5
@@ -79,4 +80,4 @@ const List = props => {
   )
 }
 
-export default List
+export default session(List, true)

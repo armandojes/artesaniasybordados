@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 // import styled from 'styled-components'
 import { Paper } from 'components/main'
 import { Typography, Divider, Box } from '@material-ui/core'
@@ -12,23 +12,25 @@ const Products = props => {
   if (loading) return 'loading...'
 
   return (
-    <Paper>
-      <Box p={{ xs: 0, md: 2, lg: 5 }}>
-        <Box mb={4}>
-          <Typography variant='h6'>
-            Mi Carrito
-          </Typography>
-        </Box>
-        {items.map(item => (
-          <>
-            <Item key={item.id} {...item} onDelete={props.onDelete} />
-            <Box mt={1} mb={1}>
-              <Divider />
-            </Box>
-          </>
-        ))}
+    <>
+      <Box pt={2} pb={2}>
+        <Typography variant='h6'>
+          Mi Carrito
+        </Typography>
       </Box>
-    </Paper>
+      <Paper>
+        <Box p={{ xs: 0, md: 2, lg: 5 }}>
+          {items.map(item => (
+            <Fragment key={item.id}>
+              <Item {...item} onDelete={props.onDelete} />
+              <Box mt={1} mb={1}>
+                <Divider />
+              </Box>
+            </Fragment>
+          ))}
+        </Box>
+      </Paper>
+    </>
   )
 }
 
