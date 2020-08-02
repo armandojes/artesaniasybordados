@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from 'components/layout'
+import Layout from 'components/layout_user'
 import Container from 'components/container'
 import styled from 'styled-components'
 import Summary from './summary'
@@ -7,10 +7,12 @@ import Form from './form'
 import Products from './products'
 import MethodPay from './methodpay'
 import Finally from './finally'
-import { string, func, object } from 'prop-types'
-import { Button } from 'components/main'
-import { Box, Grid } from '@material-ui/core'
+import { string, func, object, bool, array } from 'prop-types'
+import { Button, Paper, FullWidthCentered } from 'components/main'
+import { Box, Grid, CircularProgress } from '@material-ui/core'
 import useResponsive from 'hooks/useResponsive'
+import EmptyMessage from 'components/EmptyContent'
+import { Loyalty } from '@material-ui/icons'
 
 const Wrapper = styled.section`
   margin-top: 30px;
@@ -81,39 +83,54 @@ const View = props => {
   return (
     <Layout>
       <Container $page>
-        <ContainerMaterial>
-          <Wrapper>
-            <Body>
-              {props.view === 'form' && (
-                <Form {...props} />
-              )}
-              {props.view === 'finally' && (
-                <Finally {...props} />
-              )}
-              {props.view === 'methodPay' && (
-                <MethodPay {...props} />
-              )}
-              {props.view === 'products' && (
-                <Products {...props} />
-              )}
-              <Grid mt={2} component={Box} container justify={responsive({ xs: 'space-between', sm: 'flex-end', d: 'flex-end' })}>
-                <ButtonStyled onClick={props.onBack}>{props.view === 'products' ? 'Seguir comprando' : 'Atras'}</ButtonStyled>
-                {props.view !== 'finally' && (
-                  <ButtonStyled onClick={props.onNext} variant='contained'>Siguiente</ButtonStyled>
+        {props.loading && (
+          <Paper>
+            <FullWidthCentered>
+              <CircularProgress />
+            </FullWidthCentered>
+          </Paper>
+        )}
+        {!props.loading && !!props.items.length && (
+          <ContainerMaterial>
+            <Wrapper>
+              <Body>
+                {props.view === 'form' && (
+                  <Form {...props} />
                 )}
-                {props.view === 'finally' && props.state.methodPay !== 'paypal' && (
-                  <ButtonStyled onClick={props.onNext} variant='contained'>Pagar</ButtonStyled>
+                {props.view === 'finally' && (
+                  <Finally {...props} />
                 )}
-                {props.view === 'finally' && props.state.methodPay === 'paypal' && (
-                  <ButtonStyledPaypal variant='contained'><ButtonShadow id='render_button_paypal' />Pagar con Paypal </ButtonStyledPaypal>
+                {props.view === 'methodPay' && (
+                  <MethodPay {...props} />
                 )}
-              </Grid>
-            </Body>
-            <Aside>
-              <Summary {...props} />
-            </Aside>
-          </Wrapper>
-        </ContainerMaterial>
+                {props.view === 'products' && (
+                  <Products {...props} />
+                )}
+                <Grid mt={2} component={Box} container justify={responsive({ xs: 'space-between', sm: 'flex-end', d: 'flex-end' })}>
+                  <ButtonStyled onClick={props.onBack}>{props.view === 'products' ? 'Seguir comprando' : 'Atras'}</ButtonStyled>
+                  {props.view !== 'finally' && (
+                    <ButtonStyled onClick={props.onNext} variant='contained'>Siguiente</ButtonStyled>
+                  )}
+                  {props.view === 'finally' && props.state.methodPay !== 'paypal' && (
+                    <ButtonStyled onClick={props.onNext} variant='contained'>Pagar</ButtonStyled>
+                  )}
+                  {props.view === 'finally' && props.state.methodPay === 'paypal' && (
+                    <ButtonStyledPaypal variant='contained'><ButtonShadow id='render_button_paypal' />Pagar con Paypal </ButtonStyledPaypal>
+                  )}
+                </Grid>
+              </Body>
+              <Aside>
+                <Summary {...props} />
+              </Aside>
+            </Wrapper>
+          </ContainerMaterial>
+        )}
+        {!props.loading && !props.items.length && (
+          <EmptyMessage
+            icon={Loyalty}
+            message='Aun no tienes articulos en tu carrito'
+          />
+        )}
       </Container>
     </Layout>
   )
@@ -123,7 +140,9 @@ View.propTypes = {
   view: string,
   onNext: func,
   onBack: func,
-  state: object
+  state: object,
+  loading: bool,
+  items: array
 }
 
 export default View

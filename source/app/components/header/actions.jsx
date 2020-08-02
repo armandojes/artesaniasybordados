@@ -51,13 +51,13 @@ const Actions = _props => {
         <Avatar size='small' src={session.photo} />
         <Typography color='primary' variant='subtitle1'>{session.name.split(' ')[0]}</Typography>
       </UserContent>
-      <IconButton>
-        <Badge badgeContent={itemsOnCart.length} color='primary'>
-          <Link to='/mi-carrito'>
+      <Link to='/mi-carrito'>
+        <IconButton>
+          <Badge badgeContent={itemsOnCart.length} color='primary'>
             <ShoppingCart />
-          </Link>
-        </Badge>
-      </IconButton>
+          </Badge>
+        </IconButton>
+      </Link>
       <IconButton onClick={event => setMenu(event.currentTarget)}>
         <Menu />
       </IconButton>

@@ -10,6 +10,8 @@ import { TitlePage } from 'components/main'
 import Item from 'components/sale'
 import useResponsive from 'hooks/useResponsive'
 import Session from 'components/session'
+import EmptyMessage from 'components/EmptyContent'
+import { Loyalty } from '@material-ui/icons'
 
 const MyShops = props => {
   const session = useSelector(state => state.session)
@@ -26,20 +28,31 @@ const MyShops = props => {
   return (
     <Layout>
       <Container $page>
-        <TitlePage>Mis compras</TitlePage>
         {state.loading && (
-          <Grid container alignItems='center' justify='center' style={{ minHeight: '70vh' }}>
-            <CircularProgress style={{ display: 'block' }} />
-          </Grid>
+          <>
+            <TitlePage>Mis compras</TitlePage>
+            <Grid container alignItems='center' justify='center' style={{ minHeight: '70vh' }}>
+              <CircularProgress style={{ display: 'block' }} />
+            </Grid>
+          </>
         )}
         {!state.loading && !!state.items.length && (
-          <Grid container spacing={responsive({ xs: 2, md: 4 })}>
-            {state.items.map(itemData => (
-              <Grid key={itemData.id} item sm={4} lg={3} xs={6}>
-                <Item {...itemData} />
-              </Grid>
-            ))}
-          </Grid>
+          <>
+            <TitlePage>Mis compras</TitlePage>
+            <Grid container spacing={responsive({ xs: 2, md: 4 })}>
+              {state.items.map(itemData => (
+                <Grid key={itemData.id} item sm={4} lg={3} xs={6}>
+                  <Item {...itemData} />
+                </Grid>
+              ))}
+            </Grid>
+          </>
+        )}
+        {!state.loading && !state.items.length && (
+          <EmptyMessage
+            icon={Loyalty}
+            message='Au no tienes compras realizadas'
+          />
         )}
         <Box mb={3} />
       </Container>

@@ -4,6 +4,7 @@ import Container from 'components/container'
 import Form from './form'
 import Loading from './loading'
 import Success from './success'
+import Session from 'components/session'
 
 const Create = props => {
   const [view, setView] = useState('form')
@@ -27,4 +28,4 @@ const Create = props => {
   )
 }
 
-export default Create
+export default Session(Create, true)

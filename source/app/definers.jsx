@@ -18,11 +18,9 @@ const Definers = props => {
 
   // set items OnCart
   useEffect(() => {
-    if (session) {
+    if (session !== 'loading' && !!session) {
       const unsubscrube = onCartChange(session.id, items => dispatch(setItemsOnCart(items)))
       return () => unsubscrube()
-    } else {
-      dispatch(setItemsOnCart([]))
     }
   }, [session])
   return null

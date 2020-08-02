@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import { toString } from 'helpers/date'
 import { toPrice } from 'helpers/currency'
 import useResponsive from 'hooks/useResponsive'
+import Session from 'components/session'
 
 const PaperStyled = styled(Paper)`
   padding: 30px;
@@ -101,4 +102,4 @@ const Shop = props => {
   )
 }
 
-export default Shop
+export default Session(Shop)

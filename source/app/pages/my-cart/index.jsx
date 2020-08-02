@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom'
 import { requires } from 'helpers/validate'
 import { active, desactive } from 'flux/loading'
 import { add } from 'core/sale'
+import session from 'components/session'
 
 const Mycart = props => {
   const history = useHistory()
@@ -118,4 +119,4 @@ const Mycart = props => {
   )
 }
 
-export default Mycart
+export default session(Mycart)

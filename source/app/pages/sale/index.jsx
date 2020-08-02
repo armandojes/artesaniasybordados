@@ -16,6 +16,7 @@ import { toString } from 'helpers/date'
 import Dialog from './dialog'
 import DialogSent from './dialogSent'
 import { requires } from 'helpers/validate'
+import Session from 'components/session'
 
 const Span = styled.span`
   color: gray;
@@ -176,4 +177,5 @@ const Sale = props => {
 Sale.propTypes = {
   match: string
 }
-export default Sale
+
+export default Session(Sale, true)

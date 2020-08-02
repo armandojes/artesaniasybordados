@@ -8,6 +8,7 @@ import useObjectState from 'hooks/useState'
 import useFetch from 'hooks/useFetch'
 import Skeleton from 'components/skeletonGrid'
 import ItemSale from 'components/sale'
+import Session from 'components/session'
 
 const Sales = props => {
   const loadNextPage = useMemo(() => getList(), [])
@@ -42,4 +43,4 @@ const Sales = props => {
   )
 }
 
-export default Sales
+export default Session(Sales, true)
