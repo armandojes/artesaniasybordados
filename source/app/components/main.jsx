@@ -53,6 +53,10 @@ export const TitlePage = (props) => (
   <Typography color='primary' variant='h4' {...props} style={{ marginTop: '10px', marginBottom: '15px' }} />
 )
 
+export const TitleNotFound = (props) => (
+  <Typography variant='h4' {...props} style={{ color: 'red' }} />
+)
+
 export const Menu = props => {
   const [element, setElement] = useState(null)
 

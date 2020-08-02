@@ -7,8 +7,10 @@ import useFetch from 'hooks/useFetch'
 import Skeleton from 'components/skeletonGrid'
 import { Grid } from '@material-ui/core'
 import Article from 'components/article'
+import { Loyalty } from '@material-ui/icons'
 
 import { object } from 'prop-types'
+import EmptyMessage from 'components/EmptyContent'
 
 const Articles = props => {
   const initialFilters = props.location.state || {}
@@ -33,7 +35,7 @@ const Articles = props => {
         {state.loading && (
           <Skeleton />
         )}
-        {!state.loading && (
+        {!state.loading && !!state.items.length && (
           <Grid container spacing={3}>
             {state.items.map(item => (
               <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
@@ -41,6 +43,13 @@ const Articles = props => {
               </Grid>
             ))}
           </Grid>
+        )}
+        {!state.loading && !state.items.length && (
+          <EmptyMessage
+            title='Opps!!'
+            message='No encontramos lo que buscabas'
+            icon={Loyalty}
+          />
         )}
       </Container>
     </Layout>
