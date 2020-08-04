@@ -87,7 +87,7 @@ export const onSessionChange = (handler) => {
       if (user) {
         await new Promise(resolve => setTimeout(resolve, 3000))
         const data = await getData(user.uid)
-        handler(data)
+        handler(filterObject(data, ['number', 'email', 'photo', 'name', 'admin', 'id']))
       } else {
         handler(null)
       }
