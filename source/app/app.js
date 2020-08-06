@@ -23,6 +23,7 @@ import Sale from './pages/sale'
 
 import MyShps from './pages/my_shops'
 import Shop from './pages/shop'
+import Article from './pages/articulo'
 
 const App = props => {
   return (
@@ -33,6 +34,7 @@ const App = props => {
       <Loading />
       <Switch>
         <Route path='/' exact component={Home} />
+        <Route path='/articulo/:id' exact component={Article} />
         <Route path='/mi-carrito' exact component={Cart} />
         <Route path='/articulos' exact component={Producst} />
         <Route path='/login' exact component={Login} />

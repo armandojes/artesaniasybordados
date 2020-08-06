@@ -2,7 +2,7 @@ import React from 'react'
 import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles'
 import { oneOfType, array, object, element, node } from 'prop-types'
 
-let theme = createMuiTheme({
+const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#3483fa'
@@ -13,10 +13,10 @@ let theme = createMuiTheme({
   }
 })
 
-theme = responsiveFontSizes(theme)
+const themeResponsive = responsiveFontSizes(theme)
 
 const MaterialUIThemeProvider = props => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={themeResponsive}>
     {props.children}
   </ThemeProvider>
 )

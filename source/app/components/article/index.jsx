@@ -19,7 +19,7 @@ const Article = props => {
   }
 
   return (
-    <LinkStyled to={`/article/${props.id}`} onClick={handleAddTocart}>
+    <LinkStyled to={`/articulo/${props.id}`}>
       <CardStyled variant='outlined'>
         <Picture src={props.picture} component='img' />
         <Box p={1}>

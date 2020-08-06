@@ -3,6 +3,11 @@ import { filterObject } from 'helpers/validate'
 import { drop as dropFile } from './storage'
 import { categories, genders, subCategories } from '../constants'
 
+export const getSingle = async id => {
+  const snapshot = await db.doc(`articles/${id}`).get()
+  return snapShotParser(snapshot)
+}
+
 export const getList = (limit = 10, filters = {}) => {
   var last = null
   var finished = false
