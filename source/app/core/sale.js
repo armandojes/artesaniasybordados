@@ -2,7 +2,7 @@ import { db, snapShotParser } from 'core/index'
 import { filterObject } from 'helpers/validate'
 
 export const add = async data => {
-  const items = data.items.map(item => filterObject(item, ['picture', 'category', 'price', 'gender', 'id', 'quantity', 'title']))
+  const items = data.items.map(item => filterObject(item, ['size', 'picture', 'category', 'price', 'gender', 'id', 'quantity', 'title']))
   const dateToSave = {
     userId: data.userId,
     total: data.total,

@@ -26,6 +26,7 @@ const Item = props => {
         <Typography style={{ lineHeight: '1.2em' }} variant='subtitle1'>{props.title}</Typography>
         <Typography color='primary' variant='subtitle1'>{currency.toPrice(props.price)}</Typography>
         <Typography style={{ color: 'gray' }} variant='subtitle2'><span>Cantidad:</span> {props.quantity}</Typography>
+        {props.size && (<Typography style={{ color: 'gray' }} variant='subtitle2'><span>Talla:</span> {props.size}</Typography>)}
       </Data>
     </Content>
   )
@@ -35,7 +36,8 @@ Item.propTypes = {
   picture: string,
   title: string,
   price: number,
-  quantity: number
+  quantity: number,
+  size: string
 }
 
 export default Item

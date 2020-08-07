@@ -11,9 +11,13 @@ import { add, update } from 'core/articles'
 import { uploadPicture, drop } from 'core/storage'
 import { useLocation } from 'react-router-dom'
 import { FullWidthCentered } from 'components/main'
+import Summary from './sumary'
+import { useDispatch } from 'react-redux'
+import { setAlert } from 'flux/alert'
 
 const Form = props => {
   const location = useLocation()
+  const dispatch = useDispatch()
   const steps = ['Datos generales', 'Descripcion', 'Multimedia', 'Confirmacion']
   const initialState = location.state
   var indexUploading = 1
@@ -29,19 +33,34 @@ const Form = props => {
   }
 
   const handleNext = _event => {
+    if (currentStep === 0) {
+      const datasRequire = ['title', 'gender', 'price', 'category', 'subcategory', 'quantity']
+      const errors = requires(state, datasRequire)
+      if (errors) {
+        dispatch(setAlert({ description: 'Todos los campos son requeridos' }))
+        return setState({ errors })
+      }
+    }
+    if (currentStep === 1) {
+      const errors = requires(state, ['description'])
+      if (errors) {
+        dispatch(setAlert({ description: 'Agrega una descripcion' }))
+        return setState({ errors })
+      }
+    }
+    if (currentStep === 2) {
+      const errors = requires(state, ['pictures', 'picture'])
+      if (errors) {
+        dispatch(setAlert({ description: 'Se requieren al menos 2 imagenes' }))
+        return false
+      }
+    }
     setCurrentStep(currentStep + 1)
   }
 
   const handleback = _event => setCurrentStep(currentStep - 1)
 
   const handleSave = async _event => {
-    const datasRequire = ['title', 'gender', 'price', 'description', 'picture', 'pictures']
-    const errors = requires(state, datasRequire)
-    if (errors) {
-      window.alert('hay un error')
-      return setState({ errors, errorMessage: 'existen campos vacios' })
-    }
-
     props.setView('loading')
     var articleId = initialState ? initialState.id : null
     if (!initialState) {
@@ -90,7 +109,7 @@ const Form = props => {
 
   return (
     <FullWidthCentered>
-      <Container maxWidth='md'>
+      <Container maxWidth={currentStep === 3 ? 'lg' : 'md'}>
         <form>
           <Stepper steps={steps} activeStep={currentStep} />
 
@@ -104,21 +123,26 @@ const Form = props => {
             {currentStep === 2 && (
               <Multimedia state={state} setState={setState} />
             )}
+            {currentStep === 3 && (
+              <Summary state={state} setState={setState} />
+            )}
           </Box>
 
-          <Grid container justify='flex-end' spacing={2}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Button disabled={!currentStep} size='large' color='primary' variant='outlined' fullWidth onClick={handleback}>Atras</Button>
+          <Box pb={3}>
+            <Grid container justify='flex-end' spacing={2}>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Button disabled={!currentStep} size='large' color='primary' variant='outlined' fullWidth onClick={handleback}>Atras</Button>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                {(currentStep + 1) < steps.length && (
+                  <Button size='large' color='primary' variant='contained' fullWidth onClick={handleNext}>Siguente</Button>
+                )}
+                {(currentStep + 1) >= steps.length && (
+                  <Button size='large' color='primary' variant='contained' fullWidth onClick={handleSave}>Publicar</Button>
+                )}
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              {(currentStep + 1) < steps.length && (
-                <Button size='large' color='primary' variant='contained' fullWidth onClick={handleNext}>Siguente</Button>
-              )}
-              {(currentStep + 1) >= steps.length && (
-                <Button size='large' color='primary' variant='contained' fullWidth onClick={handleSave}>Publicar</Button>
-              )}
-            </Grid>
-          </Grid>
+          </Box>
 
         </form>
       </Container>

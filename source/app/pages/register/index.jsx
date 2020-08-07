@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, SectionTitle, FullWidthCentered, FlexCentered, Button } from 'components/main'
+import { Paper, SectionTitle, FullWidthCentered, FlexCentered, Button, Link } from 'components/main'
 import Layout from 'components/layout'
 import ContainerPage from 'components/container'
 import { Grid, Box, CircularProgress, Container } from '@material-ui/core'
@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from 'flux/alert'
 import { setLoading } from 'flux/session'
 import { useLocation, Redirect } from 'react-router'
+import { requires } from 'helpers/validate'
 
 const Register = props => {
   const [state, setState] = useObjectState({ loading: false, errors: [], errorMessage: '' })
@@ -22,6 +23,10 @@ const Register = props => {
   const session = useSelector(state => state.session)
 
   const handleRegister = async _event => {
+    const errors = requires(state, ['name', 'email', 'password', 'repassword', 'number'])
+    if (errors) return setState({ errors, errorMessage: 'Todos los campos son requeridos' })
+    if (state.password !== state.repassword) return setState({ errors: ['password', 'repassword'], errorMessage: 'Las contraseñas no coinciden' })
+
     setState({ loading: true })
     const { errorMessage } = await register(state)
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
@@ -114,7 +119,9 @@ const Register = props => {
                             <Button fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
                           </Grid>
                           <Grid item xs={12}>
-                            <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
+                            <Link to='/login'>
+                              <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
+                            </Link>
                           </Grid>
                         </Grid>
                       </form>

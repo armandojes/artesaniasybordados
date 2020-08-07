@@ -78,7 +78,7 @@ const createFakeArticles = async () => {
   for (const gender of genders_) {
     for (const category of categories_) {
       for (const subcategory of subCategories_) {
-        console.log('__will create__', `prueba => ${gender} => ${category} => ${subcategory}`)
+        console.log('__will_create__', `prueba => ${gender} => ${category} => ${subcategory}`)
         await add({
           title: `prueba => ${gender} => ${category} => ${subcategory}`,
           price: 2000,

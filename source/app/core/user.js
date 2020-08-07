@@ -61,6 +61,9 @@ export const register = async data => {
     if (error.code === 'auth/email-already-in-use') {
       return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
     }
+    if (error.code === 'auth/invalid-email') {
+      return { errorMessage: 'El correo no es válido' }
+    }
     return { errorMessage: null }
   }
 }
