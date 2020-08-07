@@ -63,7 +63,7 @@ const Mycart = props => {
 
   // on payment aproved
   const handleSaveOperation = async (status = 'pending', meta = {}) => {
-    await add({ userId: session.id, items, total, shipping: shippingPrice, info: state, meta, status })
+    await add({ userId: session.id, items, total, shipping: shippingPrice, info: state, meta, status, methodPay: state.methodPay })
     dispatch(removeAll())
     dispatch(desactive())
   }

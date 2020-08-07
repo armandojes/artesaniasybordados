@@ -22,6 +22,7 @@ const View = props => {
   const [currentPicture, setCurrentPicture] = useState(0)
   const responsive = useResponsive()
   const session = useSelector(state => state.session)
+  const { options = {} } = props
 
   return (
     <>
@@ -104,7 +105,7 @@ const View = props => {
                       {props.data.sizes && props.data.sizes.length && (
                         <Grid item xs={6}>
                           <InputGroup
-                            state={props.options}
+                            state={options}
                             setState={props.setOptions}
                             type='select'
                             options={props.data.sizes.reduce((acum, current) => { acum[current] = current; return acum }, {})}
@@ -118,7 +119,7 @@ const View = props => {
                       <Grid item xs={6}>
                         <InputGroup
                           filter='number'
-                          state={props.options}
+                          state={options}
                           setState={props.setOptions}
                           margin='none'
                           size='small'
@@ -130,7 +131,7 @@ const View = props => {
                       <Grid item xs={12}>
                         <Button
                           onClick={props.onAddToCart}
-                          disabled={!props.options.quantity || session === 'loading'}
+                          disabled={!options.quantity || session === 'loading'}
                           variant='contained'
                           fullWidth
                         >Agregar al carrito

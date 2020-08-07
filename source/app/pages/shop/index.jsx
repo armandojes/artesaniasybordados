@@ -1,7 +1,7 @@
 import React from 'react'
 import LayoutUser from 'components/layout_user'
 import Container from 'components/container'
-import { Step, StepLabel, Stepper, CircularProgress, Container as MaterialCOntainer, Typography, Grid } from '@material-ui/core'
+import { Step, StepLabel, Stepper, CircularProgress, Container as MaterialCOntainer, Typography, Grid, Box } from '@material-ui/core'
 import { status, methodsPay } from '../../constants'
 import { useParams } from 'react-router'
 import useObjectState from 'hooks/useState'
@@ -13,6 +13,7 @@ import { toString } from 'helpers/date'
 import { toPrice } from 'helpers/currency'
 import useResponsive from 'hooks/useResponsive'
 import Session from 'components/session'
+import Item from 'components/articleSecondary'
 
 const PaperStyled = styled(Paper)`
   padding: 30px;
@@ -89,6 +90,20 @@ const Shop = props => {
                   </PaperStyled>
                 </Grid>
               )}
+              <Grid item xs={12}>
+                <PaperStyled>
+                  <Box mb={2}>
+                    <Typography variant='h6'>Articulos</Typography>
+                  </Box>
+                  <Grid container spacing={3}>
+                    {state.data.items.map((itemData, index) => (
+                      <Grid key={index} item xs={12} sm={6} lg={4}>
+                        <Item {...itemData} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </PaperStyled>
+              </Grid>
             </Grid>
           </MaterialCOntainer>
         )}
