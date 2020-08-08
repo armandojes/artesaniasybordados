@@ -47,7 +47,6 @@ Item.propTypes = {
   price: number,
   quantity: number,
   onDelete: func,
-  id: string,
   size: string
 }
 

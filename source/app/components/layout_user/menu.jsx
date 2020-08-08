@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
 import { useHistory, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
-import { ShoppingBasket, ExitToApp } from '@material-ui/icons'
+import { ShoppingBasket, ExitToApp, SupervisorAccount } from '@material-ui/icons'
 import { logOut } from 'core/user'
 
 const Content = styled.aside`
@@ -86,6 +86,14 @@ const Menu = props => {
         {session && typeof session === 'object' && (
           <>
             <Divider />
+            {!!session && session.admin && (
+              <ListItem button onClick={handleRedirect('/admin')}>
+                <ListItemIcon>
+                  <SupervisorAccount />
+                </ListItemIcon>
+                <ListItemText variant='subtitle1'>Admin </ListItemText>
+              </ListItem>
+            )}
             <ListItem button onClick={handleRedirect('/mis-compras')}>
               <ListItemIcon>
                 <ShoppingBasket />

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LayoutUser from 'components/layout_user'
 import Container from 'components/container'
 import { Step, StepLabel, Stepper, CircularProgress, Container as MaterialCOntainer, Typography, Grid, Box } from '@material-ui/core'
 import { status, methodsPay } from '../../constants'
-import { useParams } from 'react-router'
+import { useParams, useLocation } from 'react-router'
 import useObjectState from 'hooks/useState'
 import useFetch from 'hooks/useFetch'
 import { get } from 'core/sale'
@@ -14,6 +14,7 @@ import { toPrice } from 'helpers/currency'
 import useResponsive from 'hooks/useResponsive'
 import Session from 'components/session'
 import Item from 'components/articleSecondary'
+import SuccessModal from './modalSuccess'
 
 const PaperStyled = styled(Paper)`
   padding: 30px;
@@ -33,6 +34,8 @@ const Shop = props => {
   const activeStep = state.data.status ? Object.keys(status).indexOf(state.data.status) : 0
   const numberArticles = state.data.items ? state.data.items.reduce((acumulator = 0, current) => acumulator + current.quantity, 0) : 0
   const responsive = useResponsive()
+  const location = useLocation()
+  const [isModalOpen, setModalOpen] = useState(location.state && location.state.success)
 
   useFetch(async () => {
     const data = await get(id)
@@ -44,6 +47,12 @@ const Shop = props => {
       <Container $page>
         {!state.loading && (
           <MaterialCOntainer maxWidth='md' disableGutters>
+            <SuccessModal
+              open={isModalOpen}
+              onClose={event => setModalOpen(false)}
+              payed={state.data.status === 'payed'}
+              methodPay={state.data.methodPay}
+            />
             <Grid container spacing={3}>
               <Grid item xs={12}><TitlePage>Detalles de tu compra</TitlePage></Grid>
               <Grid item xs={12}>

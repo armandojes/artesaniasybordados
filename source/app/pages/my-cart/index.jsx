@@ -63,9 +63,10 @@ const Mycart = props => {
 
   // on payment aproved
   const handleSaveOperation = async (status = 'pending', meta = {}) => {
-    await add({ userId: session.id, items, total, shipping: shippingPrice, info: state, meta, status, methodPay: state.methodPay })
+    const id = await add({ userId: session.id, items, total, shipping: shippingPrice, info: state, meta, status, methodPay: state.methodPay })
     dispatch(removeAll())
     dispatch(desactive())
+    history.replace({ pathname: `/compra/${id}`, state: { success: true } })
   }
 
   // paypal config

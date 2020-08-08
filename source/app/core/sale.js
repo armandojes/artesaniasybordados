@@ -4,6 +4,7 @@ import { filterObject } from 'helpers/validate'
 export const add = async data => {
   const items = data.items.map(item => filterObject(item, ['size', 'picture', 'category', 'price', 'gender', 'id', 'quantity', 'title']))
   const dateToSave = {
+    methodPay: data.methodPay,
     userId: data.userId,
     total: data.total,
     info: data.info,
@@ -13,7 +14,7 @@ export const add = async data => {
     date: new Date()
   }
   const { id } = await db.collection('sales').add(dateToSave)
-  console.log(id)
+  return id
 }
 
 export const get = async (id) => {
