@@ -5,7 +5,7 @@ import useObjectState from 'hooks/useState'
 import { Box, Grid, CircularProgress, Typography, Button, Container as ContainerMaterial } from '@material-ui/core'
 import useFetch from 'hooks/useFetch'
 import sale, { get } from 'core/sale'
-import { string } from 'prop-types'
+import { object } from 'prop-types'
 import Item from './item'
 import { Paper } from 'components/main'
 import styled from 'styled-components'
@@ -17,6 +17,7 @@ import Dialog from './dialog'
 import DialogSent from './dialogSent'
 import { requires } from 'helpers/validate'
 import Session from 'components/session'
+import notification from 'core/notification'
 
 const Span = styled.span`
   color: gray;
@@ -45,6 +46,7 @@ const Sale = props => {
     setDialogOpen(false)
     setState({ loading: true })
     await sale.setPayed(state.data.id)
+    await notification.purchasePayed(state.data.userId, state.data.id)
     const data = await get(props.match.params.id)
     setState({ loading: false, data })
   }
@@ -55,6 +57,7 @@ const Sale = props => {
     setDialogOpenSent(false)
     setState({ loading: true })
     await sale.setSent(state.data.id, { code: shippingInfo.code, company: shippingInfo.company })
+    await notification.purchaseSent(state.data.userId, state.data.id)
     const data = await get(props.match.params.id)
     setState({ loading: false, data })
   }
@@ -71,6 +74,7 @@ const Sale = props => {
     setDialogOpen(false)
     setState({ loading: true })
     await sale.setDeliered(state.data.id)
+    await notification.purchaseDelivered(state.data.userId, state.data.id)
     const data = await get(props.match.params.id)
     setState({ loading: false, data })
   }
@@ -175,7 +179,7 @@ const Sale = props => {
 }
 
 Sale.propTypes = {
-  match: string
+  match: object
 }
 
 export default Session(Sale, true)

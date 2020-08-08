@@ -5,6 +5,7 @@ import { Menu, ShoppingCart } from '@material-ui/icons'
 import { Button, Link } from 'components/main'
 import { useSelector } from 'react-redux'
 import MenuComponent from './menu'
+import useNotification from 'hooks/useNotification'
 
 const UserContent = styled(ButtonBase)`
   background: #e7f3ff!important;
@@ -12,17 +13,28 @@ const UserContent = styled(ButtonBase)`
   padding: 3px 5px!important;
   padding-right: 15px!important;
   margin-right: 10px!important;
+  position: relative!important;
 `
 const Avatar = styled(AvatarBase)`
   width: 30px!important;
   height: 30px!important;
   margin-right: 10px;
 `
+const Doc = styled.div`
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  background: red;
+  border-radius: 50%;
+  top: 0px;
+  right: 0px;
+`
 
 const Actions = _props => {
   const session = useSelector(state => state.session)
   const itemsOnCart = useSelector(state => state.cart.items)
   const [isMenuActive, setMenu] = useState(null)
+  const notification = useNotification()
 
   if (session === 'loading') {
     return 'Cargando...'
@@ -48,6 +60,9 @@ const Actions = _props => {
   return (
     <Grid container justify='flex-end' alignItems='center'>
       <UserContent>
+        {notification && (
+          <Doc />
+        )}
         <Avatar size='small' src={session.photo} />
         <Typography color='primary' variant='subtitle1'>{session.name.split(' ')[0]}</Typography>
       </UserContent>

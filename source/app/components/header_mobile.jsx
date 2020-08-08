@@ -7,6 +7,7 @@ import { Search, Notifications, ShoppingCart, Menu } from '@material-ui/icons'
 import { Link } from 'components/main'
 import { useSelector } from 'react-redux'
 import Drawer from 'components/layout_user/drawer'
+import useNotification from 'hooks/useNotification'
 
 const Header = styled.header`
   background: #fff;
@@ -24,9 +25,19 @@ const Logo = styled.img`
   width: 40px;
 `
 
+const Dot = styled.div`
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  right: 0px;
+`
+
 const HeaderMobile = props => {
   const itemsOnCart = useSelector(state => state.cart.items)
   const [isMobileFilterActive, setmobileFilterStatus] = useState(false)
+  const notification = useNotification()
 
   return (
     <Header id='header'>
@@ -47,7 +58,10 @@ const HeaderMobile = props => {
           </Link>
         </IconButton>
         <IconButton>
-          <Link to='/notificaciones'>
+          <Link style={{ position: 'relative' }} to='/notificaciones'>
+            {notification && (
+              <Dot />
+            )}
             <Notifications />
           </Link>
         </IconButton>
