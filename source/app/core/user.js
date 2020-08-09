@@ -20,12 +20,12 @@ export const registerOrLoginWidthGoogle = async props => {
     if (!dataFromDb) {
       await add(uid, { number: phoneNumber, name: displayName, email, id: uid, photo: photoURL })
     }
-    return { errorMessage: null }
+    return { errorMessage: null, success: true }
   } catch (error) {
     if (error.code === 'auth/account-exists-with-different-credential') {
-      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
+      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta', success: false }
     }
-    return { errorMessage: null }
+    return { errorMessage: null, success: false }
   }
 }
 
@@ -42,12 +42,12 @@ export const registerOrLoginWithFacebook = async props => {
     if (!dataFromDb) {
       await add(uid, { number: phoneNumber, name: displayName, email, id: uid })
     }
-    return { errorMessage: null }
+    return { errorMessage: null, success: true }
   } catch (error) {
     if (error.code === 'auth/account-exists-with-different-credential') {
-      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
+      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta', success: false }
     }
-    return { errorMessage: null }
+    return { errorMessage: null, success: false }
   }
 }
 
@@ -55,16 +55,16 @@ export const register = async data => {
   try {
     const result = await firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
     await add(result.user.uid, data)
-    return { id: result.user.uid, errorMessage: null }
+    return { id: result.user.uid, errorMessage: null, success: true }
   } catch (error) {
     console.log(error)
     if (error.code === 'auth/email-already-in-use') {
-      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta' }
+      return { errorMessage: 'Ya hay una cuenta registrada con este mismo correo, contactanos para ayudarte a recuperar el acceso a tu cuenta', success: false }
     }
     if (error.code === 'auth/invalid-email') {
-      return { errorMessage: 'El correo no es válido' }
+      return { errorMessage: 'El correo no es válido', success: false }
     }
-    return { errorMessage: null }
+    return { errorMessage: null, success: false }
   }
 }
 
@@ -88,7 +88,7 @@ export const onSessionChange = (handler) => {
   try {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        // await new Promise(resolve => setTimeout(resolve, 3000))
+        await new Promise(resolve => setTimeout(resolve, 3000))
         const data = await getData(user.uid)
         handler(filterObject(data, ['number', 'email', 'photo', 'name', 'admin', 'id']))
       } else {

@@ -1,13 +1,14 @@
 import TextFiled from 'components/inputs/textfiled'
 import React from 'react'
-import { array, string, object, func } from 'prop-types'
+import { array, string, object, func, oneOfType, number } from 'prop-types'
 import { Select, MenuItem, FormControl, InputLabel } from '@material-ui/core'
 
 const GroupInput = props => {
   const { state = {}, setState, ...otherProps } = props
   state.errors = state.errors || []
 
-  const onAnyInputChange = event => {
+  const handleChange = event => {
+    if (props.onChange) return props.onChange(event)
     setState({ [event.target.name]: event.target.value })
   }
 
@@ -23,9 +24,9 @@ const GroupInput = props => {
   }
 
   const inputProps = {
-    value: state[props.name] || '',
+    value: props.value ? props.value : state[props.name] ? state[props.name] : '',
     error: state.errors ? state.errors.includes(props.name) : false,
-    onChange: onAnyInputChange,
+    onChange: handleChange,
     onFocus: handleRemoveError,
     ...otherProps
   }
@@ -60,7 +61,9 @@ GroupInput.propTypes = {
   state: object,
   setState: func,
   errors: array,
-  name: string
+  name: string,
+  onChange: func,
+  value: oneOfType([string, number])
 }
 
 export default GroupInput

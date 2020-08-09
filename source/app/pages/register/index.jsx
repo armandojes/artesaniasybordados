@@ -36,18 +36,18 @@ const Register = props => {
 
   const handleRegisterWithFacebook = async _event => {
     setState({ loading: true })
-    const { errorMessage } = await registerOrLoginWithFacebook()
+    const { errorMessage, success } = await registerOrLoginWithFacebook()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
+    if (!errorMessage && success) dispatch(setLoading())
     setState({ loading: false })
-    if (!errorMessage) dispatch(setLoading())
   }
 
   const handleResgisterWithGoogle = async _event => {
     setState({ loading: true })
-    const { errorMessage } = await registerOrLoginWidthGoogle()
+    const { errorMessage, success } = await registerOrLoginWidthGoogle()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
+    if (!errorMessage && success) dispatch(setLoading())
     setState({ loading: false })
-    if (!errorMessage) dispatch(setLoading())
   }
 
   // redirect to home
@@ -61,76 +61,81 @@ const Register = props => {
     <Layout>
       <ContainerPage page>
         <FullWidthCentered>
-          <Container maxWidth='sm'>
-            <Paper as={Grid} container justify='center'>
-              <Grid item xs={12} md={10}>
-                {state.loading && (
-                  <FlexCentered minHeight='450px'>
-                    <CircularProgress />
-                  </FlexCentered>
-                )}
-                {!state.loading && (
-                  <>
-                    <SectionTitle align='center'>Registrate</SectionTitle>
-                    <Box p={3}>
-                      <form>
-                        <Grid container spacing={2}>
-                          {state.errorMessage && (
+          {session !== 'loading' && (
+            <Container maxWidth='sm'>
+              <Paper as={Grid} container justify='center'>
+                <Grid item xs={12} md={10}>
+                  {state.loading && (
+                    <FlexCentered minHeight='450px'>
+                      <CircularProgress />
+                    </FlexCentered>
+                  )}
+                  {!state.loading && (
+                    <>
+                      <SectionTitle align='center'>Registrate</SectionTitle>
+                      <Box p={3}>
+                        <form>
+                          <Grid container spacing={2}>
+                            {state.errorMessage && (
+                              <Grid item xs={12}>
+                                <Alert severity='error'>{state.errorMessage}</Alert>
+                              </Grid>
+                            )}
+
                             <Grid item xs={12}>
-                              <Alert severity='error'>{state.errorMessage}</Alert>
+                              <Button
+                                color='default'
+                                fullWidth
+                                startIcon={<GoogleIcon src={GoogleImageSrc} />}
+                                onClick={handleResgisterWithGoogle}
+                              >Entrar con Google
+                              </Button>
                             </Grid>
-                          )}
+                            <Grid item xs={12}>
+                              <Button
+                                onClick={handleRegisterWithFacebook}
+                                color='default'
+                                fullWidth
+                                startIcon={<Facebook />}
+                              >Entrar con Facebook
+                              </Button>
+                            </Grid>
 
-                          <Grid item xs={12}>
-                            <Button
-                              color='default'
-                              fullWidth
-                              startIcon={<GoogleIcon src={GoogleImageSrc} />}
-                              onClick={handleResgisterWithGoogle}
-                            >Entrar con Google
-                            </Button>
+                            <Grid item xs={12}>
+                              <InputGroup margin='none' name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre completo' />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <InputGroup margin='none' name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <InputGroup margin='none' name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <InputGroup margin='none' type='password' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <InputGroup margin='none' type='password' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Button fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Link to='/login'>
+                                <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
+                              </Link>
+                            </Grid>
                           </Grid>
-                          <Grid item xs={12}>
-                            <Button
-                              onClick={handleRegisterWithFacebook}
-                              color='default'
-                              fullWidth
-                              startIcon={<Facebook />}
-                            >Entrar con Facebook
-                            </Button>
-                          </Grid>
-
-                          <Grid item xs={12}>
-                            <InputGroup margin='none' name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre completo' />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <InputGroup margin='none' name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <InputGroup margin='none' name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <InputGroup margin='none' type='password' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <InputGroup margin='none' type='password' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Button fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Link to='/login'>
-                              <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
-                            </Link>
-                          </Grid>
-                        </Grid>
-                      </form>
-                    </Box>
-                  </>
-                )}
-              </Grid>
-            </Paper>
-          </Container>
+                        </form>
+                      </Box>
+                    </>
+                  )}
+                </Grid>
+              </Paper>
+            </Container>
+          )}
+          {session === 'loading' && (
+            <CircularProgress />
+          )}
         </FullWidthCentered>
       </ContainerPage>
     </Layout>

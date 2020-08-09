@@ -15,7 +15,7 @@ const Drawwer = props => {
 
   return (
     <SwipeableDrawerStyled {...props} direction anchor='right' onClick={props.onClose}>
-      <Box p={5} style={{ width: '80vw', boxSizing: 'border-box', maxWidth: '400px' }}>
+      <Box p={4} style={{ width: '80vw', boxSizing: 'border-box', maxWidth: '400px' }}>
         <Menu {...props} />
       </Box>
     </SwipeableDrawerStyled>

@@ -36,18 +36,18 @@ const Login = props => {
 
   const handleLoginWithFacebook = async _event => {
     setState({ loading: true })
-    const { errorMessage } = await registerOrLoginWithFacebook()
+    const { errorMessage, success } = await registerOrLoginWithFacebook()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
-    if (!errorMessage) dispatch(setLoading())
+    if (!errorMessage && success) dispatch(setLoading())
     setState({ loading: false })
   }
 
   const handleLoginWithGoogle = async _event => {
     setState({ loading: true })
-    const { errorMessage } = await registerOrLoginWidthGoogle()
+    const { errorMessage, success } = await registerOrLoginWidthGoogle()
     if (errorMessage) dispatch(setAlert({ description: errorMessage }))
+    if (!errorMessage && success) dispatch(setLoading())
     setState({ loading: false })
-    if (!errorMessage) dispatch(setLoading())
   }
 
   // redirect to home

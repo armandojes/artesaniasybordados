@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { List, ListItem, ListItemText, ListItemIcon, Divider, Box } from '@material-ui/core'
+import { List, ListItem, ListItemText, ListItemIcon, Divider, Box, Hidden } from '@material-ui/core'
 import { menu } from '../../constants'
 import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
@@ -7,6 +7,7 @@ import { useHistory, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import { ShoppingBasket, ExitToApp, SupervisorAccount } from '@material-ui/icons'
 import { logOut } from 'core/user'
+import ActionUser from './ActionUserLogout'
 
 const Content = styled.aside`
   position: sticky;
@@ -65,6 +66,9 @@ const Menu = props => {
   return (
     <Content style={{ top }} $headerHeight={top}>
       <List>
+        <Hidden mdUp>
+          <ActionUser />
+        </Hidden>
         {menu.map((section, index) => (
           <Fragment key={index}>
             <ListItem button onClick={event => setSection(section)}>
