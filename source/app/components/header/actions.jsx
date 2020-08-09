@@ -6,6 +6,7 @@ import { Button, Link } from 'components/main'
 import { useSelector } from 'react-redux'
 import MenuComponent from './menu'
 import useNotification from 'hooks/useNotification'
+import Notification from './notifications'
 
 const UserContent = styled(ButtonBase)`
   background: #e7f3ff!important;
@@ -34,6 +35,7 @@ const Actions = _props => {
   const session = useSelector(state => state.session)
   const itemsOnCart = useSelector(state => state.cart.items)
   const [isMenuActive, setMenu] = useState(null)
+  const [isNotificacionsActive, setNotificationActive] = useState(null)
   const notification = useNotification()
 
   if (session === 'loading') {
@@ -59,13 +61,19 @@ const Actions = _props => {
 
   return (
     <Grid container justify='flex-end' alignItems='center'>
-      <UserContent>
+      <UserContent onClick={event => setNotificationActive(event.currentTarget)}>
         {notification && (
           <Doc />
         )}
         <Avatar size='small' src={session.photo} />
         <Typography color='primary' variant='subtitle1'>{session.name.split(' ')[0]}</Typography>
       </UserContent>
+      <Notification
+        id='menu_primary'
+        anchorEl={isNotificacionsActive}
+        open={Boolean(isNotificacionsActive)}
+        onClose={event => setNotificationActive(null)}
+      />
       <Link to='/mi-carrito'>
         <IconButton>
           <Badge badgeContent={itemsOnCart.length} color='primary'>

@@ -38,9 +38,10 @@ const Shop = props => {
   const [isModalOpen, setModalOpen] = useState(location.state && location.state.success)
 
   useFetch(async () => {
+    setState({ loading: true })
     const data = await get(id)
     setState({ loading: false, data })
-  }, [])
+  }, [id])
 
   return (
     <LayoutUser>

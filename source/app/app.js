@@ -24,6 +24,7 @@ import Sale from './pages/sale'
 import MyShps from './pages/my_shops'
 import Shop from './pages/shop'
 import Article from './pages/articulo'
+import Notifications from './pages/notification'
 
 const App = props => {
   return (
@@ -47,6 +48,7 @@ const App = props => {
 
         <Route path='/mis-compras' exact component={MyShps} />
         <Route path='/compra/:id' exact component={Shop} />
+        <Route path='/notificaciones' exact component={Notifications} />
         <Route path='/admin' exact component={session(props => <Redirect to='/admin/articles' />)} />
       </Switch>
     </ThemeProvider>
