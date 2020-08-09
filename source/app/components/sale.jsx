@@ -17,6 +17,7 @@ const PaperStyled = styled(Paper)`
   @media screen and (max-width:600px) {
     padding: 10px;
   }
+  border: 1px solid #2196f354;
   cursor: pointer;
   :hover {
     box-shadow: 10px 5px 10px #cdcdcd;
@@ -25,7 +26,7 @@ const PaperStyled = styled(Paper)`
 
 const Sale = props => (
   <Link to={`/${props.admin ? 'admin/sale' : 'compra'}/${props.id}`}>
-    <PaperStyled $focused={!props.viewed && props.admin}>
+    <PaperStyled $focused={!props.isViewed && props.admin}>
       <Typography style={{ fontWeight: 'bold', marginBottom: '10px' }} align='center' variant='h6'>{toString(props.date.toDate())}</Typography>
       <Typography align='center' variant='subtitle1'>Articulos: {props.items.length}</Typography>
       <Typography align='center' variant='subtitle1'>{currency.toPrice(props.total)}</Typography>

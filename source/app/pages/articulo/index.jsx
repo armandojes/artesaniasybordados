@@ -9,6 +9,7 @@ import Container from 'components/container'
 import LoginModal from './login'
 import { useSelector, useDispatch } from 'react-redux'
 import { add } from 'flux/cart'
+import { setNotification } from 'flux/notifications'
 
 const Article = props => {
   const { id } = useParams()
@@ -29,6 +30,7 @@ const Article = props => {
   const handleAddToCart = event => {
     if (!session) return setLoginModal(true)
     dispatch(add({ ...state.data, quantity: options.quantity, size: options.size || null }))
+    dispatch(setNotification({ message: `${options.quantity} ${state.data.title} agregado al carrito` }))
   }
 
   // set initial options

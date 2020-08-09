@@ -25,10 +25,12 @@ import MyShps from './pages/my_shops'
 import Shop from './pages/shop'
 import Article from './pages/articulo'
 import Notifications from './pages/notification'
+import Notification from 'components/notifications'
 
 const App = props => {
   return (
     <ThemeProvider>
+      <Notification />
       <Definers />
       <Normalize />
       <Alert />

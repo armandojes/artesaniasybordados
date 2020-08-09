@@ -1,6 +1,7 @@
 import makeFlux from 'flux/makeflux'
 import cart from 'core/cart'
 import { setAlert } from 'flux/alert'
+import { setNotification } from './notifications'
 
 const flux = makeFlux('CART')
 
@@ -46,6 +47,7 @@ export const remove = itemToDelete => async (dispatch, getState) => {
       const newItems = currentItems.filter(item => !(item.id === itemToDelete.id && item.size === itemToDelete.size))
       dispatch(setItems(newItems))
       await cart.add(userId, newItems)
+      dispatch(setNotification({ message: `${itemToDelete.title} removido del carrito` }))
     }
   }))
 }

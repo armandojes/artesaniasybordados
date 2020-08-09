@@ -11,7 +11,8 @@ export const add = async data => {
     shipping: data.shipping,
     items,
     status: data.status,
-    date: new Date()
+    date: new Date(),
+    isViewed: false
   }
   const { id } = await db.collection('sales').add(dateToSave)
   return id
@@ -25,6 +26,12 @@ export const get = async (id) => {
 export const setPayed = async id => {
   await db.doc(`sales/${id}`).update({
     status: 'payed'
+  })
+}
+
+export const setViewed = async id => {
+  await db.doc(`sales/${id}`).update({
+    isViewed: true
   })
 }
 
@@ -76,5 +83,6 @@ export default {
   setPayed,
   setDeliered,
   setPending,
-  setSent
+  setSent,
+  setViewed
 }

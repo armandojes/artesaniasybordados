@@ -40,6 +40,7 @@ const Sale = props => {
   useFetch(async () => {
     const data = await get(props.match.params.id)
     setState({ loading: false, data })
+    if (!data.isViewed) sale.setViewed(props.match.params.id)
   }, [])
 
   const handleSetPayed = async () => {

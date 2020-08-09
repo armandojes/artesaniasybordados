@@ -8,12 +8,14 @@ import alert from 'flux/alert'
 import session from 'flux/session'
 import cart from 'flux/cart'
 import loading from 'flux/loading'
+import notification from 'flux/notifications'
 
 const reducer = combineReducers({
   loading,
   alert,
   session,
-  cart
+  cart,
+  notification
 })
 
 const configureStore = (type = 'client', session = null) => {

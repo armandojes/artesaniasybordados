@@ -39,7 +39,9 @@ const Mycart = props => {
 
   const dispatch = useDispatch()
 
-  const handleDelete = id => dispatch(remove(id))
+  const handleDelete = data => {
+    dispatch(remove(data))
+  }
 
   const handleNext = event => {
     if (view === 'products') setView('form')
