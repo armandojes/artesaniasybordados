@@ -10,7 +10,7 @@ const config = {
     path: path.resolve(__dirname, '../api'),
     filename: 'server_render.js',
     libraryTarget: 'commonjs',
-    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'http://localhost:3000/public/'
+    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artstest.vercel.app/public/'
   },
   mode: 'development',
   module: {
@@ -50,7 +50,7 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
-      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public` : 'http://localhost:3000/public')
+      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public` : 'https://artstest.vercel.app/public')
     }),
     new ExtracCssPlugin({
       filename: 'styles.css'
