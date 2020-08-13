@@ -62,76 +62,82 @@ const Register = props => {
       <ContainerPage page>
         <FullWidthCentered>
           {session !== 'loading' && (
-            <Container maxWidth='sm'>
-              <Paper as={Grid} container justify='center'>
-                <Grid item xs={12} md={10}>
-                  {state.loading && (
-                    <FlexCentered minHeight='450px'>
-                      <CircularProgress />
-                    </FlexCentered>
-                  )}
-                  {!state.loading && (
-                    <>
-                      <SectionTitle align='center'>Registrate</SectionTitle>
-                      <Box p={3}>
-                        <form>
-                          <Grid container spacing={2}>
-                            {state.errorMessage && (
+            <Limiter>
+              <Box pt={5} pb={5}>
+                <Paper as={Grid} container justify='center'>
+                  <Grid item xs={12} md={10}>
+                    {state.loading && (
+                      <FlexCentered minHeight='450px'>
+                        <CircularProgress />
+                      </FlexCentered>
+                    )}
+                    {!state.loading && (
+                      <>
+                        <SectionTitle align='center'>Registrate</SectionTitle>
+                        <Box p={3}>
+                          <form>
+                            <Grid container spacing={2}>
+                              {state.errorMessage && (
+                                <Grid item xs={12}>
+                                  <Alert severity='error'>{state.errorMessage}</Alert>
+                                </Grid>
+                              )}
+
                               <Grid item xs={12}>
-                                <Alert severity='error'>{state.errorMessage}</Alert>
+                                <Button
+                                  size='medium'
+                                  color='default'
+                                  fullWidth
+                                  startIcon={<GoogleIcon src={GoogleImageSrc} />}
+                                  onClick={handleResgisterWithGoogle}
+                                >Entrar con Google
+                                </Button>
                               </Grid>
-                            )}
+                              <Grid item xs={12}>
+                                <Button
+                                  size='medium'
+                                  onClick={handleRegisterWithFacebook}
+                                  color='default'
+                                  fullWidth
+                                  startIcon={<Facebook />}
+                                >Entrar con Facebook
+                                </Button>
+                              </Grid>
 
-                            <Grid item xs={12}>
-                              <Button
-                                color='default'
-                                fullWidth
-                                startIcon={<GoogleIcon src={GoogleImageSrc} />}
-                                onClick={handleResgisterWithGoogle}
-                              >Entrar con Google
-                              </Button>
+                              <Grid item xs={12}>
+                                <InputGroup margin='none' name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre completo' />
+                              </Grid>
+                              <Grid item xs={12}>
+                                <InputGroup margin='none' name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
+                              </Grid>
+                              <Grid item xs={12}>
+                                <InputGroup margin='none' name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
+                              </Grid>
+                              <Grid item xs={12}>
+                                <InputGroup margin='none' type='password' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
+                              </Grid>
+                              <Grid item xs={12}>
+                                <InputGroup margin='none' type='password' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Button
+                                  size='medium' fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Link to='/login'>
+                                  <Button
+                                    size='medium' fullWidth variant='outlined' color='primary'>Iniciar session</Button>
+                                </Link>
+                              </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                              <Button
-                                onClick={handleRegisterWithFacebook}
-                                color='default'
-                                fullWidth
-                                startIcon={<Facebook />}
-                              >Entrar con Facebook
-                              </Button>
-                            </Grid>
-
-                            <Grid item xs={12}>
-                              <InputGroup margin='none' name='name' setState={setState} state={state} variant='outlined' fullWidth label='Nombre completo' />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup margin='none' name='email' setState={setState} state={state} variant='outlined' fullWidth label='Correo electronico' />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup margin='none' name='number' setState={setState} state={state} variant='outlined' fullWidth label='Telefono o celular' filter='number' limit={10} />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup margin='none' type='password' name='password' setState={setState} state={state} variant='outlined' fullWidth label='Contraseña' />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <InputGroup margin='none' type='password' name='repassword' setState={setState} state={state} variant='outlined' fullWidth label='Repite la contraseña' />
-                            </Grid>
-                            <Grid item xs={12}>
-                              <Button fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
-                            </Grid>
-                            <Grid item xs={12}>
-                              <Link to='/login'>
-                                <Button fullWidth variant='outlined' color='primary'>Iniciar session</Button>
-                              </Link>
-                            </Grid>
-                          </Grid>
-                        </form>
-                      </Box>
-                    </>
-                  )}
-                </Grid>
-              </Paper>
-            </Container>
+                          </form>
+                        </Box>
+                      </>
+                    )}
+                  </Grid>
+                </Paper>
+              </Box>
+            </Limiter>
           )}
           {session === 'loading' && (
             <CircularProgress />
@@ -143,7 +149,12 @@ const Register = props => {
 }
 
 const GoogleIcon = styled.img`
-  width: 30px;
+  width: 25px;
+`
+
+const Limiter = styled.div`
+  width: 450px;
+  margin: auto
 `
 
 export default Register

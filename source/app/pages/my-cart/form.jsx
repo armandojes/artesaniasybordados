@@ -8,6 +8,12 @@ import { Alert } from '@material-ui/lab'
 
 const Limiter = styled.div`
   margin: 100px;
+  @media screen and (max-width:1600px) {
+    margin: 50px
+  }
+  @media screen and (max-width:1400px) {
+    margin: 50px 30px;
+  }
   @media screen and (max-width:1000px) {
     margin: 20px;
   }

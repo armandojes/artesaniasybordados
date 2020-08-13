@@ -37,10 +37,10 @@ export const Flex = styled.div`
 export const Button = props => (
   <>
     <Hidden smUp>
-      <ButtonMaterial color='primary' variant='outlined' style={{ textTransform: 'none' }} size='medium' {...props} />
+      <ButtonMaterial color='primary' variant='outlined' style={{ textTransform: 'none' }} size='small' {...props} />
     </Hidden>
     <Hidden xsDown>
-      <ButtonMaterial color='primary' variant='outlined' style={{ textTransform: 'none' }} size='large' {...props} />
+      <ButtonMaterial color='primary' variant='outlined' style={{ textTransform: 'none' }} size='medium' {...props} />
     </Hidden>
   </>
 )

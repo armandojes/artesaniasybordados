@@ -1,4 +1,3 @@
-import security from 'models/security'
 import { store } from '../../../models/database'
 
 const getToken = async (request, response) => {

@@ -62,7 +62,7 @@ const View = props => {
       )}
       {!props.loading && (
         <Content>
-          <Grid container spacing={responsive({ xs: 2, lg: 6 })} alignItems='flex-start'>
+          <Grid container spacing={responsive({ xs: 2, lg: 2 })} alignItems='flex-start'>
             <Grid item xs={12} md={7}>
               <Paper>
                 <Box p={responsive({ xs: 0, md: 2 })}>
@@ -79,73 +79,75 @@ const View = props => {
                 </Box>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={5} style={{ position: responsive({ xs: 'static', md: 'sticky' }), top: '50px' }}>
-              <Paper>
-                <Box p={responsive({ xs: 2, md: 2, lg: 3 })}>
-                  <ActionsContainer>
-                    <Typography variant='h5'>{props.data.title}</Typography>
-                    <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
-                      <Typography variant='h5' color='primary'>{currency.toPrice(props.data.price)}</Typography>
-                      <Typography variant='caption' color='primary'>IVA incluido</Typography>
-                    </Box>
-                    <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
-                      <Typography variant='subtitle1'>Metodos de pago</Typography>
-                      <MethoPayIcon src={paypalSrc} />
-                      <MethoPayIcon src={oxxoSrc} />
-                      <MethoPayIcon src={mastercardSrc} />
-                      <MethoPayIcon src={visaSrc} />
-                    </Box>
-                    <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
-                      <Grid container alignItems='center'>
-                        <LocalShippingStyled /><Typography variant='subtitle1'>Envios a toda la republica</Typography>
-                      </Grid>
-                    </Box>
-                    <Grid container alignItems='center' spacing={2}>
+            <Grid item xs={12} md={5} lg={5} style={{ position: responsive({ xs: 'static', md: 'sticky' }), top: '50px' }}>
+              <MenuContainerExt>
+                <Paper>
+                  <Box p={responsive({ xs: 2 })}>
+                    <ActionsContainer>
+                      <Typography variant='h5'>{props.data.title}</Typography>
+                      <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
+                        <Typography variant='h5' color='primary'>{currency.toPrice(props.data.price)}</Typography>
+                        <Typography variant='caption' color='primary'>IVA incluido</Typography>
+                      </Box>
+                      <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
+                        <Typography variant='subtitle1'>Metodos de pago</Typography>
+                        <MethoPayIcon src={paypalSrc} />
+                        <MethoPayIcon src={oxxoSrc} />
+                        <MethoPayIcon src={mastercardSrc} />
+                        <MethoPayIcon src={visaSrc} />
+                      </Box>
+                      <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
+                        <Grid container alignItems='center'>
+                          <LocalShippingStyled /><Typography variant='subtitle1'>Envios a toda la republica</Typography>
+                        </Grid>
+                      </Box>
+                      <Grid container alignItems='center' spacing={2}>
 
-                      {props.data.sizes && props.data.sizes.length && (
+                        {props.data.sizes && props.data.sizes.length && (
+                          <Grid item xs={6}>
+                            <InputGroup
+                              state={options}
+                              setState={props.setOptions}
+                              type='select'
+                              options={props.data.sizes.reduce((acum, current) => { acum[current] = current; return acum }, {})}
+                              size='small'
+                              label='Talla'
+                              name='size'
+                            />
+                          </Grid>
+                        )}
+
                         <Grid item xs={6}>
                           <InputGroup
+                            filter='number'
                             state={options}
                             setState={props.setOptions}
-                            type='select'
-                            options={props.data.sizes.reduce((acum, current) => { acum[current] = current; return acum }, {})}
+                            margin='none'
                             size='small'
-                            label='Talla'
-                            name='size'
+                            label='Cantidad'
+                            name='quantity'
+                            limit={2}
                           />
                         </Grid>
-                      )}
-
-                      <Grid item xs={6}>
-                        <InputGroup
-                          filter='number'
-                          state={options}
-                          setState={props.setOptions}
-                          margin='none'
-                          size='small'
-                          label='Cantidad'
-                          name='quantity'
-                          limit={2}
-                        />
+                        <Grid item xs={12}>
+                          <Button
+                            onClick={props.onAddToCart}
+                            disabled={!options.quantity || session === 'loading'}
+                            variant='contained'
+                            fullWidth
+                          >Agregar al carrito
+                          </Button>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Link to='/articulos'>
+                            <Button fullWidth>Seguir comprando</Button>
+                          </Link>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12}>
-                        <Button
-                          onClick={props.onAddToCart}
-                          disabled={!options.quantity || session === 'loading'}
-                          variant='contained'
-                          fullWidth
-                        >Agregar al carrito
-                        </Button>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Link to='/articulos'>
-                          <Button fullWidth>Seguir comprando</Button>
-                        </Link>
-                      </Grid>
-                    </Grid>
-                  </ActionsContainer>
-                </Box>
-              </Paper>
+                    </ActionsContainer>
+                  </Box>
+                </Paper>
+              </MenuContainerExt>
             </Grid>
 
             <Grid item xs={12} md={7}>
@@ -208,7 +210,15 @@ const LocalShippingStyled = styled(LocalShipping)`
 const ActionsContainer = styled.div`
   margin: auto;
   max-width: 350px;
-  padding: 20px 0px;
+`
+const MenuContainerExt = styled.div`
+  max-width: 450px;
+  @media screen and (max-width:1500px) {
+    max-width: 400px;
+  }
+  @media screen and (max-width:1400px) {
+    max-width: 350px;
+  }
 `
 
 const Content = styled.div`

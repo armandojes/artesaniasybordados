@@ -28,6 +28,7 @@ const GroupInput = props => {
     error: state.errors ? state.errors.includes(props.name) : false,
     onChange: handleChange,
     onFocus: handleRemoveError,
+    size: 'small',
     ...otherProps
   }
 

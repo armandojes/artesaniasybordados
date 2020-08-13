@@ -1,6 +1,6 @@
 import React from 'react'
 import { Paper, SectionTitle, FlexCentered, Button } from 'components/main'
-import { Grid, Box, CircularProgress, Container, Divider, Typography } from '@material-ui/core'
+import { Grid, Box, CircularProgress, Divider, Typography } from '@material-ui/core'
 import InputGroup from 'components/inputs/group'
 import useObjectState from 'hooks/useState'
 import { Facebook } from '@material-ui/icons'
@@ -64,7 +64,7 @@ const Login = props => {
         <CircularProgress />
       )}
       {session !== 'loading' && (
-        <Container maxWidth='sm'>
+        <Limiter>
           <Paper as={Grid} container justify='center'>
             {state.loading && (
               <FlexCentered minHeight='250px'>
@@ -74,7 +74,7 @@ const Login = props => {
             {!state.loading && (
               <Grid item xs={12}>
                 <SectionTitle align='center'>{props.message || 'Inicia session'}</SectionTitle>
-                <Box p={3}>
+                <Box p={2}>
                   <form>
                     <Grid container spacing={2}>
                       {state.errorMessage && (
@@ -84,6 +84,7 @@ const Login = props => {
                       )}
                       <Grid item xs={12}>
                         <Button
+                          size='medium'
                           onClick={handleLoginWithGoogle}
                           color='default'
                           variant='outlined'
@@ -94,6 +95,7 @@ const Login = props => {
                       </Grid>
                       <Grid item xs={12}>
                         <Button
+                          size='medium'
                           onClick={handleLoginWithFacebook}
                           color='default'
                           variant='outlined'
@@ -103,13 +105,13 @@ const Login = props => {
                         </Button>
                       </Grid>
                       <Grid item xs={12}>
-                        <InputGroup margin='none' name='email' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Correo electronico' />
+                        <InputGroup size='small' margin='none' name='email' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Correo electronico' />
                       </Grid>
                       <Grid item xs={12}>
-                        <InputGroup margin='none' name='password' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Contraseña' type='password' />
+                        <InputGroup size='small' margin='none' name='password' onChange={onAnyInputChange} state={state} variant='outlined' fullWidth label='Contraseña' type='password' />
                       </Grid>
                       <Grid item xs={12}>
-                        <Button color='primary' variant='contained' onClick={handleLogin} fullWidth>Entrar</Button>
+                        <Button size='medium' color='primary' variant='contained' onClick={handleLogin} fullWidth>Entrar</Button>
                       </Grid>
                       <Box mt={4} />
                       <Grid item xs={12} container spacing={2} alignItems='center'>
@@ -130,7 +132,7 @@ const Login = props => {
               </Grid>
             )}
           </Paper>
-        </Container>
+        </Limiter>
       )}
     </>
   )
@@ -141,6 +143,15 @@ Login.propTypes = {
 }
 
 const GoogleIcon = styled.img`
-  width: 30px;
+  width: 22px;
 `
+
+const Limiter = styled.div`
+  width: 450px;
+  margin: auto;
+  @media screen and (max-width:700px) {
+    width: 90%!important;
+  }
+`
+
 export default Login

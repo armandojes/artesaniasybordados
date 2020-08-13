@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LayoutUser from 'components/layout_user'
 import Container from 'components/container'
-import { Step, StepLabel, Stepper, CircularProgress, Container as MaterialCOntainer, Typography, Grid, Box } from '@material-ui/core'
+import { Step, StepLabel, Stepper, CircularProgress, Typography, Grid, Box } from '@material-ui/core'
 import { status, methodsPay } from '../../constants'
 import { useParams, useLocation } from 'react-router'
 import useObjectState from 'hooks/useState'
@@ -47,7 +47,7 @@ const Shop = props => {
     <LayoutUser>
       <Container $page>
         {!state.loading && (
-          <MaterialCOntainer maxWidth='md' disableGutters>
+          <Limiter>
             <SuccessModal
               open={isModalOpen}
               onClose={event => setModalOpen(false)}
@@ -107,7 +107,7 @@ const Shop = props => {
                   </Box>
                   <Grid container spacing={3}>
                     {state.data.items.map((itemData, index) => (
-                      <Grid key={index} item xs={12} sm={6} lg={4}>
+                      <Grid key={index} item xs={12} sm={6}>
                         <Item {...itemData} />
                       </Grid>
                     ))}
@@ -115,7 +115,7 @@ const Shop = props => {
                 </PaperStyled>
               </Grid>
             </Grid>
-          </MaterialCOntainer>
+          </Limiter>
         )}
         {!!state.loading && (
           <FullWidthCentered>
@@ -126,5 +126,17 @@ const Shop = props => {
     </LayoutUser>
   )
 }
+
+const Limiter = styled.div`
+  width: 70%;
+  max-width: 800px;
+  margin: auto;
+  @media screen and (max-width:1100px) {
+    width: 90%;
+  }
+  @media screen and (max-width:800px) {
+    width: 100%;
+  }
+`
 
 export default Session(Shop)

@@ -35,6 +35,10 @@ const Picture = styled.img`
   width: 300px;
   margin: auto;
   display: block;
+  @media screen and (max-width:1500px) {
+    width: 220px;
+  }
+
   @media screen and (max-width:1300px) {
     width: 200px;
   }
@@ -59,7 +63,7 @@ const ButtonStyled = styled(Button)`
 `
 
 const PaperStyled = styled(Paper)`
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
   background-color: #fff;
   background-blend-mode: multiply;
@@ -70,9 +74,6 @@ const PaperStyled = styled(Paper)`
   background-image: url(${contactSrc});
   @media screen and (max-width:1600px) {
     background-size: 60%;
-  }
-  @media screen and (max-width:1400px) {
-    background-size: 70%;
   }
   @media screen and (max-width:900px) {
     background-size: 80%;
