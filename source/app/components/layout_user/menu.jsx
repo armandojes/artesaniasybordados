@@ -5,19 +5,21 @@ import styled from 'styled-components'
 import useHeightHeader from 'hooks/useHeightHeader'
 import { useHistory, useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
-import { ShoppingBasket, ExitToApp, SupervisorAccount } from '@material-ui/icons'
+import { ShoppingBasket, ExitToApp, SupervisorAccount, Home, ViewList, Info, ModeComment, LocalOffer } from '@material-ui/icons'
 import { logOut } from 'core/user'
 import ActionUser from './ActionUserLogout'
+import { HashLink } from 'react-router-hash-link'
 
 const Content = styled.aside`
   position: sticky;
   top: 0px;
   max-height: ${props => 'calc(100vh - ' + props.$headerHeight + 'px)'};
+  overflow-x: hidden;
   overflow-y: scroll;
   &:hover {
     ::-webkit-scrollbar {
-    display: initial;
-  }
+      display: initial;
+    }
   }
   ::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -35,6 +37,9 @@ const Content = styled.aside`
   ::-webkit-scrollbar-thumb {
     background-color: #cdcdcd;
     border-radius: 10px;
+  }
+  svg {
+    color: #d891efa6;
   }
 `
 
@@ -72,6 +77,9 @@ const Menu = props => {
         {menu.map((section, index) => (
           <Fragment key={index}>
             <ListItem button onClick={event => setSection(section)}>
+              <ListItemIcon>
+                <LocalOffer />
+              </ListItemIcon>
               <ListItemText variant='subtitle1'>{section.label}</ListItemText>
             </ListItem>
             {((state.category === section.value && section.keyname === 'category' && !!section.filters.length) || (state.gender === section.value && section.keyname === 'gender' && !!section.filters.length)) && (
@@ -79,6 +87,9 @@ const Menu = props => {
                 <List>
                   {section.filters.map((subSection, index) => (
                     <ListItem button key={index} onClick={event => setSubSection(section, subSection)}>
+                      <ListItemIcon>
+                        <LocalOffer />
+                      </ListItemIcon>
                       <ListItemText varian='subtitle2'>{subSection.label}</ListItemText>
                     </ListItem>
                   ))}
@@ -87,6 +98,37 @@ const Menu = props => {
             )}
           </Fragment>
         ))}
+        <Hidden mdUp>
+          <>
+            <Divider />
+            <ListItem button onClick={handleRedirect('/')}>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText variant='subtitle1'>Inicio</ListItemText>
+            </ListItem>
+            <ListItem button onClick={handleRedirect('/articulos')}>
+              <ListItemIcon>
+                <ViewList />
+              </ListItemIcon>
+              <ListItemText variant='subtitle1'>Galeria</ListItemText>
+            </ListItem>
+            <ListItem button onClick={handleRedirect('/acerca-de-nosotros')}>
+              <ListItemIcon>
+                <Info />
+              </ListItemIcon>
+              <ListItemText variant='subtitle1'>Quienes somos</ListItemText>
+            </ListItem>
+            <HashLink to='/#contacto'>
+              <ListItem button>
+                <ListItemIcon>
+                  <ModeComment />
+                </ListItemIcon>
+                <ListItemText variant='subtitle1'>Contáctanos</ListItemText>
+              </ListItem>
+            </HashLink>
+          </>
+        </Hidden>
         {session && typeof session === 'object' && (
           <>
             <Divider />

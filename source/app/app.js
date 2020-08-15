@@ -26,6 +26,7 @@ import Shop from './pages/shop'
 import Article from './pages/articulo'
 import Notifications from './pages/notification'
 import Notification from 'components/notifications'
+import Policy from './pages/policy'
 
 const App = props => {
   return (
@@ -42,6 +43,7 @@ const App = props => {
         <Route path='/articulos' exact component={Producst} />
         <Route path='/login' exact component={Login} />
         <Route path='/register' exact component={Register} />
+        <Route path='/notice-of-privacy' exact component={Policy} />
 
         <Route path='/admin/create' exact component={Create} />
         <Route path='/admin/sale/:id' exact component={Sale} />

@@ -35,7 +35,7 @@ const Footer = props => (
           <Divider />
         </Box>
         <div>
-          <LinkStyled to='/terms-and-conditions'>Términos y condiciones</LinkStyled> | <LinkStyled to='/notice-of-privacy'>Políticas de privacidad</LinkStyled> | <LinkStyled to='/about'>Sobre nosotros</LinkStyled>
+          <LinkStyled>Términos y condiciones</LinkStyled> | <LinkStyled to='/notice-of-privacy'>Políticas de privacidad</LinkStyled> | <LinkStyled to='/acerca-de-nosotros'>Sobre nosotros</LinkStyled>
         </div>
       </Hidden>
       <Hidden mdUp>
@@ -56,9 +56,9 @@ const Footer = props => (
         <Box paddingTop={2} paddingBottom={2}>
           <Divider />
         </Box>
-        <LinkStyledDesk to='/terms-and-conditions'>Términos y condiciones</LinkStyledDesk>
+        <LinkStyledDesk>Términos y condiciones</LinkStyledDesk>
         <LinkStyledDesk to='/notice-of-privacy'>Políticas de privacidad</LinkStyledDesk>
-        <LinkStyledDesk to='/about'>Sobre nosotros</LinkStyledDesk>
+        <LinkStyledDesk to='/acerca-de-nosotros'>Sobre nosotros</LinkStyledDesk>
       </Hidden>
     </Container>
   </FooterStyled>
