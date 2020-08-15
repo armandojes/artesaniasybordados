@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Container from 'components/container'
 import srclogo from '../assets/logo.png'
 import { IconButton, Badge } from '@material-ui/core'
-import { Search, Notifications, ShoppingCart, Menu } from '@material-ui/icons'
+import { Notifications, ShoppingCart, Menu } from '@material-ui/icons'
 import { Link } from 'components/main'
 import { useSelector } from 'react-redux'
 import Drawer from 'components/layout_user/drawer'
@@ -55,11 +55,11 @@ const HeaderMobile = props => {
             <Logo src={srclogo} />
           </Link>
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <Link to='/buscar'>
             <Search />
           </Link>
-        </IconButton>
+        </IconButton> */}
         <IconButton>
           <Link style={{ position: 'relative' }} to='/notificaciones'>
             {notification && (

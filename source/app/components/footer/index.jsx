@@ -14,7 +14,7 @@ const Footer = props => (
         <Grid container justify='center' alignItems='center' spacing={2}>
           <Grid item xs={4}>
             <Cards
-              message='Paga con tarjeta o en efectivo'
+              message='Paga con paypal o en efectivo'
               Icon={CreditCard}
             />
           </Grid>
@@ -41,7 +41,7 @@ const Footer = props => (
       <Hidden mdUp>
         <Swype>
           <Cards
-            message='Paga con tarjeta o en efectivo'
+            message='Paga con paypal o en efectivo'
             Icon={CreditCard}
           />
           <Cards
@@ -72,12 +72,12 @@ const FooterStyled = styled.footer`
 `
 
 const LinkStyled = styled(Link)`
-  color: initial;
+  color: #530b4c;
   text-decoration: none;
 `
 
 const LinkStyledDesk = styled(Link)`
-  color: initial;
+  color: #530b4c;
   text-decoration: none;
   display: block;
   text-align: center;

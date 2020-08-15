@@ -14,6 +14,7 @@ import Login from './pages/login'
 import Register from './pages/register'
 import Cart from './pages/my-cart'
 import Producst from './pages/products'
+import About from './pages/about'
 
 // admins pages
 import Create from './pages/create'
@@ -44,6 +45,7 @@ const App = props => {
         <Route path='/login' exact component={Login} />
         <Route path='/register' exact component={Register} />
         <Route path='/notice-of-privacy' exact component={Policy} />
+        <Route path='/acerca-de-nosotros' exact component={About} />
 
         <Route path='/admin/create' exact component={Create} />
         <Route path='/admin/sale/:id' exact component={Sale} />
