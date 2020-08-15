@@ -7,6 +7,11 @@ import Searcher from './searcher'
 import Action from './actions'
 import { Button } from 'components/main'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const ButtonStyled = styled(Button)`
+  color: #2b0028!important;
+`
 
 const Header = () => {
   return (
@@ -23,10 +28,10 @@ const Header = () => {
             </Grid>
             <Hidden smDown>
               <div>
-                <Link to='/'><Button variant='text'>Inicio</Button></Link>
-                <Link to='/'><Button variant='text'>Ofertas</Button></Link>
-                <Link to='/'><Button variant='text'>Contacto</Button></Link>
-                <Link to='/'><Button variant='text'>Galeria</Button></Link>
+                <Link to='/'><ButtonStyled variant='text'>Inicio</ButtonStyled></Link>
+                <Link to='/'><ButtonStyled variant='text'>Ofertas</ButtonStyled></Link>
+                <Link to='/'><ButtonStyled variant='text'>Contacto</ButtonStyled></Link>
+                <Link to='/'><ButtonStyled variant='text'>Galeria</ButtonStyled></Link>
               </div>
             </Hidden>
 

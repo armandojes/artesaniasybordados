@@ -5,10 +5,10 @@ import { oneOfType, array, object, element, node } from 'prop-types'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#3483fa'
+      main: '#9767CB'
     },
     secondary: {
-      main: '#3483fa'
+      main: '#2b0028'
     }
   }
 })

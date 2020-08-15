@@ -9,7 +9,7 @@ import useNotification from 'hooks/useNotification'
 import Notification from './notifications'
 
 const UserContent = styled(ButtonBase)`
-  background: #e7f3ff!important;
+  background: #2f052b30!important;
   border-radius: 50px!important;
   padding: 3px 5px!important;
   padding-right: 15px!important;
@@ -30,7 +30,15 @@ const Doc = styled.div`
   top: 0px;
   right: 0px;
 `
-
+const ButtonStyled = styled(Button)`
+  color: #2b0028!important;
+  border-color: #2b0028!important;
+`
+const IconButtonStyled = styled(IconButton)`
+  svg {
+    color: #2b0028!important;
+  }
+`
 const Actions = _props => {
   const session = useSelector(state => state.session)
   const itemsOnCart = useSelector(state => state.cart.items)
@@ -47,12 +55,12 @@ const Actions = _props => {
       <Grid container justify='flex-end' alignItems='center' spacing={1}>
         <Grid item>
           <Link to='/login'>
-            <Button size='medium'>Iniciar session</Button>
+            <ButtonStyled size='medium'>Iniciar session</ButtonStyled>
           </Link>
         </Grid>
         <Grid item>
           <Link to='/register'>
-            <Button size='medium'>Registrate</Button>
+            <ButtonStyled size='medium'>Registrate</ButtonStyled>
           </Link>
         </Grid>
       </Grid>
@@ -66,7 +74,7 @@ const Actions = _props => {
           <Doc />
         )}
         <Avatar size='small' src={session.photo} />
-        <Typography color='primary' variant='subtitle1'>{session.name.split(' ')[0]}</Typography>
+        <Typography style={{ color: '#ffffff' }} color='primary' variant='subtitle1'>{session.name.split(' ')[0]}</Typography>
       </UserContent>
       <Notification
         id='menu_primary'
@@ -75,15 +83,15 @@ const Actions = _props => {
         onClose={event => setNotificationActive(null)}
       />
       <Link to='/mi-carrito'>
-        <IconButton>
+        <IconButtonStyled>
           <Badge badgeContent={itemsOnCart.length} color='primary'>
             <ShoppingCart />
           </Badge>
-        </IconButton>
+        </IconButtonStyled>
       </Link>
-      <IconButton onClick={event => setMenu(event.currentTarget)}>
+      <IconButtonStyled onClick={event => setMenu(event.currentTarget)}>
         <Menu />
-      </IconButton>
+      </IconButtonStyled>
       <MenuComponent
         id='menu_primary'
         anchorEl={isMenuActive}

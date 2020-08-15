@@ -32,7 +32,6 @@ const TextFiled = props => {
       fullWidth
       variant='outlined'
       color='primary'
-      margin='normal'
       {...otherProps}
       onChange={handleChange}
     />

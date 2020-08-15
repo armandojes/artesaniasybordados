@@ -11,6 +11,8 @@ const Searcher = props => {
       margin='none'
       size='small'
       placeholder='Buscar'
+      color='secondary'
+      focused
     />
   )
 }

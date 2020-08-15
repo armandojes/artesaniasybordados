@@ -10,10 +10,13 @@ import Drawer from 'components/layout_user/drawer'
 import useNotification from 'hooks/useNotification'
 
 const Header = styled.header`
-  background: #fff;
+  background: #D891EF;
   position: sticky;
   top: 0px;
   z-index:2;
+  svg {
+    color: #2b0028;
+  }
 `
 const ContainerStyled = styled(Container)`
   display: flex;
@@ -22,7 +25,7 @@ const ContainerStyled = styled(Container)`
   justify-content: space-between;
 `
 const Logo = styled.img`
-  width: 40px;
+  width: 75px;
 `
 
 const Dot = styled.div`

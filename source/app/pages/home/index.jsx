@@ -12,6 +12,7 @@ import jewelry from '../../assets/jewelry.png'
 import calzado from '../../assets/calzado.png'
 import { WhatsApp, Email, Phone, Facebook, Instagram } from '@material-ui/icons'
 import contactSrc from '../../assets/contact.png'
+import Cover from './cover.jsx'
 
 const Container = styled(ContainerBase)`
   padding: 15px;
@@ -107,6 +108,7 @@ const home = props => {
 
   return (
     <Layout>
+      <Cover />
       <Container $page>
 
         <Box mb={5}>
@@ -190,7 +192,7 @@ const home = props => {
             </Grid>
 
             <Grid item xs={12}>
-              <PaperStyled>
+              <PaperStyled id='contacto'>
 
                 <Box p={responsive({ xs: 2, sm: 4, md: 6, lg: 10 })}>
                   <Grid container spacing={5} justify='flex-start'>

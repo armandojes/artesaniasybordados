@@ -33,22 +33,22 @@ const GeneralData = props => {
   return (
     <Grid container justify='center' spacing={2}>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Titulo' name='title' state={props.state} setState={props.setState} limit={50} />
+        <TextField label='Titulo' name='title' state={props.state} setState={props.setState} limit={50} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Precio' name='price' state={props.state} setState={props.setState} filter='number' limit={10} />
+        <TextField label='Precio' name='price' state={props.state} setState={props.setState} filter='number' limit={10} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Cantidad' name='quantity' state={props.state} setState={props.setState} filter='number' limit={10} />
+        <TextField label='Cantidad' name='quantity' state={props.state} setState={props.setState} filter='number' limit={10} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Genero' name='gender' state={props.state} setState={props.setState} type='select' options={genders} />
+        <TextField label='Genero' name='gender' state={props.state} setState={props.setState} type='select' options={genders} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Categoria' name='category' state={props.state} setState={props.setState} type='select' options={categories} />
+        <TextField label='Categoria' name='category' state={props.state} setState={props.setState} type='select' options={categories} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Sub categoria' name='subcategory' state={props.state} setState={props.setState} type='select' options={subCategories} />
+        <TextField label='Sub categoria' name='subcategory' state={props.state} setState={props.setState} type='select' options={subCategories} />
       </Grid>
       <Grid item xs={12} md={6}>
         {props.state.sizes && props.state.sizes.map((size, index) => (
@@ -61,7 +61,7 @@ const GeneralData = props => {
         ))}
       </Grid>
       <Grid item xs={12} md={6}>
-        <TextField margin='none' label='Tallas' name='sizes' value={input} onChange={handleChange} />
+        <TextField label='Tallas' name='sizes' value={input} onChange={handleChange} />
       </Grid>
     </Grid>
   )

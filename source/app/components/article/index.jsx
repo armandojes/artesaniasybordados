@@ -6,18 +6,8 @@ import { Paper } from 'components/main'
 import { Link } from 'react-router-dom'
 import Picture from 'components/Picture'
 import { toPrice } from 'helpers/currency'
-import { useDispatch } from 'react-redux'
-import { add } from 'flux/cart'
 
 const Article = props => {
-  const dispatch = useDispatch()
-
-  const handleAddTocart = event => {
-    event.preventDefault()
-    event.stopPropagation()
-    dispatch(add({ ...props, quantity: 1 }))
-  }
-
   return (
     <LinkStyled to={`/articulo/${props.id}`}>
       <CardStyled variant='outlined'>
@@ -45,7 +35,7 @@ const CardStyled = styled(Paper)`
   padding: 0px;
   height: 100%;
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
     box-shadow: 5px 5px 20px #808080a8;
   }
 `
