@@ -67,7 +67,7 @@ const SuccessModal = props => {
             <Typography align='center' color='primary' variant='h4'>¡Gracias por tu compra!</Typography>
             <Box mt={2} />
             {!props.payed && (
-              <Typography style={{ color: 'gray' }} align='center' variant='h6'>Tu compra se ha procesado correctamente</Typography>
+              <Typography style={{ color: 'gray' }} align='center' variant='h6'>Tu compra se ha procesado correctamente, solo sigue las instrucciones de pago para finalizar tu compra</Typography>
             )}
             {props.payed && (
               <Typography style={{ color: 'gray' }} align='center' variant='h6'>Tu pago se ha procesado correctamente, en breve prepararemos tu paquete</Typography>

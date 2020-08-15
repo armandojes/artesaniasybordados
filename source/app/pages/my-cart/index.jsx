@@ -102,8 +102,14 @@ const Mycart = props => {
     }, 200)
   }, [total, state.methodPay, view])
 
+  const handlePay = async _event => {
+    dispatch(active('Estamos generando tu orden de pago'))
+    await handleSaveOperation()
+  }
+
   return (
     <View
+      onPay={handlePay}
       onSuccessOperation={handleSaveOperation}
       paypalConfig={paypalConfig}
       onNext={handleNext}

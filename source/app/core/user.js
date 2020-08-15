@@ -75,8 +75,9 @@ export const getData = async (userId = '') => {
 
 export const add = async (id, data) => {
   try {
-    const dataFiltered = filterObject(data, ['name', 'email', 'number', 'state', 'adress', 'city', 'gender', 'photo'])
+    const dataFiltered = filterObject(data, ['name', 'email', 'number', 'state', 'adress', 'city', 'gender', 'photo', 'type'])
     dataFiltered.admin = false
+    dataFiltered.type = 'client'
     await db.doc(`users/${id}`).set(dataFiltered)
     return id
   } catch (error) {
@@ -90,7 +91,7 @@ export const onSessionChange = (handler) => {
       if (user) {
         await new Promise(resolve => setTimeout(resolve, 3000))
         const data = await getData(user.uid)
-        handler(filterObject(data, ['number', 'email', 'photo', 'name', 'admin', 'id']))
+        handler(filterObject(data, ['number', 'email', 'photo', 'name', 'admin', 'id', 'type']))
       } else {
         handler(null)
       }

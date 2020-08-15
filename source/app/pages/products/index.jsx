@@ -11,10 +11,14 @@ import { Loyalty } from '@material-ui/icons'
 
 import { object } from 'prop-types'
 import EmptyMessage from 'components/EmptyContent'
+import { useSelector } from 'react-redux'
+import { transformPrice } from 'helpers/calculatePrice'
 
 const Articles = props => {
   const initialFilters = props.location.state || {}
   const [state, setState] = useObjectState({ items: [], loading: true })
+  const session = useSelector(state => state.session)
+  const userType = (!!session && session !== 'loading') ? session.type : 'client'
 
   // fetcher
   const loadNextPage = useMemo(() => getList(null, initialFilters), [initialFilters.category, initialFilters.subcategory, initialFilters.gender])
@@ -39,7 +43,7 @@ const Articles = props => {
           <Grid container spacing={3}>
             {state.items.map(item => (
               <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
-                <Article {...item} />
+                <Article {...item} price={transformPrice(item.price, userType)} />
               </Grid>
             ))}
           </Grid>

@@ -112,7 +112,7 @@ const View = props => {
                     <ButtonStyled onClick={props.onNext} variant='contained'>Siguiente</ButtonStyled>
                   )}
                   {props.view === 'finally' && props.state.methodPay !== 'paypal' && (
-                    <ButtonStyled onClick={props.onNext} variant='contained'>Pagar</ButtonStyled>
+                    <ButtonStyled onClick={props.onPay} variant='contained'>Generar orden de pago</ButtonStyled>
                   )}
                   {props.view === 'finally' && props.state.methodPay === 'paypal' && (
                     <ButtonStyledPaypal variant='contained'><ButtonShadow id='render_button_paypal' />Pagar con Paypal </ButtonStyledPaypal>
@@ -142,7 +142,8 @@ View.propTypes = {
   onBack: func,
   state: object,
   loading: bool,
-  items: array
+  items: array,
+  onPay: func
 }
 
 export default View

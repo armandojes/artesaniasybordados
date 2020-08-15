@@ -10,6 +10,7 @@ import LoginModal from './login'
 import { useSelector, useDispatch } from 'react-redux'
 import { add } from 'flux/cart'
 import { setNotification } from 'flux/notifications'
+import { transformPrice } from 'helpers/calculatePrice'
 
 const Article = props => {
   const { id } = useParams()
@@ -18,6 +19,8 @@ const Article = props => {
   const [options, setOptions] = useObjectState({ quantity: 1 })
   const [isLoginModalOpne, setLoginModal] = useState(false)
   const session = useSelector(state => state.session)
+  const userType = (!!session && session !== 'loading') ? session.type : 'client'
+  const priceCalculated = transformPrice(state.data.price, userType)
 
   const pictures = state.loading ? [] : [state.data.picture, ...state.data.pictures]
 
@@ -29,7 +32,7 @@ const Article = props => {
 
   const handleAddToCart = event => {
     if (!session) return setLoginModal(true)
-    dispatch(add({ ...state.data, quantity: options.quantity, size: options.size || null }))
+    dispatch(add({ ...state.data, price: priceCalculated, quantity: options.quantity, size: options.size || null }))
     dispatch(setNotification({ message: `${options.quantity} ${state.data.title} agregado al carrito` }))
   }
 
@@ -53,7 +56,10 @@ const Article = props => {
           onAddToCart={handleAddToCart}
           options={options}
           setOptions={setOptions}
-          data={state.data}
+          data={{
+            ...state.data,
+            price: priceCalculated
+          }}
           loading={state.loading}
           pictures={pictures}
         />
