@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from 'components/layout'
 import Container from 'components/container'
 import styled from 'styled-components'
@@ -56,6 +56,10 @@ const ContainerMaterialStyled = styled('div')`
 `
 
 const About = props => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <Layout>
       <Fullwidth>

@@ -111,11 +111,11 @@ const home = props => {
       <Cover />
       <Container $page>
 
-        <Box mb={5}>
+        <Box mb={5} mt={{ xs: 2, md: 5 }}>
           <Grid container spacing={responsive({ xs: 1, md: 2, lg: 4 })}>
             <Grid item xs={12}>
               <Typography variant='h4'>
-                Descubre
+                Elige tus piezas favoritas
               </Typography>
             </Grid>
             <Grid item xs={6}>

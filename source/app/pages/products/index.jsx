@@ -5,7 +5,7 @@ import { getList } from 'core/articles'
 import useObjectState from 'hooks/useState'
 import useFetch from 'hooks/useFetch'
 import Skeleton from 'components/skeletonGrid'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography, Box } from '@material-ui/core'
 import Article from 'components/article'
 import { Loyalty } from '@material-ui/icons'
 
@@ -41,6 +41,11 @@ const Articles = props => {
         )}
         {!state.loading && !!state.items.length && (
           <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Box mt={{ xs: 3, md: 3 }}>
+                <Typography variant='h4'>Catálogo</Typography>
+              </Box>
+            </Grid>
             {state.items.map(item => (
               <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
                 <Article {...item} price={transformPrice(item.price, userType)} />
