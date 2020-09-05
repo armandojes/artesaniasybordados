@@ -11,7 +11,9 @@ const TextFieldStyled = styled(TextField)`
 const Searcher = props => {
   const history = useHistory()
   const location = useLocation()
-  const { keywords } = queryString.parse(location.search)
+  const { keywords = '' } = queryString.parse(location.search)
+
+  console.log('searcherKeywords', keywords)
 
   const handleRedirect = debounce(function (value) {
     const destination = { pathname: '/articulos', search: `keywords=${value}` }
@@ -19,7 +21,6 @@ const Searcher = props => {
   }, 1000)
 
   const handleChange = event => {
-    console.log('handleChange', event.target)
     handleRedirect(event.target.value)
   }
 

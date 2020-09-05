@@ -24,7 +24,7 @@ const Articles = props => {
   const { keywords } = queryString.parse(location.search)
 
   // fetcher
-  const loadNextPage = useMemo(() => getList(null, {...initialFilters, keywords }), [initialFilters.category, initialFilters.subcategory, initialFilters.gender, keywords])
+  const loadNextPage = useMemo(() => getList(null, { ...initialFilters, keywords }), [initialFilters.category, initialFilters.subcategory, initialFilters.gender, keywords])
 
   // fetch initial items
   useFetch(async () => {
@@ -46,7 +46,7 @@ const Articles = props => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Box mt={{ xs: 3, md: 3 }}>
-                <Typography variant='h4'>Catálogo</Typography>
+                <Typography variant='h4'>{keywords || 'Catálogo'}</Typography>
               </Box>
             </Grid>
             {state.items.map(item => (
