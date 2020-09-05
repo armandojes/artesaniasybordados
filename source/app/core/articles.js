@@ -35,10 +35,12 @@ export const getList = (limit = 10, filters = {}) => {
 // create a new article
 // return id or null
 export const add = async data_ => {
+  var keywords = {}
+  data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
   const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
   try {
-    const result = await db.collection('articles').add({ ...data, date: new Date() })
+    const result = await db.collection('articles').add({ ...data, date: new Date(), keywords })
     return result.id
   } catch (error) {
     console.log('_error_', error)
@@ -47,11 +49,13 @@ export const add = async data_ => {
 }
 
 export const update = async (id, data_) => {
+  var keywords = {}
+  data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
   const allow = ['title', 'price', 'gender', 'description', 'pictures', 'picture', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
 
   try {
-    await db.doc(`articles/${id}`).update({ ...data, date: new Date() })
+    await db.doc(`articles/${id}`).update({ ...data, date: new Date(), keywords })
     return id
   } catch (error) {
     console.log('_error_', error)
