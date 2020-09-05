@@ -19,6 +19,14 @@ export const getList = (limit = 10, filters = {}) => {
       if (filters.category) query = query.where('category', '==', filters.category)
       if (filters.subcategory) query = query.where('subcategory', '==', filters.subcategory)
       if (filters.gender) query = query.where('gender', '==', filters.gender)
+
+      if (filters.keywords) {
+        const searchKeywords = filters.keywords.trim().split(' ').map(word => word.toLowerCase())
+        searchKeywords.forEach(keyword => {
+          query = query.where(`keywords.${keyword}`, '==', true)
+        })
+      }
+
       if (last) query = query.startAfter(last)
       if (limit) query = query.limit(limit)
       const snapshot = await query.get()
