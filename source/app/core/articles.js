@@ -15,7 +15,8 @@ export const getList = (limit = 10, filters = {}) => {
   return async () => {
     if (finished) return []
     try {
-      let query = db.collection('articles').orderBy('date', 'desc')
+      let query = db.collection('articles')
+      if (!filters.keywords) query = query.orderBy('date', 'desc')
       if (filters.category) query = query.where('category', '==', filters.category)
       if (filters.subcategory) query = query.where('subcategory', '==', filters.subcategory)
       if (filters.gender) query = query.where('gender', '==', filters.gender)

@@ -3,12 +3,12 @@ import { AppBar, Grid, Hidden } from '@material-ui/core'
 import { Content, Body, Logo } from './styled'
 import Container from 'components/container'
 import srclogo from '../../assets/logo.png'
-// import Searcher from './searcher'
 import Action from './actions'
 import { Button } from 'components/main'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { HashLink } from 'react-router-hash-link'
+import Searcher from './searcher'
 
 const ButtonStyled = styled(Button)`
   color: #2b0028!important;
@@ -23,11 +23,11 @@ const Header = () => {
         <Body>
           <Grid container justify='space-between' alignItems='center'>
 
-            <Grid item alignItems='center'>
-              <Link to='/'><Logo src={srclogo} /></Link>
-              {/* <Grid item xs>
+            <Grid item xs={6} md={4} container alignItems='center'>
+              <Logo src={srclogo} />
+              <Grid item xs>
                 <Searcher />
-              </Grid> */}
+              </Grid>
             </Grid>
             <Hidden smDown>
               <div>
