@@ -19,20 +19,7 @@ const Mycart = props => {
   const [view, setView] = useState('products') // products || form || methodPay || finally
   const subTotal = calculatePrice(items)
   const total = subTotal + shippingPrice
-  const [state, setState] = useObjectState({
-    city: 'san cristobal de las casas',
-    email: 'armando@gmail.com',
-    errorMessage: null,
-    errors: [],
-    lastname: 'santiz lopez',
-    name: 'armando de jesus',
-    number: '6565564556',
-    postal_code: '29247',
-    references: 'puerta negra ',
-    state: 'chiapas',
-    street_number: 'lazaro cardenas numero 7',
-    suburb: 'la frontera'
-  })
+  const [state, setState] = useObjectState({})
 
   // reset scroll when change currentView
   useEffect(() => { window.scrollTo(0, 0) }, [view])

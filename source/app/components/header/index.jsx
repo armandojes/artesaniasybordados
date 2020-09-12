@@ -24,7 +24,9 @@ const Header = () => {
           <Grid container justify='space-between' alignItems='center'>
 
             <Grid item xs={6} md={4} container alignItems='center'>
-              <Logo src={srclogo} />
+              <Link to='/'>
+                <Logo src={srclogo} />
+              </Link>
               <Grid item xs>
                 <Searcher />
               </Grid>
