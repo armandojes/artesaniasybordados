@@ -17,12 +17,18 @@ import ReactMarkdown from 'react-markdown'
 import { Skeleton } from '@material-ui/lab'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import ModalPicture from './picturesModalHoc'
+import SwipeableViews from 'react-swipeable-views'
 
 const View = props => {
-  const [currentPicture, setCurrentPicture] = useState(0)
   const responsive = useResponsive()
   const session = useSelector(state => state.session)
+  const [currentPictureIndex, setCurrentPictureIndex] = useState(null)
   const { options = {} } = props
+
+  const handleIndexChange = index => {
+    setCurrentPictureIndex(index)
+  }
 
   return (
     <>
@@ -65,13 +71,17 @@ const View = props => {
           <Grid container spacing={responsive({ xs: 2, lg: 2 })} alignItems='flex-start'>
             <Grid item xs={12} md={7}>
               <Paper>
-                <Box p={responsive({ xs: 0, md: 2 })}>
-                  <Picture src={props.pictures[currentPicture]} height={100} />
+                <Box overflow='hidden' p={responsive({ xs: 0, md: 2 })}>
+                  <SwipeableViews index={currentPictureIndex} onChangeIndex={handleIndexChange} enableMouseEvents disableLazyLoading interval={10000}>
+                    {props.pictures.map((picture, index) => (
+                      <PicturePrimary key={index} src={picture} height={100} onClick={event => props.onSetIndexPicture(0)} />
+                    ))}
+                  </SwipeableViews>
                   <Box mt={2}>
                     <Grid container spacing={responsive({ xs: 1, md: 2 })}>
                       {props.pictures.map((picture, index) => (
                         <Tumb key={picture} item xs>
-                          <PictureIcon src={picture} onClick={event => setCurrentPicture(index)} />
+                          <PictureIcon src={picture} onClick={event => setCurrentPictureIndex(index)} />
                         </Tumb>
                       ))}
                     </Grid>
@@ -176,7 +186,8 @@ View.propTypes = {
   pictures: propTypes.array,
   options: propTypes.object,
   setOptions: propTypes.func,
-  onAddToCart: propTypes.func
+  onAddToCart: propTypes.func,
+  onSetIndexPicture: propTypes.func // created by hooc
 }
 
 const PictureIcon = styled(Picture)`
@@ -231,4 +242,10 @@ const DescriptionContainer = styled.div`
   line-height: 1.6em;
 `
 
-export default View
+const PicturePrimary = styled(Picture)`
+  cursor: pointer;
+  transition: all 300ms;
+  margin: auto;
+`
+
+export default ModalPicture(View)
