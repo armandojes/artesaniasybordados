@@ -21,7 +21,7 @@ const rendered = async (request, response) => {
   const styledCss = styledColector.getStyleTags()
   styledColector.seal()
 
-  const fullHtml = markup('html', [], Materialcss, styledCss)
+  const fullHtml = markup('', [], Materialcss, styledCss)
   response.send(fullHtml)
   response.end()
 }

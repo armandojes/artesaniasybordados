@@ -11,15 +11,11 @@ import { Loyalty } from '@material-ui/icons'
 import queryString from 'query-string'
 import { object } from 'prop-types'
 import EmptyMessage from 'components/EmptyContent'
-import { useSelector } from 'react-redux'
-import { transformPrice } from 'helpers/calculatePrice'
 import { useLocation } from 'react-router'
 
 const Articles = props => {
   const initialFilters = props.location.state || {}
   const [state, setState] = useObjectState({ items: [], loading: true })
-  const session = useSelector(state => state.session)
-  const userType = (!!session && session !== 'loading') ? session.type : 'client'
   const location = useLocation()
   const { keywords } = queryString.parse(location.search)
 
@@ -51,7 +47,7 @@ const Articles = props => {
             </Grid>
             {state.items.map(item => (
               <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
-                <Article {...item} price={transformPrice(item.price, userType)} />
+                <Article {...item} />
               </Grid>
             ))}
           </Grid>

@@ -35,7 +35,7 @@ const View = props => {
                   <Skeleton variant='rect' height={responsive({ xs: 300, md: 500, sm: 400 })} />
                   <Box mt={2}>
                     <Grid container spacing={responsive({ xs: 1, md: 2 })}>
-                      {[1, 2, 3, 4, 5, 6].map((picture, index) => (
+                      {[1, 2, 3, 4, 5, 6].map((picture) => (
                         <Tumb key={picture} item xs>
                           <Skeleton variant='rect' height={60} />
                         </Tumb>
@@ -66,7 +66,7 @@ const View = props => {
             <Grid item xs={12} md={7}>
               <Paper>
                 <Box p={responsive({ xs: 0, md: 2 })}>
-                  <Picture src={props.pictures[currentPicture]} height={80} />
+                  <Picture src={props.pictures[currentPicture]} height={100} />
                   <Box mt={2}>
                     <Grid container spacing={responsive({ xs: 1, md: 2 })}>
                       {props.pictures.map((picture, index) => (
