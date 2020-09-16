@@ -1,8 +1,20 @@
+/* eslint-disable handle-callback-err */
+/* eslint-disable no-new */
 import firebase from 'firebase/app'
 import 'firebase/storage'
+import Compressor from 'compressorjs'
 
 const resizeFile = (file) => new Promise(resolve => {
-  return resolve(file)
+  new Compressor(file, {
+    quality: 0.9,
+    maxWidth: 1800,
+    success: (result) => {
+      resolve(result)
+    },
+    error: (error) => {
+      resolve(null)
+    }
+  })
 })
 
 const storageRef = firebase.storage().ref()
@@ -11,9 +23,9 @@ const bucket = storageRef.bucket
 
 export const uploadPicture = async (path, file, isPrimary = false) => {
   try {
+    var name = isPrimary ? `primary_${file.name}` : file.name
     const compresedFile = await resizeFile(file)
-    var name = file.name
-    if (isPrimary) name = `primary_${name}`
+    console.log('compresedFile', compresedFile)
     await storageRef.child(`${path}/${name}`).put(compresedFile)
     const fullPathEncoded = encodeURIComponent(`${path}/${name}`)
     return `${baseStorageUrl}/${bucket}/o/${fullPathEncoded}?alt=media`
