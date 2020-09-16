@@ -9,7 +9,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'app.js',
-    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artstest.vercel.app/public/'
+    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public/'
   },
   mode: 'development',
   module: {
@@ -49,7 +49,7 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
-      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artstest.vercel.app/public')
+      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public')
     }),
     new ExtracCssPlugin({
       filename: 'styles.css'

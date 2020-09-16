@@ -51,6 +51,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "compressorjs": "^1.0.6",
     "debounce": "^1.2.0",
+    "dotenv-webpack": "^2.0.0",
     "express": "^4.17.1",
     "firebase": "^7.15.3",
     "latest": "^0.2.0",

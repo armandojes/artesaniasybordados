@@ -1,6 +1,7 @@
 export const secret = 'helloforyou'
+export const isProduction = ENV === 'production'
 
-export const firebaseConfig = {
+const firebaseConfigProduction = {
   apiKey: 'AIzaSyAnYHA114ubzMjUDND3V5J852bfM1cPmUY',
   authDomain: 'arts-bfab3.firebaseapp.com',
   databaseURL: 'https://arts-bfab3.firebaseio.com',
@@ -9,15 +10,30 @@ export const firebaseConfig = {
   messagingSenderId: '804609683943',
   appId: '1:804609683943:web:893f59b6de6d63e7c40d42'
 }
-
-export const shippingPrice = 50
-
-export default {
-  secret
+const firebaseConfigDevelop = {
+  apiKey: 'AIzaSyCKNcHonL_1Wv-feCa6Uaviop8BQJgW5JE',
+  authDomain: 'artesaniasybordados-develop.firebaseapp.com',
+  databaseURL: 'https://artesaniasybordados-develop.firebaseio.com',
+  projectId: 'artesaniasybordados-develop',
+  storageBucket: 'artesaniasybordados-develop.appspot.com',
+  messagingSenderId: '25365981751',
+  appId: '1:25365981751:web:f21bc8972c40e7fd8fadb2'
 }
+
+export const domains = {
+  production: 'https://artesaniasybordados.com.mx'
+}
+
+export const firebaseConfig = isProduction ? firebaseConfigProduction : firebaseConfigDevelop
 
 export const paypal = {
   token: 'AaSWKyX_04IYi1ka8A_Qxr-xddBNxbn_K0fzZukxjYHN1BR01dv6wykgLV_zoBL16adglxM6ixmC2jps'
 }
 
 export const limitPictures = 15
+
+export default {
+  secret,
+  limitPictures,
+  paypal
+}
