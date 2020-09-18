@@ -52,7 +52,8 @@ export const menu = [
 
 export const methodsPay = {
   paypal: 'Paypal',
-  cash: 'Deposito en efectivo, bancos y oxxo'
+  cash: 'Deposito en efectivo, bancos y oxxo',
+  mercadopago: 'mercadopago'
 }
 
 export const status = {
@@ -72,4 +73,19 @@ export const statusColors = {
 export const companiesSending = {
   estafeta: 'Estafeta',
   dhl: 'DHL'
+}
+
+export const fakeCheckoutData = {
+  city: 'san cristobal de las casas',
+  email: 'armando@gmail.com',
+  errorMessage: null,
+  errors: [],
+  lastname: 'santiz lopez',
+  name: 'armando de jesus',
+  number: '6565564556',
+  postal_code: '29247',
+  references: 'puerta negra ',
+  state: 'chiapas',
+  street_number: 'lazaro cardenas numero 7',
+  suburb: 'la frontera'
 }

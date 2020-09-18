@@ -55,7 +55,7 @@ const config = {
     })
   ],
   resolve: {
-    extensions: ['.js', '.jsx', '.jpg', '.png', '.gif', '.svg'],
+    extensions: ['.json', '.js', '.jsx', '.jpg', '.png', '.gif', '.svg'],
     alias: {
       flux: path.resolve(__dirname, '../source/app/flux'),
       api: path.resolve(__dirname, '../source/app/api.js'),

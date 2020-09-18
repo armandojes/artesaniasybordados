@@ -10,6 +10,7 @@ import { requires } from 'helpers/validate'
 import { active, desactive } from 'flux/loading'
 import { add } from 'core/sale'
 import session from 'components/session'
+import { fakeCheckoutData } from '../../constants'
 
 const Mycart = props => {
   const history = useHistory()
@@ -19,7 +20,7 @@ const Mycart = props => {
   const [view, setView] = useState('products') // products || form || methodPay || finally
   const subTotal = calculatePrice(items)
   const total = subTotal + shippingPrice
-  const [state, setState] = useObjectState({})
+  const [state, setState] = useObjectState(ENV === 'development' ? fakeCheckoutData : {})
 
   // reset scroll when change currentView
   useEffect(() => { window.scrollTo(0, 0) }, [view])

@@ -20,7 +20,7 @@ const Footer = props => (
           </Grid>
           <Grid item xs={4}>
             <Cards
-              message='Envíos a cualquier parte de la republica'
+              message='Envíos nacionales e internaciones'
               Icon={LocalShipping}
             />
           </Grid>
@@ -35,7 +35,7 @@ const Footer = props => (
           <Divider />
         </Box>
         <div>
-          <LinkStyled>Términos y condiciones</LinkStyled> | <LinkStyled to='/notice-of-privacy'>Políticas de privacidad</LinkStyled> | <LinkStyled to='/acerca-de-nosotros'>Sobre nosotros</LinkStyled>
+          <LinkStyled as='div'>Términos y condiciones</LinkStyled> | <LinkStyled to='/notice-of-privacy'>Políticas de privacidad</LinkStyled> | <LinkStyled to='/acerca-de-nosotros'>Sobre nosotros</LinkStyled>
         </div>
       </Hidden>
       <Hidden mdUp>
@@ -45,7 +45,7 @@ const Footer = props => (
             Icon={CreditCard}
           />
           <Cards
-            message='Envíos a cualquier parte de la republica'
+            message='Envíos nacionales e internaciones'
             Icon={LocalShipping}
           />
           <Cards
@@ -56,7 +56,7 @@ const Footer = props => (
         <Box paddingTop={2} paddingBottom={2}>
           <Divider />
         </Box>
-        <LinkStyledDesk>Términos y condiciones</LinkStyledDesk>
+        <LinkStyledDesk as='div'>Términos y condiciones</LinkStyledDesk>
         <LinkStyledDesk to='/notice-of-privacy'>Políticas de privacidad</LinkStyledDesk>
         <LinkStyledDesk to='/acerca-de-nosotros'>Sobre nosotros</LinkStyledDesk>
       </Hidden>

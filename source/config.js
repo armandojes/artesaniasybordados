@@ -30,10 +30,16 @@ export const paypal = {
   token: 'AaSWKyX_04IYi1ka8A_Qxr-xddBNxbn_K0fzZukxjYHN1BR01dv6wykgLV_zoBL16adglxM6ixmC2jps'
 }
 
+export const mercadopago = {
+  PublicKey: 'TEST-55009628-46e2-4102-ad7a-596b5922b9af'
+}
+
 export const limitPictures = 15
+export const shippingPrice = 100
 
 export default {
   secret,
   limitPictures,
-  paypal
+  paypal,
+  mercadopago
 }
