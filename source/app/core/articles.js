@@ -98,13 +98,14 @@ export const add = async data_ => {
   var idCreated = null
   while (!idCreated) {
     const docRef = db.collection('articles').doc()
-    const isNotAvalaible = await getSingleDisabled(docRef.id)
-    console.log('notAvalaible', isNotAvalaible, docRef.id)
-    if (!isNotAvalaible) idCreated = docRef.id
+    const doesExistAtDisableArticles = await getSingleDisabled(docRef.id)
+    const doesExistAtArticles = await getSingle(docRef.id)
+    if (!doesExistAtDisableArticles && !doesExistAtArticles) idCreated = docRef.id
   }
+
   var keywords = {}
   data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
-  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes']
+  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes', 'picture', 'pictures']
   const data = filterObject(data_, allow)
   data.price = parseInt(data.price)
   data.quantity = parseInt(data.quantity)
@@ -156,9 +157,11 @@ const createFakeArticles = async () => {
       for (const subcategory of subCategories_) {
         console.log('__will_create__', `prueba => ${gender} => ${category} => ${subcategory}`)
         await add({
+          pictures: [],
           title: `prueba => ${gender} => ${category} => ${subcategory}`,
           price: 2000,
           gender,
+          quantity: 10,
           category,
           subcategory,
           picture: 'https://http2.mlstatic.com/lote-de-6-blusas-kimonas-bordadas-chiapas-D_NQ_NP_801532-MLM40332406734_012020-O.webp',
@@ -174,4 +177,4 @@ const createFakeArticles = async () => {
   }
 }
 
-window.create = createFakeArticles
+if (ENV === 'development') window.create = createFakeArticles
