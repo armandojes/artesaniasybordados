@@ -26,3 +26,7 @@ export const snapShotParser = (snapshot) => {
 
 export const db = firebase.firestore()
 export default db
+
+if (ENV === 'development') {
+  window.db = db
+}

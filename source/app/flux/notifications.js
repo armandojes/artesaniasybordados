@@ -15,7 +15,7 @@ const remove = key => dispatch => {
 export const setNotification = data => async dispatch => {
   const key = Math.floor(Math.random() * 100)
   dispatch(addNotification({ ...data, key }))
-  setTimeout(event => dispatch(remove(key)), 5000)
+  setTimeout(event => dispatch(remove(key)), 6000)
 }
 
 const addNotification = flux.createAction('SET_NOTIFICATION', (state, payload) => {

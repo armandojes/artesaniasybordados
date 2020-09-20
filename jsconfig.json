@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "jsx": "react",
     "paths": {
       "api": ["./source/app/api.js"],
@@ -13,6 +13,6 @@
       "core/*": ["./source/app/core/*"]
     }
   },
-  "include": ["source/**/*"],
+  "include": ["source/**/*", "node-modules/prop-types"],
   "exclude": ["node_modules"]
 }

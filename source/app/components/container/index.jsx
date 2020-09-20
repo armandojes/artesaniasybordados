@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Container = props => {
   return (
-    <GridStyled {...props}>
+    <GridStyled {...props} name='container'>
       {props.children}
     </GridStyled>
   )

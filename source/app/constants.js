@@ -1,21 +1,25 @@
 export const categories = {
   ropa: 'ropa',
   calzado: 'Calzado',
-  accesorio: 'Accesorio'
+  accesorio: 'Accesorio',
+  pottery: 'Alfarería',
+  design: 'Diseños inicos y personalizados'
 }
 
 export const subCategories = {
   reboso: 'Reboso',
   mananita: 'Mañanita',
   chalina: 'Chalina',
-  faja: 'Faja'
+  faja: 'Faja',
+  none: 'Ninguno'
 }
 
 export const genders = {
   male: 'Hombre',
   female: 'Mujer',
   boy: 'Niño',
-  girl: 'Niña'
+  girl: 'Niña',
+  none: 'Ningúno'
 }
 
 export const menu = [
@@ -46,6 +50,18 @@ export const menu = [
     label: 'Accesorios',
     keyname: 'category',
     value: 'accesorio',
+    filters: []
+  },
+  {
+    label: 'Alfarería',
+    keyname: 'category',
+    value: 'pottery',
+    filters: []
+  },
+  {
+    label: 'Diseños unicos y personalizados',
+    keyname: 'category',
+    value: 'design',
     filters: []
   }
 ]

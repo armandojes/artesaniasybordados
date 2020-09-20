@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, oneOfType, number, func } from 'prop-types'
+import { string, number, func, bool } from 'prop-types'
 import { Paper, Menu } from 'components/main'
 import Picture from 'components/Picture'
 import { Typography, MenuItem } from '@material-ui/core'
@@ -23,15 +23,26 @@ const Span = styled.span`
 `
 
 const ArticleCard = props => {
-  const { handleDelete, ...data } = props
+  const { handleDelete, onDisable, onEnable, ...data } = props
   const history = useHistory()
 
   return (
     <PaperStyled>
       <MenuStyled>
-        <MenuItem onClick={() => history.push(`/articulo/${data.id}`)}>Ver detalles</MenuItem>
-        <MenuItem onClick={() => props.handleDelete(data)}>Eliminar</MenuItem>
-        <MenuItem onClick={() => history.push('/admin/create', { ...data })}>Editar</MenuItem>
+        {!props.isDisabled && (
+          <>
+            <MenuItem onClick={() => history.push(`/articulo/${data.id}`)}>Ver detalles</MenuItem>
+            <MenuItem onClick={() => handleDelete(data)}>Eliminar</MenuItem>
+            <MenuItem onClick={() => history.push('/admin/create', data)}>Editar</MenuItem>
+            <MenuItem onClick={() => onDisable(data)}>Deshabilitar</MenuItem>
+          </>
+        )}
+        {props.isDisabled && (
+          <>
+            <MenuItem onClick={() => history.push(`/articulo/${data.id}`)}>Ver detalles</MenuItem>
+            <MenuItem onClick={() => onEnable(data)}>Habiliar</MenuItem>
+          </>
+        )}
       </MenuStyled>
       <Picture src={data.picture} id={data.id} />
       <Typography variant='h6'>{data.title}</Typography>
@@ -44,8 +55,11 @@ ArticleCard.propTypes = {
   title: string,
   picture: string,
   id: string,
-  price: oneOfType([string, number]),
-  handleDelete: func
+  price: number,
+  handleDelete: func,
+  onDisable: func,
+  isDisabled: bool,
+  onEnable: func
 }
 
 export default ArticleCard

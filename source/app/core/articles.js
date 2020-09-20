@@ -3,8 +3,37 @@ import { filterObject } from 'helpers/validate'
 import { drop as dropFile } from './storage'
 import { categories, genders, subCategories } from '../constants'
 
+export const setDisable = async articleId => {
+  try {
+    const { id, ...data } = await getSingle(articleId)
+    await db.doc(`articles/${articleId}`).delete()
+    await db.doc(`disabledArticles/${articleId}`).set(data)
+    return true
+  } catch (error) {
+    console.log('setDisableError', error)
+    return false
+  }
+}
+
+export const setEnable = async articleId => {
+  try {
+    const { id, ...data } = await getSingleDisabled(articleId)
+    await db.doc(`disabledArticles/${articleId}`).delete()
+    await db.doc(`articles/${articleId}`).set(data)
+    return true
+  } catch (error) {
+    console.log('setEnableError', error)
+    return false
+  }
+}
+
 export const getSingle = async id => {
   const snapshot = await db.doc(`articles/${id}`).get()
+  return snapShotParser(snapshot)
+}
+
+export const getSingleDisabled = async id => {
+  const snapshot = await db.doc(`disabledArticles/${id}`).get()
   return snapShotParser(snapshot)
 }
 
@@ -41,16 +70,48 @@ export const getList = (limit = 10, filters = {}) => {
   }
 }
 
+export const getListDisableds = (limit = 10) => {
+  var last = null
+  var finished = false
+
+  return async () => {
+    if (finished) return []
+    try {
+      let query = db.collection('disabledArticles')
+      if (last) query = query.startAfter(last)
+      if (limit) query = query.limit(limit)
+      const snapshot = await query.get()
+      last = snapshot.docs[snapshot.docs.length - 1]
+      if (snapshot.docs.length !== limit) finished = true
+      return snapShotParser(snapshot)
+    } catch (error) {
+      console.log('__error__', error)
+      return []
+    }
+  }
+}
+
 // create a new article
 // return id or null
 export const add = async data_ => {
+  // check if the id is not at disabledArticles
+  var idCreated = null
+  while (!idCreated) {
+    const docRef = db.collection('articles').doc()
+    const isNotAvalaible = await getSingleDisabled(docRef.id)
+    console.log('notAvalaible', isNotAvalaible, docRef.id)
+    if (!isNotAvalaible) idCreated = docRef.id
+  }
   var keywords = {}
   data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
   const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
+  data.price = parseInt(data.price)
+  data.quantity = parseInt(data.quantity)
+
   try {
-    const result = await db.collection('articles').add({ ...data, date: new Date(), keywords })
-    return result.id
+    await db.doc(`articles/${idCreated}`).set({ ...data, date: new Date(), keywords })
+    return idCreated
   } catch (error) {
     console.log('_error_', error)
     return null
@@ -62,6 +123,8 @@ export const update = async (id, data_) => {
   data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
   const allow = ['title', 'price', 'gender', 'description', 'pictures', 'picture', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
+  data.price = parseInt(data.price)
+  data.quantity = parseInt(data.quantity)
 
   try {
     await db.doc(`articles/${id}`).update({ ...data, date: new Date(), keywords })

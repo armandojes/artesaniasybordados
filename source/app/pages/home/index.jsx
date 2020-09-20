@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom'
 import woman from '../../assets/woman.png'
 import man from '../../assets/man.png'
 import jewelry from '../../assets/jewelry.png'
-import calzado from '../../assets/calzado.png'
 import { WhatsApp, Email, Phone, Facebook, Instagram } from '@material-ui/icons'
 import contactSrc from '../../assets/contact.png'
 import Cover from './cover.jsx'
+import calzado from '../../assets/calzado.png'
+import design from '../../assets/design.png'
+import pottery from '../../assets/pottery.png'
 
 const Container = styled(ContainerBase)`
   padding: 15px;
@@ -128,9 +130,7 @@ const home = props => {
                         <Typography variant='subtitle1' align='center'>Viste con blusas, huipiles, vestidos y ropa artesanal</Typography>
                       </Hidden>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-
                         <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
-
                       </Box>
                     </Grid>
                     <Picture src={woman} />
@@ -156,7 +156,6 @@ const home = props => {
                 </SectionBoxes>
               </Link>
             </Grid>
-
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { category: 'accesorio' } }}>
                 <SectionBoxes>
@@ -167,9 +166,7 @@ const home = props => {
                         <Typography variant='subtitle1' align='center'>Detalles y piezas personalizables con estilo mexicano</Typography>
                       </Hidden>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-
                         <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
-
                       </Box>
                     </Grid>
                     <Picture src={jewelry} />
@@ -195,9 +192,42 @@ const home = props => {
               </Link>
             </Grid>
 
+            <Grid item xs={6}>
+              <Link to={{ pathname: '/articulos', state: { category: 'pottery' } }}>
+                <SectionBoxes>
+                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <Grid item xs>
+                      <Typography align='center' variant='h5'>Alfarería</Typography>
+                      <Typography variant='subtitle1' align='center'> </Typography>
+                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      </Box>
+                    </Grid>
+                    <Picture src={pottery} />
+                  </Grid>
+                </SectionBoxes>
+              </Link>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Link to={{ pathname: '/articulos', state: { category: 'design' } }}>
+                <SectionBoxes>
+                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <Grid item xs>
+                      <Typography align='center' variant='h5'>Diseños únicos y personalizados</Typography>
+                      <Typography variant='subtitle1' align='center'> </Typography>
+                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                      </Box>
+                    </Grid>
+                    <Picture src={design} />
+                  </Grid>
+                </SectionBoxes>
+              </Link>
+            </Grid>
+
             <Grid item xs={12}>
               <PaperStyled id='contacto'>
-
                 <Box p={responsive({ xs: 2, sm: 4, md: 6, lg: 10 })}>
                   <Grid container spacing={5} justify='flex-start'>
                     <Grid item xs={12} md={7} lg={5}>
