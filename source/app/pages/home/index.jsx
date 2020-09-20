@@ -15,6 +15,7 @@ import Cover from './cover.jsx'
 import calzado from '../../assets/calzado.png'
 import design from '../../assets/design.png'
 import pottery from '../../assets/pottery.png'
+import { contact } from '../../../config'
 
 const Container = styled(ContainerBase)`
   padding: 15px;
@@ -235,54 +236,58 @@ const home = props => {
                         <Typography color='primary' variant='h4'>Contactanos</Typography>
                       </Box>
                       <Typography variant='body1'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit ipsum veritatis vitae nobis, itaque cupiditate sequi. Tenetur, ea, quas, sunt maxime corrupti ex illo veritatis expedita corporis illum fuga in.
+                        Cualquier duda o sugerencia contáctanos por cualquiera de nuestros medios disponibles.
                       </Typography>
                       <Box mt={3}>
                         <List>
-                          <LinkOut href='https://wa.me/9671388451' target='_blank'>
+                          <LinkOut href={`https://wa.me/+521${contact.whatsapp}`} target='_blank'>
                             <ListItem>
                               <ListItemAvatar>
                                 <IconsCOntainerStyled>
                                   <WhatsApp />
                                 </IconsCOntainerStyled>
                               </ListItemAvatar>
+                              <ListItemText style={{ color: '#3483fa' }} primary={contact.whatsapp} />
+                            </ListItem>
+                          </LinkOut>
+                          <LinkOut href={`mailto:${contact.email}`}>
+                            <ListItem>
+                              <ListItemAvatar>
+                                <IconsCOntainerStyled>
+                                  <Email />
+                                </IconsCOntainerStyled>
+                              </ListItemAvatar>
+                              <ListItemText style={{ color: '#3483fa' }} primary={contact.email} />
+                            </ListItem>
+                          </LinkOut>
+                          <LinkOut href={`tel:${contact.number}`}>
+                            <ListItem>
+                              <ListItemAvatar>
+                                <IconsCOntainerStyled>
+                                  <Phone />
+                                </IconsCOntainerStyled>
+                              </ListItemAvatar>
                               <ListItemText style={{ color: '#3483fa' }} primary='9671388451' />
                             </ListItem>
                           </LinkOut>
-                          <ListItem>
-                            <ListItemAvatar>
-                              <IconsCOntainerStyled>
-                                <Email />
-                              </IconsCOntainerStyled>
-                            </ListItemAvatar>
-                            <ListItemText style={{ color: '#3483fa' }} primary='armandodejesus678@gmail.com' />
-                          </ListItem>
-                          <ListItem>
-                            <ListItemAvatar>
-                              <IconsCOntainerStyled>
-                                <Phone />
-                              </IconsCOntainerStyled>
-                            </ListItemAvatar>
-                            <ListItemText style={{ color: '#3483fa' }} primary='9671388451' />
-                          </ListItem>
-                          <LinkOut href='https://facebook.com' target='_blank'>
+                          <LinkOut href={contact.facebookPage} target='_blank'>
                             <ListItem>
                               <ListItemAvatar>
                                 <IconsCOntainerStyled>
                                   <Facebook />
                                 </IconsCOntainerStyled>
                               </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary='Facebook page' />
+                              <ListItemText style={{ color: '#3483fa' }} primary='Pagina en Facebook' />
                             </ListItem>
                           </LinkOut>
-                          <LinkOut href='https://instagram.com' target='_blank'>
+                          <LinkOut href={contact.instagram} target='_blank'>
                             <ListItem>
                               <ListItemAvatar>
                                 <IconsCOntainerStyled>
                                   <Instagram />
                                 </IconsCOntainerStyled>
                               </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary='instagram' />
+                              <ListItemText style={{ color: '#3483fa' }} primary='Instagram' />
                             </ListItem>
                           </LinkOut>
                         </List>

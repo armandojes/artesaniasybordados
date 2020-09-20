@@ -43,3 +43,11 @@ export default {
   paypal,
   mercadopago
 }
+
+export const contact = {
+  whatsapp: 9676809393,
+  email: 'paulinasantiz490@gmail.com',
+  number: 9676809393,
+  facebookPage: 'https://facebook.com',
+  instagram: 'https://instagram.com'
+}
