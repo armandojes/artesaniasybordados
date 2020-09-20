@@ -15,6 +15,7 @@ import useResponsive from 'hooks/useResponsive'
 import Session from 'components/session'
 import Item from 'components/articleSecondary'
 import SuccessModal from './modalSuccess'
+import { contact } from '../../../config'
 
 const PaperStyled = styled(Paper)`
   padding: 30px;
@@ -29,6 +30,9 @@ const Instructions = styled.div`
   border: 2px solid #d891ef;
   padding: 10px;
   border-radius: 5px;
+  span {
+    font-weight: bold;
+  }
 `
 
 const steps = Object.keys(status).map(keyname => status[keyname])
@@ -80,21 +84,25 @@ const Shop = props => {
                     <Instructions>
                       <Typography style={{ color: '' }} variant='h6'>Instrucciones para realizar el pago</Typography>
                       <p style={{ color: '' }} variant='subtitle1'>Puedes realizar el deposito en efectivo en cualquier banco o en cualquier oxxo, tambien puedes realizar una tranferencia electronica desde el portal de tu banco</p>
-                      <p style={{ color: '' }} variant='subtitle1'>IMPORTANTE: Despues de realizar tu deposito envianos tu comprobante al correo XXXXXXXX@XXXXX.com o al whatsapp 11234567890 para procesar con tu compra</p>
+                      <p style={{ color: '' }} variant='subtitle1'>IMPORTANTE: Despues de realizar tu deposito envianos tu comprobante  al correo <span>{contact.email}</span> o al whatsapp <span>{contact.whatsapp}</span> para procesar con tu compra</p>
 
                       <Box mt={1} />
                       <Typography variant='h6' color='primary'><Span>Total a pagar:</Span> {toPrice(state.data.total)}</Typography>
                       <Box mt={1} />
                       <Typography variant='h6' color='primary'>Transferencia electronica</Typography>
-                      <Typography variant='subtitle1'><Span>Cuenta:</Span> 000000000000000000</Typography>
+                      <Typography variant='subtitle1'><Span>CLAVE:</Span> 021130064844077333</Typography>
+                      <Typography variant='subtitle1'><Span>Banco:</Span> HSBC </Typography>
+                      <Typography variant='subtitle1'><Span>Nombre:</Span> Paulina Santiz Lopez </Typography>
                       <Box mt={1} />
 
                       <Typography variant='h6' color='primary'>Deposito en oxxo</Typography>
-                      <Typography variant='subtitle1'><Span>Cuenta:</Span> 000000000000000000</Typography>
+                      <Typography variant='subtitle1'><Span>Tarjeta HSBC:</Span> 4213166124684766</Typography>
+                      <Typography variant='subtitle1'><Span>Nombre:</Span> Paulina Santiz Lopez </Typography>
                       <Box mt={1} />
 
                       <Typography variant='h6' color='primary'>Deposito en bancos</Typography>
-                      <Typography variant='subtitle1'><Span>Cuenta:</Span> 000000000000000000</Typography>
+                      <Typography variant='subtitle1'><Span>Cuenta HSBC:</Span> 6484407733 </Typography>
+                      <Typography variant='subtitle1'><Span>Nombre:</Span> Paulina Santiz Lopez </Typography>
                       <Box mt={1} />
                       <Typography variant='subtitle1'><Span>Para cualquier duda o aclaracion no dudes en contactarnos</Span></Typography>
                     </Instructions>

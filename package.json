@@ -83,6 +83,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1",
     "styled-normalize": "^8.0.7",
-    "vercel": "^19.1.1"
+    "vercel": "^19.1.1",
+    "watermarkjs": "^2.1.1"
   }
 }

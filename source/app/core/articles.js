@@ -105,7 +105,7 @@ export const add = async data_ => {
 
   var keywords = {}
   data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
-  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes', 'picture', 'pictures']
+  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
   data.price = parseInt(data.price)
   data.quantity = parseInt(data.quantity)

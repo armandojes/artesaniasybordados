@@ -56,6 +56,7 @@ const config = {
     })
   ],
   devServer: {
+    headers: { 'Access-Control-Allow-Origin': '*' },
     host: ip.address(),
     port: 8080,
     disableHostCheck: true
