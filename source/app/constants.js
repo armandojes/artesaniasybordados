@@ -7,11 +7,12 @@ export const categories = {
 }
 
 export const subCategories = {
-  reboso: 'Reboso',
-  mananita: 'Mañanita',
-  chalina: 'Chalina',
-  faja: 'Faja',
-  none: 'Ninguno'
+  blouse: 'Blusa',
+  dress: 'Vestido',
+  jacket: 'Chamarra',
+  shawl: 'Rebozo',
+  bag: 'Bolsa',
+  none: 'Ningúno'
 }
 
 export const genders = {
@@ -28,10 +29,11 @@ export const menu = [
     keyname: 'gender',
     value: 'female',
     filters: [
-      { label: 'Reboso', value: 'reboso', keyname: 'subcategory' },
-      { label: 'Mañanitas', value: 'mananita', keyname: 'subcategory' },
-      { label: 'Chalinas', value: 'chalina', keyname: 'subcategory' },
-      { label: 'Fajas', value: 'faja', keyname: 'subcategory' }
+      { label: 'Blusas', value: 'blouse', keyname: 'subcategory' },
+      { label: 'Vestidos', value: 'dress', keyname: 'subcategory' },
+      { label: 'Chamarras', value: 'jacket', keyname: 'subcategory' },
+      { label: 'Rebozos', value: 'shawl', keyname: 'subcategory' },
+      { label: 'Bolsas', value: 'bag', keyname: 'subcategory' }
     ]
   },
   {
