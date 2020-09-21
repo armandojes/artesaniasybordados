@@ -30,7 +30,7 @@ const config = {
         test: /\.(png|jpe?g|gif|svg)$/i,
         loader: 'file-loader',
         options: {
-          emitFile: false
+          emitFile: true
         }
       },
       {

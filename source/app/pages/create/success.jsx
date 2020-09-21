@@ -21,7 +21,7 @@ const Success = props => (
       <Container maxWidth='sm'>
         <Grid container spacing={2} justify='center'>
           <Grid item xs={12} sm={6}>
-            <Link to={`/article/${props.id}`}>
+            <Link to={`/articulo/${props.id}`}>
               <Button fullWidth color='primary' variant='outlined'>Ver Articulo</Button>
             </Link>
           </Grid>
