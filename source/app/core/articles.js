@@ -105,10 +105,11 @@ export const add = async data_ => {
 
   var keywords = {}
   data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
-  const allow = ['title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes']
+  const allow = ['weight', 'title', 'price', 'gender', 'description', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
   data.price = parseInt(data.price)
   data.quantity = parseInt(data.quantity)
+  data.weight = parseInt(data.weight)
 
   try {
     await db.doc(`articles/${idCreated}`).set({ ...data, date: new Date(), keywords })
@@ -122,10 +123,11 @@ export const add = async data_ => {
 export const update = async (id, data_) => {
   var keywords = {}
   data_.title.trim().split(' ').forEach(word => { keywords[word.toLowerCase()] = true })
-  const allow = ['title', 'price', 'gender', 'description', 'pictures', 'picture', 'category', 'subcategory', 'quantity', 'sizes']
+  const allow = ['weight', 'title', 'price', 'gender', 'description', 'pictures', 'picture', 'category', 'subcategory', 'quantity', 'sizes']
   const data = filterObject(data_, allow)
   data.price = parseInt(data.price)
   data.quantity = parseInt(data.quantity)
+  data.weight = parseInt(data.weight)
 
   try {
     await db.doc(`articles/${id}`).update({ ...data, date: new Date(), keywords })
