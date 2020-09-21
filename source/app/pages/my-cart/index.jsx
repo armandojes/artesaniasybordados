@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import View from './view'
-import { shippingPrice } from '../../../config'
+import shippingCostCalculator from 'helpers/ShppingCostCalculator'
 import calculatePrice from 'helpers/calculatePrice'
 import useObjectState from 'hooks/useState'
 import { remove, removeAll } from 'flux/cart'
@@ -16,7 +16,7 @@ const Mycart = props => {
   const history = useHistory()
   const { items, loading } = useSelector(state => state.cart)
   const session = useSelector(state => state.session)
-
+  const shippingPrice = shippingCostCalculator(items || [])
   const [view, setView] = useState('products') // products || form || methodPay || finally
   const subTotal = calculatePrice(items)
   const total = subTotal + shippingPrice

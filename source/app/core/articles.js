@@ -159,6 +159,7 @@ const createFakeArticles = async () => {
       for (const subcategory of subCategories_) {
         console.log('__will_create__', `prueba => ${gender} => ${category} => ${subcategory}`)
         await add({
+          weight: 100,
           pictures: [],
           title: `prueba => ${gender} => ${category} => ${subcategory}`,
           price: 2000,

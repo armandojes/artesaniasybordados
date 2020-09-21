@@ -30,10 +30,6 @@ const markup = (html, states, materialCss, styledCss) => {
         <link rel="icon" type="image/png" sizes="32x32" href="${publicPath}-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="${publicPath}-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="${publicPath}-16x16.png">
-        <link rel="manifest" href="/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
 
       </head>
       <body>

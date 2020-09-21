@@ -19,7 +19,8 @@ const Article = props => {
   const [isLoginModalOpne, setLoginModal] = useState(false)
   const session = useSelector(state => state.session)
 
-  const pictures = state.loading ? [] : [state.data.picture, ...state.data.pictures]
+  var pictures = []
+  if (!state.loading && state.pictures) pictures = [state.data.picture, ...state.data.pictures]
 
   useFetch(async () => {
     const data = await getSingle(id)
