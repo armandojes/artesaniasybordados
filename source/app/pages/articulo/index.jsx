@@ -20,7 +20,7 @@ const Article = props => {
   const session = useSelector(state => state.session)
 
   var pictures = []
-  if (!state.loading && state.pictures) pictures = [state.data.picture, ...state.data.pictures]
+  if (!state.loading && state.data.pictures) pictures = [state.data.picture, ...state.data.pictures]
 
   useFetch(async () => {
     const data = await getSingle(id)

@@ -6,8 +6,7 @@ import Picture from 'components/Picture'
 import propTypes from 'prop-types'
 import styled from 'styled-components'
 import currency from 'helpers/currency'
-import visaSrc from '../../assets/visa.jpg'
-import mastercardSrc from '../../assets/mastercard.png'
+import speisrc from '../../assets/spei.png'
 import paypalSrc from '../../assets/paypal.png'
 import oxxoSrc from '../../assets/oxxo.png'
 import { LocalShipping } from '@material-ui/icons'
@@ -103,8 +102,8 @@ const View = props => {
                         <Typography variant='subtitle1'>Metodos de pago</Typography>
                         <MethoPayIcon src={paypalSrc} />
                         <MethoPayIcon src={oxxoSrc} />
-                        <MethoPayIcon src={mastercardSrc} />
-                        <MethoPayIcon src={visaSrc} />
+                        <MethoPayIcon src={speisrc} />
+
                       </Box>
                       <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
                         <Grid container alignItems='center'>
