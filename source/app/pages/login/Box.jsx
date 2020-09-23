@@ -150,7 +150,7 @@ const Limiter = styled.div`
   width: 450px;
   margin: auto;
   @media screen and (max-width:700px) {
-    width: 90%!important;
+    width: 90vw!important;
   }
 `
 

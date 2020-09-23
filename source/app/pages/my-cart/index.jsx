@@ -76,6 +76,12 @@ const Mycart = props => {
           handleSaveOperation('payed', { id, payer })
         })
         return status
+      },
+      onError: () => {
+        dispatch(desactive())
+      },
+      onCancel: () => {
+        dispatch(desactive())
       }
     }
   }

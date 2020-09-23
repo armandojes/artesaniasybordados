@@ -2,7 +2,7 @@ import React from 'react'
 import { Paper, SectionTitle, FullWidthCentered, FlexCentered, Button, Link } from 'components/main'
 import Layout from 'components/layout'
 import ContainerPage from 'components/container'
-import { Grid, Box, CircularProgress, Container } from '@material-ui/core'
+import { Grid, Box, CircularProgress } from '@material-ui/core'
 import InputGroup from 'components/inputs/group'
 import useObjectState from 'hooks/useState'
 import { Alert } from '@material-ui/lab'
@@ -121,12 +121,16 @@ const Register = props => {
                               </Grid>
                               <Grid item xs={12}>
                                 <Button
-                                  size='medium' fullWidth variant='contained' color='primary' onClick={handleRegister}>Registrarme</Button>
+                                  size='medium' fullWidth variant='contained' color='primary' onClick={handleRegister}
+                                >Registrarme
+                                </Button>
                               </Grid>
                               <Grid item xs={12}>
                                 <Link to='/login'>
                                   <Button
-                                    size='medium' fullWidth variant='outlined' color='primary'>Iniciar session</Button>
+                                    size='medium' fullWidth variant='outlined' color='primary'
+                                  >Iniciar session
+                                  </Button>
                                 </Link>
                               </Grid>
                             </Grid>
