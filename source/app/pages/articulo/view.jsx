@@ -107,7 +107,7 @@ const View = props => {
                       </Box>
                       <Box pt={responsive({ xs: 1, md: 2 })} pb={responsive({ xs: 1, md: 2 })}>
                         <Grid container alignItems='center'>
-                          <LocalShippingStyled /><Typography variant='subtitle1'>Envios a toda la republica</Typography>
+                          <LocalShippingStyled /><Typography variant='subtitle1'>Envíos nacionales e internaciones</Typography>
                         </Grid>
                       </Box>
                       <Grid container alignItems='center' spacing={2}>

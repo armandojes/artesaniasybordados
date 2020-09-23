@@ -13,8 +13,6 @@ const Searcher = props => {
   const location = useLocation()
   const { keywords = '' } = queryString.parse(location.search)
 
-  console.log('searcherKeywords', keywords)
-
   const handleRedirect = debounce(function (value) {
     const destination = { pathname: '/articulos', search: `keywords=${value}` }
     keywords ? history.replace(destination) : history.push(destination)

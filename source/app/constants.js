@@ -70,8 +70,7 @@ export const menu = [
 
 export const methodsPay = {
   paypal: 'Paypal',
-  cash: 'Deposito en efectivo, bancos y oxxo',
-  mercadopago: 'mercadopago'
+  cash: 'Deposito en efectivo, bancos y oxxo'
 }
 
 export const status = {

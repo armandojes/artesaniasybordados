@@ -28,6 +28,7 @@ import Article from './pages/articulo'
 import Notifications from './pages/notification'
 import Notification from 'components/notifications'
 import Policy from './pages/policy'
+import SearchHistory from './pages/SearchHistory'
 
 const App = props => {
   return (
@@ -42,6 +43,7 @@ const App = props => {
         <Route path='/articulo/:id' exact component={Article} />
         <Route path='/mi-carrito' exact component={Cart} />
         <Route path='/articulos' exact component={Producst} />
+        <Route path='/buscar' exact component={SearchHistory} />
         <Route path='/login' exact component={Login} />
         <Route path='/register' exact component={Register} />
         <Route path='/notice-of-privacy' exact component={Policy} />

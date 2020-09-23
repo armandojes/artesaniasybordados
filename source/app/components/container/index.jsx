@@ -16,7 +16,7 @@ Container.propTypes = {
 }
 
 const GridStyled = styled('div')`
-  padding: ${props => props.$page ? '10px 20px' : '0px 20px'};
+  padding: ${props => props.$page ? '10px 10px' : '0px 10px'};
   min-height: ${props => props.$page ? '80vh' : 'auto'};
 `
 

@@ -43,6 +43,14 @@ const Content = styled.aside`
   }
 `
 
+const ListItemStyled = styled(ListItem)`
+  border-radius: 15px!important;
+  background: ${props => props.$selected ? '#9767cb1f!important' : 'transparent!important'};
+  :hover {
+    background: ${props => props.$selected ? '#9767cb1f!important' : 'transparent!important'};
+    color: #9767CB;
+  }
+`
 const Menu = props => {
   const top = useHeightHeader()
   const history = useHistory()
@@ -76,22 +84,22 @@ const Menu = props => {
         </Hidden>
         {menu.map((section, index) => (
           <Fragment key={index}>
-            <ListItem button onClick={event => setSection(section)}>
+            <ListItemStyled button onClick={event => setSection(section)} $selected={state[section.keyname] === section.value && !state.subcategory}>
               <ListItemIcon>
                 <LocalOffer />
               </ListItemIcon>
               <ListItemText variant='subtitle1'>{section.label}</ListItemText>
-            </ListItem>
+            </ListItemStyled>
             {((state.category === section.value && section.keyname === 'category' && !!section.filters.length) || (state.gender === section.value && section.keyname === 'gender' && !!section.filters.length)) && (
               <Box pl={2}>
                 <List>
                   {section.filters.map((subSection, index) => (
-                    <ListItem button key={index} onClick={event => setSubSection(section, subSection)}>
+                    <ListItemStyled button key={index} onClick={event => setSubSection(section, subSection)} $selected={state[subSection.keyname] === subSection.value}>
                       <ListItemIcon>
                         <LocalOffer />
                       </ListItemIcon>
                       <ListItemText varian='subtitle2'>{subSection.label}</ListItemText>
-                    </ListItem>
+                    </ListItemStyled>
                   ))}
                 </List>
               </Box>
@@ -101,31 +109,31 @@ const Menu = props => {
         <Hidden mdUp>
           <>
             <Divider />
-            <ListItem button onClick={handleRedirect('/')}>
+            <ListItemStyled button onClick={handleRedirect('/')}>
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
               <ListItemText variant='subtitle1'>Inicio</ListItemText>
-            </ListItem>
-            <ListItem button onClick={handleRedirect('/articulos')}>
+            </ListItemStyled>
+            <ListItemStyled button onClick={handleRedirect('/articulos')}>
               <ListItemIcon>
                 <ViewList />
               </ListItemIcon>
               <ListItemText variant='subtitle1'>Galeria</ListItemText>
-            </ListItem>
-            <ListItem button onClick={handleRedirect('/acerca-de-nosotros')}>
+            </ListItemStyled>
+            <ListItemStyled button onClick={handleRedirect('/acerca-de-nosotros')}>
               <ListItemIcon>
                 <Info />
               </ListItemIcon>
               <ListItemText variant='subtitle1'>Quienes somos</ListItemText>
-            </ListItem>
+            </ListItemStyled>
             <HashLink to='/#contacto'>
-              <ListItem button>
+              <ListItemStyled button>
                 <ListItemIcon>
                   <ModeComment />
                 </ListItemIcon>
                 <ListItemText variant='subtitle1'>Contáctanos</ListItemText>
-              </ListItem>
+              </ListItemStyled>
             </HashLink>
           </>
         </Hidden>
@@ -133,25 +141,25 @@ const Menu = props => {
           <>
             <Divider />
             {!!session && session.admin && (
-              <ListItem button onClick={handleRedirect('/admin')}>
+              <ListItemStyled button onClick={handleRedirect('/admin')}>
                 <ListItemIcon>
                   <SupervisorAccount />
                 </ListItemIcon>
                 <ListItemText variant='subtitle1'>Admin </ListItemText>
-              </ListItem>
+              </ListItemStyled>
             )}
-            <ListItem button onClick={handleRedirect('/mis-compras')}>
+            <ListItemStyled button onClick={handleRedirect('/mis-compras')}>
               <ListItemIcon>
                 <ShoppingBasket />
               </ListItemIcon>
               <ListItemText variant='subtitle1'>Mis compras </ListItemText>
-            </ListItem>
-            <ListItem button onClick={event => logOut()}>
+            </ListItemStyled>
+            <ListItemStyled button onClick={event => logOut()}>
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
               <ListItemText variant='subtitle1'>Cerrar session </ListItemText>
-            </ListItem>
+            </ListItemStyled>
           </>
         )}
       </List>
