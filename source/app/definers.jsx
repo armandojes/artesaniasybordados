@@ -12,6 +12,7 @@ const Definers = props => {
   // listener form session
   useEffect(() => {
     onSessionChange(data => {
+      console.log('OnSessionChangeData', data)
       dispatch(setSession(data))
     })
   }, [])

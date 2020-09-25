@@ -89,9 +89,18 @@ export const onSessionChange = (handler) => {
   try {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        await new Promise(resolve => setTimeout(resolve, 3000))
-        const data = await getData(user.uid)
-        handler(filterObject(data, ['number', 'email', 'photo', 'name', 'admin', 'id', 'type']))
+        var data = await getData(user.uid)
+
+        if (!data) {
+          await new Promise(resolve => setTimeout(resolve, 2000))
+          data = await getData(user.uid)
+        }
+
+        if (!data) {
+          await new Promise(resolve => setTimeout(resolve, 3000))
+          data = await getData(user.uid)
+        }
+        data ? handler(filterObject(data, ['number', 'email', 'photo', 'name', 'admin', 'id', 'type'])) : handler(null)
       } else {
         handler(null)
       }
