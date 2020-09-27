@@ -3,7 +3,7 @@ export const categories = {
   calzado: 'Calzado',
   accesorio: 'Accesorio',
   pottery: 'Alfarería',
-  design: 'Diseños inicos y personalizados'
+  design: 'Diseños únicos y personalizados'
 }
 
 export const subCategories = {

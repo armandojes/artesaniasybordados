@@ -70,13 +70,13 @@ const View = props => {
           <Grid container spacing={responsive({ xs: 2, lg: 2 })} alignItems='flex-start'>
             <Grid item xs={12} md={7}>
               <Paper>
-                <Box overflow='hidden' p={responsive({ xs: 0, md: 2 })}>
+                <Box overflow='hidden' pr={responsive({ xs: 0, md: 4 })} pl={responsive({ xs: 0, md: 4 })}>
                   <SwipeableViews index={currentPictureIndex} onChangeIndex={handleIndexChange} enableMouseEvents disableLazyLoading interval={10000}>
                     {props.pictures.map((picture, index) => (
-                      <PicturePrimary key={index} src={picture} height={100} onClick={event => props.onSetIndexPicture(index)} />
+                      <PicturePrimary key={index} src={picture} height={95} onClick={event => props.onSetIndexPicture(index)} />
                     ))}
                   </SwipeableViews>
-                  <Box mt={2}>
+                  <Box mt={1}>
                     <Grid container spacing={responsive({ xs: 1, md: 2 })}>
                       {props.pictures.map((picture, index) => (
                         <Tumb key={picture} item xs>

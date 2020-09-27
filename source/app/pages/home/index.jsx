@@ -47,9 +47,9 @@ const Picture = styled.img`
     width: 200px;
   }
   @media screen and (max-width:960px) {
-    margin-bottom: 10px;
-    max-width: 100%;
+    margin-bottom: auto;
   }
+  
 `
 const ButtonStyled = styled(Button)`
   width: 50%;
@@ -63,6 +63,9 @@ const ButtonStyled = styled(Button)`
   }
   @media screen and (max-width:1000px) {
     width: 130px;
+  }
+  @media screen and (max-width:600px) {
+    font-size: .8em!important;
   }
 `
 
@@ -105,6 +108,14 @@ const LinkOut = styled.a`
     text-decoration: underline;
   }
 `
+const GridCard = styled(Grid)`
+  height: 100%;
+`
+const GridDataContainer = styled(Grid)`
+  @media screen and (max-width:960px) {
+    flex-grow: initial!important;
+  }
+`
 
 const home = props => {
   const responsive = useResponsive()
@@ -124,54 +135,54 @@ const home = props => {
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { gender: 'female' } }}>
                 <SectionBoxes>
-                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <Grid item xs>
-                      <Typography align='center' variant='h5'>Para ellas</Typography>
+                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <GridDataContainer item xs>
+                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Para ellas</Typography>
                       <Hidden xsDown>
                         <Typography variant='subtitle1' align='center'>Viste con blusas, huipiles, vestidos y ropa artesanal</Typography>
                       </Hidden>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
                       </Box>
-                    </Grid>
+                    </GridDataContainer>
                     <Picture src={woman} />
-                  </Grid>
+                  </GridCard>
                 </SectionBoxes>
               </Link>
             </Grid>
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { gender: 'male' } }}>
                 <SectionBoxes>
-                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <Grid item xs>
-                      <Typography align='center' variant='h5'>Para el</Typography>
+                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <GridDataContainer item xs>
+                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Para el</Typography>
                       <Hidden xsDown>
                         <Typography variant='subtitle1' align='center'>Moda con bordados mexicanos</Typography>
                       </Hidden>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
                       </Box>
-                    </Grid>
+                    </GridDataContainer>
                     <Picture src={man} />
-                  </Grid>
+                  </GridCard>
                 </SectionBoxes>
               </Link>
             </Grid>
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { category: 'accesorio' } }}>
                 <SectionBoxes>
-                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <Grid item xs>
-                      <Typography align='center' variant='h5'>Joyeria y accesorios</Typography>
+                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <GridDataContainer item xs>
+                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Joyeria y accesorios</Typography>
                       <Hidden xsDown>
                         <Typography variant='subtitle1' align='center'>Detalles y piezas personalizables con estilo mexicano</Typography>
                       </Hidden>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
                       </Box>
-                    </Grid>
+                    </GridDataContainer>
                     <Picture src={jewelry} />
-                  </Grid>
+                  </GridCard>
                 </SectionBoxes>
               </Link>
             </Grid>
@@ -179,16 +190,16 @@ const home = props => {
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { category: 'calzado' } }}>
                 <SectionBoxes>
-                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <Grid item xs>
-                      <Typography align='center' variant='h5'>Calzado</Typography>
+                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <GridDataContainer item xs>
+                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Calzado</Typography>
                       <Typography variant='subtitle1' align='center'> </Typography>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
                       </Box>
-                    </Grid>
+                    </GridDataContainer>
                     <Picture src={calzado} />
-                  </Grid>
+                  </GridCard>
                 </SectionBoxes>
               </Link>
             </Grid>
@@ -196,16 +207,16 @@ const home = props => {
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { category: 'pottery' } }}>
                 <SectionBoxes>
-                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <Grid item xs>
-                      <Typography align='center' variant='h5'>Alfarería</Typography>
+                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <GridDataContainer item xs>
+                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Alfarería</Typography>
                       <Typography variant='subtitle1' align='center'> </Typography>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
                       </Box>
-                    </Grid>
+                    </GridDataContainer>
                     <Picture src={pottery} />
-                  </Grid>
+                  </GridCard>
                 </SectionBoxes>
               </Link>
             </Grid>
@@ -213,16 +224,16 @@ const home = props => {
             <Grid item xs={6}>
               <Link to={{ pathname: '/articulos', state: { category: 'design' } }}>
                 <SectionBoxes>
-                  <Grid container alignItems='center' direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <Grid item xs>
-                      <Typography align='center' variant='h5'>Diseños únicos y personalizados</Typography>
+                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                    <GridDataContainer item xs>
+                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Diseños únicos y personalizados</Typography>
                       <Typography variant='subtitle1' align='center'> </Typography>
                       <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant='contained' color='primary'>Ver mas</ButtonStyled>
+                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
                       </Box>
-                    </Grid>
+                    </GridDataContainer>
                     <Picture src={design} />
-                  </Grid>
+                  </GridCard>
                 </SectionBoxes>
               </Link>
             </Grid>
@@ -267,7 +278,7 @@ const home = props => {
                                   <Phone />
                                 </IconsCOntainerStyled>
                               </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary='9671388451' />
+                              <ListItemText style={{ color: '#3483fa' }} primary={contact.number} />
                             </ListItem>
                           </LinkOut>
                           <LinkOut href={contact.facebookPage} target='_blank'>

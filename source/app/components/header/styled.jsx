@@ -6,7 +6,7 @@ export const Content = styled.div`
   color: gray!important;
 `
 export const Logo = styled.img`
-  width: 150px;
+  width: 130px;
   margin-right: 20px;
 `
 export const Body = styled.div`

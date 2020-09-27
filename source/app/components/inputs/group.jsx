@@ -32,6 +32,13 @@ const GroupInput = props => {
     ...otherProps
   }
 
+  // auto select  option
+  const handleSelectKeyPress = (event, name) => {
+    const keypreessed = event.key.toString().toLowerCase()
+    const objectOfOptionSelected = Object.keys(props.options).filter(keyname => props.options[keyname].toString().toLowerCase()[0] === keypreessed)[0]
+    if (objectOfOptionSelected) props.setState({ [name]: objectOfOptionSelected })
+  }
+
   if (!props.type || props.type === 'string' || props.type === 'password') {
     return (
       <TextFiled
@@ -45,7 +52,7 @@ const GroupInput = props => {
     return (
       <FormControl fullWidth variant='outlined' {...otherSelectProps} margin={margin}>
         <InputLabel>{label}</InputLabel>
-        <Select {...otherSelectProps} label={label} onFocus={() => onFocus({ target: { name: otherSelectProps.name } })}>
+        <Select {...otherSelectProps} label={label} onFocus={() => onFocus({ target: { name: otherSelectProps.name } })} onKeyPress={event => { handleSelectKeyPress(event, otherSelectProps.name) }}>
           {Object.keys(options).map((keyname) => (
             <MenuItem key={keyname} value={keyname}>{options[keyname]}</MenuItem>
           ))}
@@ -64,7 +71,8 @@ GroupInput.propTypes = {
   errors: array,
   name: string,
   onChange: func,
-  value: oneOfType([string, number])
+  value: oneOfType([string, number]),
+  options: object
 }
 
 export default GroupInput

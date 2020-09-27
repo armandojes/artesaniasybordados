@@ -49,9 +49,9 @@ const Form = props => {
       }
     }
     if (currentStep === 2) {
-      const errors = requires(state, ['pictures', 'picture'])
+      const errors = requires(state, ['picture'])
       if (errors) {
-        dispatch(setAlert({ description: 'Se requieren al menos 2 imagenes' }))
+        dispatch(setAlert({ description: 'Se requiere al menos 1 imagen' }))
         return false
       }
     }

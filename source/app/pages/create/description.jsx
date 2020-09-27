@@ -5,7 +5,7 @@ const Description = props => (
 
   <TextFiled
     multiline
-    rows={25}
+    rows={10}
     state={props.state}
     setState={props.setState}
     name='description'

@@ -74,7 +74,7 @@ const About = props => {
           <Box pb={{ xs: 5, md: 10 }} pt={{ xs: 5, md: 10 }}>
             <ContainerMaterialStyled>
               <Paragraph>
-                "Artesanias y bordados" nace para impulsar a nuestros artesanos chiapanecos promoviendo el genuino arte popular chiapaneco y a sus creadores, con el fomento y difusión dentro y fuera de sus espacios.
+                "Artesanías y bordados" nace para impulsar a nuestros artesanos, promoviendo el genuino arte popular chiapaneco, con el fomento y difusión dentro y fuera de sus espacios.
               </Paragraph>
               <Paragraph>
                 Queremos ayudar a nuestros artesanos brindando espacios dignos para comercializar sus piezas de la forma más justa para todos, contribuyendo a mejorar su calidad de vida y la de sus familias.
