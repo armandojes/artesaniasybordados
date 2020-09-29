@@ -10,9 +10,9 @@ const config = {
     path: path.resolve(__dirname, '../api'),
     filename: 'server_render.js',
     libraryTarget: 'commonjs',
-    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public/'
+    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : '/public/'
   },
-  mode: 'development',
+  mode: env,
   module: {
     rules: [
       {

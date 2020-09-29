@@ -10,9 +10,9 @@ const config = {
     path: path.resolve(__dirname, '../build'),
     filename: 'server.js',
     libraryTarget: 'commonjs',
-    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'http://localhost:3000/public/'
+    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : '/public/'
   },
-  mode: 'development',
+  mode: env,
   module: {
     rules: [
       {

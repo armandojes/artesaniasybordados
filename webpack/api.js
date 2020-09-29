@@ -10,7 +10,7 @@ const config = {
     filename: 'api.js',
     libraryTarget: 'commonjs'
   },
-  mode: 'development',
+  mode: env,
   module: {
     rules: [
       {

@@ -11,7 +11,7 @@ const config = {
     filename: 'app.js',
     publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public/'
   },
-  mode: 'development',
+  mode: env,
   module: {
     rules: [
       {
@@ -49,7 +49,7 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
-      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public')
+      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public/` : '/public')
     }),
     new ExtracCssPlugin({
       filename: 'styles.css'
