@@ -6,9 +6,8 @@ import Compressor from 'compressorjs'
 
 const resizeFile = (file) => new Promise(resolve => {
   new Compressor(file, {
-    quality: 0.8,
+    quality: 1,
     maxWidth: 1800,
-    minWidth: 1800,
     success: (result) => {
       resolve(result)
     },
