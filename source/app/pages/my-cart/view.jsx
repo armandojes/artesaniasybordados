@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from 'components/layout_user'
+import Layout from 'components/layout'
 import Container from 'components/container'
 import styled from 'styled-components'
 import Summary from './summary'

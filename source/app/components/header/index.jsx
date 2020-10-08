@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import { AppBar, Grid, Hidden } from '@material-ui/core'
 import { Content, Body, Logo } from './styled'
 import Container from 'components/container'
