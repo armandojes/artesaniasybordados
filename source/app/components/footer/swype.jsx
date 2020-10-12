@@ -23,7 +23,6 @@ const PictureViewer = props => {
           <MobileStepper steps={maxSteps} position='static' variant='dots' activeStep={activeStep} />
         </FlexCentered>
       </PicturesContainer>
-
     </>
   )
 }

@@ -26,7 +26,7 @@ const Content = styled.div`
   align-items: center;
   padding: 10px;
   flex-direction: column;
-  color: #530b4c;
+  color: #000;
 
   & svg {
     font-size: 70px;

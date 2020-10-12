@@ -1,9 +1,10 @@
+/* eslint-disable react/jsx-handler-names */
 import React from 'react'
 import styled from 'styled-components'
-import { Grid, Typography, Box } from '@material-ui/core'
+import { Grid, Typography, Box, Button } from '@material-ui/core'
 import Input from 'components/inputs/group'
 import { Paper } from 'components/main'
-import { object, func, string } from 'prop-types'
+import { object, func } from 'prop-types'
 import { Alert } from '@material-ui/lab'
 
 const Limiter = styled.div`
@@ -27,10 +28,10 @@ const Form = props => {
       </Box>
       <Paper>
         <Limiter>
-          {props.state.errorMessage && (
+          {props.value.errorMessage && (
             <Box mb={2}>
               <Alert severity='error'>
-                {props.state.errorMessage}
+                {props.value.errorMessage}
               </Alert>
             </Box>
           )}
@@ -38,8 +39,8 @@ const Form = props => {
             <Grid item xs={12} sm={6}>
               <Input
                 margin='none'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
                 name='name'
                 label='Nombre'
               />
@@ -48,8 +49,8 @@ const Form = props => {
               <Input
                 margin='none'
                 label='Apellidos'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
                 name='lastname'
               />
             </Grid>
@@ -58,8 +59,8 @@ const Form = props => {
                 name='number'
                 margin='none'
                 label='Numero de contacto'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
                 filter='number'
                 limit={10}
               />
@@ -69,8 +70,8 @@ const Form = props => {
                 name='email'
                 margin='none'
                 label='Correo electronico'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -78,8 +79,8 @@ const Form = props => {
                 name='street_number'
                 margin='none'
                 label='Calle y numero'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -87,8 +88,8 @@ const Form = props => {
                 name='postal_code'
                 margin='none'
                 label='Codigo postal'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
                 filter='number'
                 limit={5}
               />
@@ -98,8 +99,8 @@ const Form = props => {
                 name='suburb'
                 margin='none'
                 label='Colonia'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -107,8 +108,8 @@ const Form = props => {
                 name='state'
                 margin='none'
                 label='Estado'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -116,8 +117,8 @@ const Form = props => {
                 name='city'
                 margin='none'
                 label='Delegacion o municipio'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -125,21 +126,46 @@ const Form = props => {
                 name='references'
                 margin='none'
                 label='Referencias'
-                state={props.state}
-                setState={props.setState}
+                state={props.value}
+                setState={props.onChange}
               />
             </Grid>
           </Grid>
         </Limiter>
       </Paper>
+      <Box mt={5} mb={5}>
+        <Grid container spacing={1} justify='flex-end'>
+          <Grid item xs={6} md={5} lg={4}>
+            <Button
+              size='medium'
+              fullWidth
+              variant='outlined'
+              color='primary'
+              onClick={props.onBack}
+            >Atrás
+            </Button>
+          </Grid>
+          <Grid item xs={6} md={5} lg={4}>
+            <Button
+              onClick={props.onNext}
+              size='medium'
+              fullWidth
+              variant='contained'
+              color='primary'
+            >Siguente
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   )
 }
 
 Form.propTypes = {
-  state: object,
-  setState: func,
-  errorMessage: string
+  value: object,
+  onBack: func,
+  onNext: func,
+  onChange: func
 }
 
 export default Form

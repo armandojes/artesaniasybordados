@@ -72,12 +72,12 @@ const FooterStyled = styled.footer`
 `
 
 const LinkStyled = styled(Link)`
-  color: #530b4c;
+  color: #000;
   text-decoration: none;
 `
 
 const LinkStyledDesk = styled(Link)`
-  color: #530b4c;
+  background: #fff;
   text-decoration: none;
   display: block;
   text-align: center;

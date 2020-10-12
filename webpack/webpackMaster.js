@@ -36,7 +36,7 @@ const configMaster = {
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
-      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public` : 'http://localhost:3000/public')
+      publicPath: JSON.stringify(env === 'development' ? `http://${ip.address()}:8080/public` : '/public')
     }),
     new ExtracCssPlugin({
       filename: 'styles.css'

@@ -23,4 +23,5 @@ const Layout = props => {
 Layout.propTypes = {
   children: oneOfType([string, array, object, element])
 }
+
 export default Layout

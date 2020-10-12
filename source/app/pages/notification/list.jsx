@@ -2,11 +2,11 @@
 import React, { Fragment } from 'react'
 import { Grid, Divider } from '@material-ui/core'
 import { Paper } from 'components/main'
-import Picture from 'components/Picture'
 import styled from 'styled-components'
 import { toString } from 'helpers/date'
 import { useHistory } from 'react-router'
 import { setViewed } from 'core/notification'
+import { NotificationsActive } from '@material-ui/icons'
 
 const ItemContent = styled.div`
   position: relative;
@@ -16,19 +16,11 @@ const ItemContent = styled.div`
   background: ${props => !props.$isViewed ? '#deeffd7a' : '#fff'};
   cursor: pointer;
 `
-const Dot = styled.div`
-  background: #448dfa;
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  left: 6px;
-  top: 6px;
-`
 
-const PictureStyled = styled(Picture)`
+const PictureStyled = styled(NotificationsActive)`
   width: 45px;
   margin-right: 15px;
+  color: ${props => props.$active ? 'red' : 'gray'};
 `
 const DataContainer = styled.div`
   display: block;
@@ -58,8 +50,7 @@ const List = props => {
           <Fragment key={index}>
             <Grid item xs={12}>
               <ItemContent onClick={handleRedirect(`/${item.pathname}`, item.userId, item.id)} $isViewed={item.isViewed}>
-                {!item.isViewed && (<Dot />)}
-                <PictureStyled src={item.icon} />
+                <PictureStyled $active={!item.isViewed} />
                 <DataContainer>
                   <div>
                     {item.content}

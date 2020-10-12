@@ -76,6 +76,7 @@
     "react-dropzone": "^11.0.1",
     "react-fetch-ssr": "^3.0.5",
     "react-img-zoom": "^0.1.0",
+    "react-inner-image-zoom": "^1.1.1",
     "react-markdown": "^4.3.1",
     "react-redux": "^7.2.0",
     "react-router-hash-link": "^2.0.0",

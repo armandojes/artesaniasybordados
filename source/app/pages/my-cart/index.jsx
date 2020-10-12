@@ -1,125 +1,120 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import View from './view'
-import shippingCostCalculator from 'helpers/ShppingCostCalculator'
-import calculatePrice from 'helpers/calculatePrice'
+import { useSelector } from 'react-redux'
 import useObjectState from 'hooks/useState'
-import { remove, removeAll } from 'flux/cart'
 import { useHistory } from 'react-router-dom'
-import { requires } from 'helpers/validate'
-import { active, desactive } from 'flux/loading'
-import { add } from 'core/sale'
 import session from 'components/session'
 import { fakeCheckoutData } from '../../constants'
+import Layout from 'components/layout'
+import Container from 'components/container'
+import styled from 'styled-components'
+import Summary from './summary'
+import Form from './form'
+import Products from './products'
+import MethodPay from './methodpay'
+import Finally from './finally'
+import EmptyMessage from 'components/EmptyContent'
+import { Loyalty } from '@material-ui/icons'
 
 const Mycart = props => {
   const history = useHistory()
-  const { items, loading } = useSelector(state => state.cart)
-  const session = useSelector(state => state.session)
-  const shippingPrice = shippingCostCalculator(items || [])
+  const { items } = useSelector(state => state.cart)
   const [view, setView] = useState('products') // products || form || methodPay || finally
-  const subTotal = calculatePrice(items)
-  const total = subTotal + shippingPrice
   const [state, setState] = useObjectState(ENV === 'development' ? fakeCheckoutData : {})
 
-  // reset scroll when change currentView
   useEffect(() => { window.scrollTo(0, 0) }, [view])
 
-  const dispatch = useDispatch()
-
-  const handleDelete = data => {
-    dispatch(remove(data))
-  }
-
-  const handleNext = event => {
-    if (view === 'products') setView('form')
-    if (view === 'form') {
-      const errors = requires(state, ['name', 'lastname', 'number', 'email', 'street_number', 'postal_code', 'suburb', 'state', 'city', 'references'])
-      if (errors) setState({ errors, errorMessage: 'Todos los campos son obligatorios' })
-      else setView('methodPay')
-    }
-    if (view === 'methodPay') {
-      if (!state.methodPay) setState({ errorMessage: 'Selecciona un metodo de pago' })
-      else setView('finally')
-    }
-  }
-
-  const handleBack = event => {
-    if (view === 'products') history.push('/articulos')
-    if (view === 'form') setView('products')
-    if (view === 'methodPay') setView('form')
-    if (view === 'finally') setView('methodPay')
-  }
-
-  // on payment aproved
-  const handleSaveOperation = async (status = 'pending', meta = {}) => {
-    const id = await add({ userId: session.id, items, total, shipping: shippingPrice, info: state, meta, status, methodPay: state.methodPay })
-    dispatch(removeAll())
-    dispatch(desactive())
-    history.replace({ pathname: `/compra/${id}`, state: { success: true } })
-  }
-
-  // paypal config
-  const paypalConfig = props => {
-    return {
-      createOrder: function (data, actions) {
-        dispatch(active('Estamos procesando el pago'))
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: total }
-          }]
-        })
-      },
-      onApprove: (data, actions) => {
-        const status = actions.order.capture().then((details) => {
-          const { id, payer } = details
-          handleSaveOperation('payed', { id, payer })
-        })
-        return status
-      },
-      onError: () => {
-        dispatch(desactive())
-      },
-      onCancel: () => {
-        dispatch(desactive())
-      }
-    }
-  }
-
-  // render button paypal
-  useEffect(any => {
-    setTimeout(() => {
-      try {
-        window.document.getElementById('render_button_paypal').innerHTML = ''
-        window.paypal.Buttons(paypalConfig({ ...props })).render('#render_button_paypal')
-      } catch (error) { console.log('_error_', error) }
-    }, 200)
-  }, [total, state.methodPay, view])
-
-  const handlePay = async _event => {
-    dispatch(active('Estamos generando tu orden de pago'))
-    await handleSaveOperation()
-  }
-
   return (
-    <View
-      onPay={handlePay}
-      onSuccessOperation={handleSaveOperation}
-      paypalConfig={paypalConfig}
-      onNext={handleNext}
-      onBack={handleBack}
-      onDelete={handleDelete}
-      loading={loading}
-      items={items}
-      view={view}
-      setView={setView}
-      shippingPrice={shippingPrice}
-      subTotal={subTotal}
-      total={total}
-      state={state}
-      setState={setState}
-    />
+    <Layout>
+      <Container $page>
+        {!!items.length && (
+          <ContainerMaterial>
+            <Wrapper>
+              <Body>
+                {view === 'products' && (
+                  <Products
+                    onNext={() => setView('form')}
+                    onBack={() => history.push('/articulos')}
+                  />
+                )}
+                {view === 'form' && (
+                  <Form
+                    onNext={() => setView('methodPay')}
+                    onBack={() => setView('products')}
+                    value={state}
+                    onChange={setState}
+                  />
+                )}
+                {view === 'methodPay' && (
+                  <MethodPay
+                    onNext={() => setView('finally')}
+                    onBack={() => setView('form')}
+                    value={state.methodPay}
+                    onChange={val => setState({ methodPay: val })}
+                  />
+                )}
+                {view === 'finally' && (
+                  <Finally
+                    onBack={() => setView('methodPay')}
+                    state={state}
+                    onViewChange={setView}
+                  />
+                )}
+              </Body>
+              <Aside>
+                <Summary />
+              </Aside>
+            </Wrapper>
+          </ContainerMaterial>
+        )}
+        {!items.length && (
+          <EmptyMessage
+            icon={Loyalty}
+            message='Aun no tienes articulos en tu carrito'
+          />
+        )}
+      </Container>
+    </Layout>
   )
 }
+
+const Wrapper = styled.section`
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  @media screen and (max-width:950px) {
+    flex-wrap: wrap;
+    flex-direction: column-reverse
+  }
+`
+const Body = styled.div`
+  width: 60%;
+  @media screen and (max-width:950px) {
+    width: 100%;;
+  }
+`
+
+const Aside = styled.div`
+  width: 35%;
+  padding: 0px 10px;
+  @media screen and (max-width:950px) {
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 20px;
+  }
+`
+
+const ContainerMaterial = styled.div`
+  width: 80%;
+  margin: auto;
+  max-width: 1280px;
+  @media screen and (max-width:1200px) {
+    width: 100%;
+  }
+  @media screen and (max-width:950px) {
+    max-width: 600px;
+    width: 100%;
+  }
+`
 
 export default session(Mycart)

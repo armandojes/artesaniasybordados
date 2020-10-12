@@ -12,12 +12,6 @@ const Container = styled.div`
   width: 350px;
   min-height: 200px;
   max-height: 500px;
-  overflow-y: scroll;
-  &:hover {
-    ::-webkit-scrollbar {
-    display: initial;
-  }
-  }
   ::-webkit-scrollbar {
     -webkit-appearance: none;
     display: none;
