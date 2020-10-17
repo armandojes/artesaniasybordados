@@ -34,6 +34,12 @@ export const mercadopago = {
   PublicKey: 'TEST-55009628-46e2-4102-ad7a-596b5922b9af'
 }
 
+export const fiServe = {
+  apiKey: 'y8mlwZApi8UmtJPQGdOCiSmOwjDBnERA',
+  apiSecret: 'rIoBSymVqIEQ2rzJ',
+  url: 'https://cert.api.firstdata.com/gateway/v2'
+}
+
 export const limitPictures = 15
 export const shippingPrice = 100
 
