@@ -1,11 +1,36 @@
 import fiserv from 'models/fiserv'
 
 const charge = async (request, response) => {
-  console.log('request recived--------------------------------')
+  const secureData = {
+    total: request.body.total,
+    cardNumber: request.body.cardNumber,
+    cardCode: request.body.cardCode,
+    cardMonth: request.body.cardMonth,
+    cardYear: request.body.cardYear
+  }
 
-  const status = await fiserv.pay({}, '0904fbfe-10af-11eb-adc1-0242ac120007')
-  console.log(status)
-  response.json(status)
+  const status = await fiserv.pay(secureData)
+
+  if (status.transactionStatus === 'APPROVED') {
+    response.json({
+      status: 'success',
+      orderId: status.orderId
+    })
+    response.end()
+  }
+
+  if (status.error) {
+    response.json({
+      status: 'error',
+      errorMessage: status.error.message
+    })
+    return response.end()
+  }
+
+  response.json({
+    status: 'error',
+    errorMessage: status.processor.responseMessage
+  })
   response.end()
 }
 

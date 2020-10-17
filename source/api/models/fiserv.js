@@ -2,6 +2,7 @@
 import crypto from 'crypto-js'
 import axios from 'axios'
 import { fiServe } from '../../config'
+import { v4 } from 'uuid'
 
 const axiosWrapper = async (data) => {
   try {
@@ -19,20 +20,21 @@ export const createMessageSignature = (apiKey, uuid, time, payload = '') => {
   return signature
 }
 
-export const pay = async (_data, uuid) => {
+export const pay = async (params) => {
+  const uuid = v4()
   const data = {
     'transactionAmount': {
-      'total': '100.00',
+      'total': params.total,
       'currency': 'MXN'
     },
     'requestType': 'PaymentCardSaleTransaction',
     'paymentMethod': {
       'paymentCard': {
-        'number': '5204730000001004',
-        'securityCode': '200',
+        'number': params.cardNumber,
+        'securityCode': params.cardCode,
         'expiryDate': {
-          'month': '02',
-          'year': '23'
+          'month': params.cardMonth,
+          'year': params.cardYear
         }
       }
     }

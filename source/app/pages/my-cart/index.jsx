@@ -15,11 +15,12 @@ import Finally from './finally'
 import EmptyMessage from 'components/EmptyContent'
 import { Loyalty } from '@material-ui/icons'
 import { useMediaQuery } from '@material-ui/core'
+import Card from './card'
 
 const Mycart = props => {
   const history = useHistory()
   const { items, loading } = useSelector(state => state.cart)
-  const [view, setView] = useState('products') // products || form || methodPay || finally
+  const [view, setView] = useState('products') // products || form || methodPay || finally || card
   const [state, setState] = useObjectState(ENV === 'development' ? fakeCheckoutData : {})
   const isMobile = useMediaQuery('(max-width:950px)')
 
@@ -47,6 +48,16 @@ const Mycart = props => {
                     country={state.country}
                   />
                 )}
+                {view === 'card' && (
+                  <Card
+                    state={state}
+                    onNext={() => setView('methodPay')}
+                    onBack={() => setView('finally')}
+                    value={state}
+                    onChange={setState}
+                    country={state.country}
+                  />
+                )}
                 {view === 'methodPay' && (
                   <MethodPay
                     onNext={() => setView('finally')}
@@ -58,6 +69,7 @@ const Mycart = props => {
                 {view === 'finally' && (
                   <Finally
                     onBack={() => setView('methodPay')}
+                    methodPay={state.methodPay}
                     state={state}
                     onViewChange={setView}
                   />
