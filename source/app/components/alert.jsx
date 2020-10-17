@@ -28,11 +28,11 @@ const Modal = props => {
             {!!description && (<Typography variant='h6'>{description}</Typography>)}
             {!!action && (
               <Grid container spacing={2} justify='center' style={{ width: '100%' }}>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={6} md={6}>
                   <Button fullWidth onClick={_event => dispatch(setInitialState())}>Cancelar</Button>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                  <Button fullWidth onClick={_event => dispatch(actionCreator())}>Aceptar</Button>
+                <Grid item xs={6} md={6}>
+                  <Button fullWidth variant='contained' onClick={_event => dispatch(actionCreator())}>Aceptar</Button>
                 </Grid>
               </Grid>
             )}

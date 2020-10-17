@@ -17,7 +17,7 @@ import { Loyalty } from '@material-ui/icons'
 
 const Mycart = props => {
   const history = useHistory()
-  const { items } = useSelector(state => state.cart)
+  const { items, loading } = useSelector(state => state.cart)
   const [view, setView] = useState('products') // products || form || methodPay || finally
   const [state, setState] = useObjectState(ENV === 'development' ? fakeCheckoutData : {})
 
@@ -26,7 +26,7 @@ const Mycart = props => {
   return (
     <Layout>
       <Container $page>
-        {!!items.length && (
+        {!loading && !!items.length && (
           <ContainerMaterial>
             <Wrapper>
               <Body>
@@ -42,6 +42,7 @@ const Mycart = props => {
                     onBack={() => setView('products')}
                     value={state}
                     onChange={setState}
+                    country={state.country}
                   />
                 )}
                 {view === 'methodPay' && (
@@ -61,15 +62,23 @@ const Mycart = props => {
                 )}
               </Body>
               <Aside>
-                <Summary />
+                <Summary
+                  country={state.country}
+                />
               </Aside>
             </Wrapper>
           </ContainerMaterial>
         )}
-        {!items.length && (
+        {!loading && !items.length && (
           <EmptyMessage
             icon={Loyalty}
             message='Aun no tienes articulos en tu carrito'
+          />
+        )}
+        {loading && (
+          <EmptyMessage
+            icon={Loyalty}
+            message='Cargando...'
           />
         )}
       </Container>

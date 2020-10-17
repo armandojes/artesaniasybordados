@@ -6,6 +6,7 @@ import Input from 'components/inputs/group'
 import { Paper } from 'components/main'
 import { object, func } from 'prop-types'
 import { Alert } from '@material-ui/lab'
+import { country } from '../../../constants'
 
 const Limiter = styled.div`
   margin: 100px;
@@ -108,6 +109,17 @@ const Form = props => {
                 name='state'
                 margin='none'
                 label='Estado'
+                state={props.value}
+                setState={props.onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Input
+                type='select'
+                options={country}
+                name='country'
+                margin='none'
+                label='Pais'
                 state={props.value}
                 setState={props.onChange}
               />

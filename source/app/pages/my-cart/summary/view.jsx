@@ -34,7 +34,9 @@ const Summary = props => {
           </Typography>
         </Grid>
         <Grid item xs={5}>
-          <Typography align='right' variant='subtitle2'>{currency.toPrice(props.shippingPrice)}</Typography>
+          <Typography align='right' variant='subtitle2'>
+            { typeof props.shippingPrice === 'string' ? props.shippingPrice : currency.toPrice(props.shippingPrice)}
+          </Typography>
         </Grid>
         <Grid item xs={12}><Divider /></Grid>
         <Grid item xs={7}>

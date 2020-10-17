@@ -106,3 +106,8 @@ export const fakeCheckoutData = {
   street_number: 'lazaro cardenas numero 7',
   suburb: 'la frontera'
 }
+
+export const country = {
+  mexico: 'Mexico',
+  us: 'Estados unidos'
+}
