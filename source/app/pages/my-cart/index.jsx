@@ -14,12 +14,14 @@ import MethodPay from './methodpay'
 import Finally from './finally'
 import EmptyMessage from 'components/EmptyContent'
 import { Loyalty } from '@material-ui/icons'
+import { useMediaQuery } from '@material-ui/core'
 
 const Mycart = props => {
   const history = useHistory()
   const { items, loading } = useSelector(state => state.cart)
   const [view, setView] = useState('products') // products || form || methodPay || finally
   const [state, setState] = useObjectState(ENV === 'development' ? fakeCheckoutData : {})
+  const isMobile = useMediaQuery('(max-width:950px)')
 
   useEffect(() => { window.scrollTo(0, 0) }, [view])
 
@@ -61,11 +63,13 @@ const Mycart = props => {
                   />
                 )}
               </Body>
-              <Aside>
-                <Summary
-                  country={state.country}
-                />
-              </Aside>
+              {(!isMobile || view === 'finally') && (
+                <Aside>
+                  <Summary
+                    country={state.country}
+                  />
+                </Aside>
+              )}
             </Wrapper>
           </ContainerMaterial>
         )}

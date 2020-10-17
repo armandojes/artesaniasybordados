@@ -40,7 +40,6 @@ const MethodPay = props => {
         <Grid container spacing={1} justify='flex-end'>
           <Grid item xs={6} md={5} lg={4}>
             <Button
-              style={{ fontSize: '.8em' }}
               size='medium'
               fullWidth
               variant='outlined'
@@ -52,7 +51,6 @@ const MethodPay = props => {
           <Grid item xs={6} md={5} lg={4}>
             <Button
               onClick={props.onNext}
-              style={{ fontSize: '.8em' }}
               size='medium'
               fullWidth
               variant='contained'

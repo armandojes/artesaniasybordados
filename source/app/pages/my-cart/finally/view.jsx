@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Paper, Button } from 'components/main'
-import { Typography, Box, Grid } from '@material-ui/core'
+import { Typography, Box, Grid, useMediaQuery } from '@material-ui/core'
 import { methodsPay } from '../../../constants'
 import propTypes from 'prop-types'
 
@@ -18,11 +18,15 @@ const ButtonStyled = styled(Button)`
 `
 
 const MethodPay = props => {
+  const isMobile = useMediaQuery('(max-width:950px)')
+
   return (
     <>
-      <Box pt={2} pb={2}>
-        <Typography variant='h6'>Confirmar compra</Typography>
-      </Box>
+      {!isMobile && (
+        <Box pt={2} pb={2}>
+          <Typography variant='h6'>Confirmar compra</Typography>
+        </Box>
+      )}
       <Boxes>
         <Typography color='primary' variant='subtitle1'> Nombre:</Typography>
         <Typography variant='subtitle1'>{props.state.name} {props.state.lastname}</Typography>
