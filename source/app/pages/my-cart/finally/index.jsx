@@ -1,35 +1,17 @@
 import React, { useEffect } from 'react'
 import propTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { active, desactive } from 'flux/loading'
-import { removeAll } from 'flux/cart'
-import { add } from 'core/sale'
-import calculatePrice from 'helpers/calculatePrice'
-import shippingCostCalculator from 'helpers/ShppingCostCalculator'
-import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { Paper, Button } from 'components/main'
 import { Typography, Box, Grid, useMediaQuery } from '@material-ui/core'
 import { methodsPay } from '../../../constants'
+import useModel from '../useModel'
 
 const Finally = props => {
   const dispatch = useDispatch()
-  const session = useSelector(state => state.session)
-  const { items } = useSelector(state => state.cart)
-  const subTotal = calculatePrice(items)
-  const shippingPrice = props.country === 'us' ? 'A acordar' : shippingCostCalculator(items || [])
-  const total = props.country === 'us' ? subTotal : subTotal + shippingPrice
-  const history = useHistory()
   const isMobile = useMediaQuery('(max-width:950px)')
-
-  // on payment aproved
-  const handleSaveOperation = async (status = 'pending', meta = {}) => {
-    dispatch(active('Estamos generando tu orden de pago'))
-    const id = await add({ userId: session.id, items, total, shipping: shippingPrice, info: props.state, meta, status, methodPay: props.state.methodPay })
-    dispatch(removeAll())
-    dispatch(desactive())
-    history.replace({ pathname: `/compra/${id}`, state: { success: true } })
-  }
+  const { handleSaveOperation, total } = useModel(props.country)
 
   const paypalConfig = props => {
     return {
@@ -44,7 +26,7 @@ const Finally = props => {
       onApprove: (data, actions) => {
         const status = actions.order.capture().then((details) => {
           const { id, payer } = details
-          handleSaveOperation('payed', { id, payer })
+          handleSaveOperation('payed', { id, payer }, props.state)
         })
         return status
       },
@@ -119,7 +101,7 @@ const Finally = props => {
           </Grid>
           <Grid item xs={6} md={5} lg={4}>
             {props.state.methodPay === 'cash' && (
-              <Button fullWidth onClick={() => handleSaveOperation()} variant='contained'>Generar orden de pago</Button>
+              <Button fullWidth onClick={() => handleSaveOperation('pending', {}, props.state)} variant='contained'>Generar orden de pago</Button>
             )}
             {props.state.methodPay === 'card' && (
               <Button fullWidth onClick={() => props.onViewChange('card')} variant='contained'>Siguente</Button>

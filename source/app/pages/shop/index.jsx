@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LayoutUser from 'components/layout_user'
 import Container from 'components/container'
 import { Step, StepLabel, Stepper, CircularProgress, Typography, Grid, Box } from '@material-ui/core'
-import { status, methodsPay } from '../../constants'
+import { status, methodsPay, country } from '../../constants'
 import { useParams, useLocation } from 'react-router'
 import useObjectState from 'hooks/useState'
 import useFetch from 'hooks/useFetch'
@@ -131,6 +131,7 @@ const Shop = props => {
                   <Typography variant='subtitle1'><Span>Codigo postal:</Span> {state.data.info.postal_code}</Typography>
                   <Typography variant='subtitle1'><Span>Ciudad:</Span> {state.data.info.city}</Typography>
                   <Typography variant='subtitle1'><Span>Estado:</Span> {state.data.info.state}</Typography>
+                  <Typography variant='subtitle1'><Span>Pais:</Span> {country[state.data.info.country]}</Typography>
                 </PaperStyled>
               </Grid>
               {state.data.status === 'sent' && (

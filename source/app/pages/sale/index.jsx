@@ -9,7 +9,7 @@ import { object } from 'prop-types'
 import Item from './item'
 import { Paper } from 'components/main'
 import styled from 'styled-components'
-import { methodsPay, status, statusColors } from '../../constants'
+import { methodsPay, status, statusColors, country } from '../../constants'
 import { Edit } from '@material-ui/icons'
 import { toPrice } from 'helpers/currency'
 import { toString } from 'helpers/date'
@@ -154,6 +154,7 @@ const Sale = props => {
                         <Typography variant='subtitle1'><Span>Codigo postal:</Span> {state.data.info.postal_code}</Typography>
                         <Typography variant='subtitle1'><Span>Ciudad:</Span> {state.data.info.city}</Typography>
                         <Typography variant='subtitle1'><Span>Estado:</Span> {state.data.info.state}</Typography>
+                        <Typography variant='subtitle1'><Span>Pais:</Span> {country[state.data.info.country]}</Typography>
                       </Box>
                     </Paper>
                   </Box>

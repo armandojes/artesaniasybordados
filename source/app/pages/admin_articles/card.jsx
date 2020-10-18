@@ -7,21 +7,6 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import currency from 'helpers/currency'
 
-const PaperStyled = styled(Paper)`
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-`
-const MenuStyled = styled(Menu)`
-  position: absolute;
-  right: 10px;
-  top: 15px;
-`
-const Span = styled.span`
-  color: #000;
-  margin-right: 15px;
-`
-
 const ArticleCard = props => {
   const { handleDelete, onDisable, onEnable, ...data } = props
   const history = useHistory()
@@ -46,7 +31,7 @@ const ArticleCard = props => {
       </MenuStyled>
       <Picture src={data.picture} id={data.id} />
       <Typography variant='h6'>{data.title}</Typography>
-      <Typography color='primary' variant='subtitle1'><Span>precio basee</Span>{currency.toPrice(data.price)}</Typography>
+      <Typography>{currency.toPrice(data.price)}</Typography>
     </PaperStyled>
   )
 }
@@ -61,5 +46,16 @@ ArticleCard.propTypes = {
   isDisabled: bool,
   onEnable: func
 }
+
+const PaperStyled = styled(Paper)`
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+`
+const MenuStyled = styled(Menu)`
+  position: absolute;
+  right: 10px;
+  top: 15px;
+`
 
 export default ArticleCard

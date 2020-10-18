@@ -72,6 +72,7 @@ const Mycart = props => {
                     methodPay={state.methodPay}
                     state={state}
                     onViewChange={setView}
+                    country={state.country}
                   />
                 )}
               </Body>

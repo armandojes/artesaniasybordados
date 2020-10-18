@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { requires } from 'helpers/validate'
 import styled from 'styled-components'
@@ -9,13 +8,9 @@ import propTypes from 'prop-types'
 import { Alert } from '@material-ui/lab'
 import useObjectState from 'hooks/useState'
 import Axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
-import calculatePrice from 'helpers/calculatePrice'
-import shippingCostCalculator from 'helpers/ShppingCostCalculator'
-import { useHistory } from 'react-router'
+import { useDispatch } from 'react-redux'
 import { active, desactive } from 'flux/loading'
-import { add } from 'core/sale'
-import { removeAll } from 'flux/cart'
+import useModel from '../useModel'
 
 const months = { '01': '02', '02': '03', '03': '04', '04': '05', '05': '06', '06': '01', '07': '07', '08': '08', '09': '09', 10: '10', 11: '11', 12: '12' }
 const years = { 20: '20', 21: '21', 22: '22', 23: '23', 24: '24', 25: '25', 26: '26', 27: '27', 28: '28', 29: '29', 30: '30', 31: '31', 32: '32', 33: '33', 34: '34', 35: '35', 36: '36', 37: '37', 38: '38', 39: '39', 40: '40' }
@@ -23,21 +18,8 @@ const years = { 20: '20', 21: '21', 22: '22', 23: '23', 24: '24', 25: '25', 26: 
 const Card = props => {
   const [state, setState] = useObjectState({})
   const dispatch = useDispatch()
-  const session = useSelector(state => state.session)
-  const { items } = useSelector(state => state.cart)
-  const subTotal = calculatePrice(items)
-  const shippingPrice = props.country === 'us' ? 'A acordar' : shippingCostCalculator(items || [])
-  const total = props.country === 'us' ? subTotal : subTotal + shippingPrice
-  const history = useHistory()
 
-  // on payment aproved
-  const handleSaveOperation = async (status = 'pending', meta = {}) => {
-    dispatch(active('Estamos generando tu orden de pago'))
-    const id = await add({ userId: session.id, items, total, shipping: shippingPrice, info: props.state, meta, status, methodPay: props.state.methodPay })
-    dispatch(removeAll())
-    dispatch(desactive())
-    history.replace({ pathname: `/compra/${id}`, state: { success: true } })
-  }
+  const { handleSaveOperation, total } = useModel(props.country)
 
   const axiosWrapper = async (data) => {
     try {
@@ -79,7 +61,7 @@ const Card = props => {
       return dispatch(desactive())
     }
 
-    handleSaveOperation('payed', { response })
+    handleSaveOperation('payed', { response }, props.state)
   }
 
   return (
