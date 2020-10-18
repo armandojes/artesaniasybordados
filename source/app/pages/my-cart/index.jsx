@@ -20,7 +20,7 @@ import Card from './card'
 const Mycart = props => {
   const history = useHistory()
   const { items, loading } = useSelector(state => state.cart)
-  const [view, setView] = useState('products') // products || form || methodPay || finally || card
+  const [view, setView] = useState('card') // products || form || methodPay || finally || card
   const [state, setState] = useObjectState(ENV === 'development' ? fakeCheckoutData : {})
   const isMobile = useMediaQuery('(max-width:950px)')
 

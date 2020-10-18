@@ -53,7 +53,7 @@ const GroupInput = props => {
       <FormControl fullWidth variant='outlined' {...otherSelectProps} margin={margin}>
         <InputLabel>{label}</InputLabel>
         <Select {...otherSelectProps} label={label} onFocus={() => onFocus({ target: { name: otherSelectProps.name } })} onKeyPress={event => { handleSelectKeyPress(event, otherSelectProps.name) }}>
-          {Object.keys(options).map((keyname) => (
+          {Object.keys(options).sort().map((keyname) => (
             <MenuItem key={keyname} value={keyname}>{options[keyname]}</MenuItem>
           ))}
         </Select>
