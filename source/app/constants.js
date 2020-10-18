@@ -70,7 +70,7 @@ export const menu = [
 
 export const methodsPay = {
   paypal: 'Paypal',
-  card: 'Tarjeta de crédito o débito',
+  // card: 'Tarjeta de crédito o débito',
   cash: 'Deposito en efectivo, bancos y oxxo'
 
 }

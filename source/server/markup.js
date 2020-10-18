@@ -6,7 +6,7 @@ const markup = (html, states, materialCss, styledCss) => {
     <html lang="es">
       <head>
         <style id="jss-server-side">${materialCss}</style>
-        <script src="https://www.paypal.com/sdk/js?client-id=${paypal.token}&currency=MXN&components=marks,buttons&disable-funding=credit,card"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=${ENV === 'development' ? paypal.token : paypal.prodToken}&currency=MXN&components=marks,buttons&disable-funding=credit,card"></script>
         ${styledCss}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

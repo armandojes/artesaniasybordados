@@ -27,7 +27,8 @@ export const domains = {
 export const firebaseConfig = isProduction ? firebaseConfigProduction : firebaseConfigDevelop
 
 export const paypal = {
-  token: 'AaSWKyX_04IYi1ka8A_Qxr-xddBNxbn_K0fzZukxjYHN1BR01dv6wykgLV_zoBL16adglxM6ixmC2jps'
+  token: 'AaSWKyX_04IYi1ka8A_Qxr-xddBNxbn_K0fzZukxjYHN1BR01dv6wykgLV_zoBL16adglxM6ixmC2jps',
+  prodToken: 'AQflwcCafKBrBiRwQFRPct8BESbYy4spJRt97pj47crYetM9kBkQHZjKZU-uvZFsl1hCmaVaNt5UpUfg'
 }
 
 export const mercadopago = {
