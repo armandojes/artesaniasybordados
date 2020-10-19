@@ -180,7 +180,11 @@ const createFakeArticles = async () => {
         })
         await update(idCreated, {
           picture: 'https://http2.mlstatic.com/lote-de-6-blusas-kimonas-bordadas-chiapas-D_NQ_NP_801532-MLM40332406734_012020-O.webp',
-          pictures: []
+          pictures: [],
+          title: `prueba => ${gender} => ${category} => ${subcategory}`,
+          price: parseInt(2000),
+          quantity: parseInt(20),
+          weight: parseInt(100)
         })
       }
     }

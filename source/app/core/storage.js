@@ -18,7 +18,7 @@ const getFilePath = url => {
 
 const resizeFile = (file) => new Promise(resolve => {
   new Compressor(file, {
-    quality: 0.9,
+    quality: 0.7,
     maxWidth: 1800,
     success: (result) => {
       resolve(result)

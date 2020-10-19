@@ -20,7 +20,9 @@ const Articles = props => {
   const { keywords } = queryString.parse(location.search)
 
   // fetcher
-  const loadNextPage = useMemo(() => getList(null, { ...initialFilters, keywords }), [initialFilters.category, initialFilters.subcategory, initialFilters.gender, keywords])
+  const loadNextPage = useMemo(() => {
+    return getList(10, { ...initialFilters, keywords })
+  }, [initialFilters.category, initialFilters.subcategory, initialFilters.gender, keywords])
 
   // fetch initial items
   useFetch(async () => {
@@ -29,16 +31,42 @@ const Articles = props => {
     setState({ items, loading: false })
   }, [loadNextPage])
 
+  const handleLoadNextPage = async () => {
+    setState({ loading: true })
+    const newItems = await loadNextPage()
+    setState({ loading: false, items: [...state.items, ...newItems] })
+  }
+
+  // load next page
+  const handleScroll = _event => {
+    if (state.loading) return false
+    const scrolled = window.scrollY
+    const viewportHeight = window.innerHeight
+    const fullHeight = document.getElementById('render_target').clientHeight
+    console.log((scrolled + viewportHeight + 100) < fullHeight)
+    if ((scrolled + viewportHeight + 500) < fullHeight) return false
+    console.log('loading: false')
+    if (state.finished) return false
+    handleLoadNextPage()
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
+
   // reset scrolled
-  useEffect(() => { window.scrollTo(0, 0) }, [initialFilters])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [loadNextPage])
 
   return (
     <Layout>
       <Container $page>
-        {state.loading && (
+        {state.loading && !state.items.length && (
           <Skeleton />
         )}
-        {!state.loading && !!state.items.length && (
+        {!!state.items.length && (
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Box mt={{ xs: 3, md: 3 }}>
