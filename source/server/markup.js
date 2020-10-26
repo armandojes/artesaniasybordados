@@ -10,12 +10,19 @@ const markup = (html, states, materialCss, styledCss) => {
         ${styledCss}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Artesanias y bordados</title>
+        <title>Artesanias y bordados | Encuentra todo los que buscas en un solo lugar</title>
+        <meta name="description" content="Trabajamos directo con fabricantes, envios naciones e internacionales, seguridad de principio a fin">
         <link rel="stylesheet" href="${publicPath}/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,600;1,700&display=swap" rel="stylesheet">
         <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+
+        <meta property="og:url" content="https://artesaniasybordados.com.mx/" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Encuentra todo los que buscas en un solo lugar | Artesanias y Bordados" />
+        <meta property="og:description" content="Envios nacionales e internacionales, trabajamos directo con fabricantes, seguridad de principio a fin" />
+        <meta property="og:image" content="${publicPath}/landing.png" />
 
         <link rel="apple-touch-icon" sizes="57x57" href="${publicPath}/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="${publicPath}/apple-icon-60x60.png">

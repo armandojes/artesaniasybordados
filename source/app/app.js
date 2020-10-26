@@ -1,5 +1,5 @@
-import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom'
 import { Normalize } from 'styled-normalize'
 import ThemeProvider from './theme'
 import Alert from 'components/alert'
@@ -29,8 +29,23 @@ import Notifications from './pages/notification'
 import Notification from 'components/notifications'
 import Policy from './pages/policy'
 import SearchHistory from './pages/SearchHistory'
+import ReactGA from 'react-ga'
+
+ReactGA.initialize('UA-180757951-1')
 
 const App = props => {
+  const location = useLocation()
+
+  const pageController = (url) => {
+    console.log(`-- ${url} registered --`)
+    ReactGA.ga('set', 'page', url)
+    ReactGA.ga('send', 'pageview', url)
+  }
+
+  useEffect(_any => {
+    pageController(location.pathname)
+  }, [location.pathname])
+
   return (
     <ThemeProvider>
       <Notification />
