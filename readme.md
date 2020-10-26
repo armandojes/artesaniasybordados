@@ -1,5 +1,5 @@
 ## pasos para ejecutar el proyecto
-
+### requiere tener node js v14.xx instalado
 * 1 clona el proyecto
 * 2 ejecuta npm install 
 * 3 llenar los campos en source/config.js que son variables de entorno y secrets
