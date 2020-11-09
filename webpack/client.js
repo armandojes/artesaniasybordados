@@ -2,6 +2,8 @@ const path = require('path')
 const env = process.env.NODE_ENV
 const webpack = require('webpack')
 const ExtracCssPlugin = require('mini-css-extract-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const isDevelopment = process.env.NODE_ENV !== 'production'
 var ip = require('ip')
 
 const config = {
@@ -11,7 +13,7 @@ const config = {
     filename: 'app.js',
     publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public/'
   },
-  mode: env,
+  mode: isDevelopment ? 'development' : 'production',
   module: {
     rules: [
       {
@@ -22,7 +24,10 @@ const config = {
           presets: [
             '@babel/preset-env',
             '@babel/preset-react'
-          ]
+          ],
+          plugins: [
+            isDevelopment && require.resolve('react-refresh/babel')
+          ].filter(Boolean)
         }
       },
       {
@@ -53,13 +58,16 @@ const config = {
     }),
     new ExtracCssPlugin({
       filename: 'styles.css'
-    })
-  ],
+    }),
+    isDevelopment && new ReactRefreshWebpackPlugin()
+  ].filter(Boolean),
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
     host: ip.address(),
     port: 8080,
-    disableHostCheck: true
+    disableHostCheck: true,
+    hot: true,
+    hotOnly: true
   },
   resolve: {
     extensions: ['.js', '.jsx', '.jpg', '.png', '.gif', '.svg'],
