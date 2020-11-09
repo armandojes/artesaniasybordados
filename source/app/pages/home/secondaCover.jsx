@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import coverSrc from '../../assets/cover2.jpg'
 import Container from 'components/container'
-import { Button, Box, useMediaQuery } from '@material-ui/core'
+import { Button, Box, useMediaQuery, Hidden } from '@material-ui/core'
 import { HashLink as Link } from 'react-router-hash-link'
 
 const Fullwidth = styled.div`
@@ -35,7 +35,7 @@ const FirstCover = props => {
     <Fullwidth>
       <Container>
         <Title>
-          Precios especiales a <br /> mayoristas
+          Somos una basta red <Hidden smUp><br /></Hidden>de artesanos
         </Title>
         <Box mt={3}>
           <Link to='/#contacto'>

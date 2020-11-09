@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from 'components/layout'
 import ContainerBase from 'components/container'
 import styled from 'styled-components'
-import { Paper } from 'components/main'
+import { Paper, ResponsiveFontsSize } from 'components/main'
 import { Grid, Typography, Button, Box, Hidden, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
 import useResponsive from 'hooks/useResponsive'
 import { Link } from 'react-router-dom'
@@ -16,6 +16,7 @@ import calzado from '../../assets/calzado.png'
 import design from '../../assets/design.png'
 import pottery from '../../assets/pottery.png'
 import { contact } from '../../../config'
+import MakeCustom from './MakeCustom'
 
 const Container = styled(ContainerBase)`
   padding: 15px;
@@ -124,195 +125,199 @@ const home = props => {
     <Layout>
       <Cover />
       <Container $page>
+        <ResponsiveFontsSize>
+          <Box mb={5} mt={{ xs: 2, md: 5 }}>
+            <Grid container spacing={responsive({ xs: 1, md: 2, lg: 4 })}>
+              <Grid xs={12} item>
+                <MakeCustom />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant='h4'>
+                  Elige tus piezas favoritas
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Link to={{ pathname: '/articulos', state: { gender: 'female' } }}>
+                  <SectionBoxes>
+                    <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                      <GridDataContainer item xs>
+                        <Typography style={{ lineHeight: '1.1em' }} align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Para ellas</Typography>
+                        <Hidden xsDown>
+                          <Typography variant='subtitle1' align='center'>Viste con blusas, huipiles, vestidos y ropa artesanal</Typography>
+                        </Hidden>
+                        <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                          <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
+                        </Box>
+                      </GridDataContainer>
+                      <Picture src={woman} />
+                    </GridCard>
+                  </SectionBoxes>
+                </Link>
+              </Grid>
+              <Grid item xs={6}>
+                <Link to={{ pathname: '/articulos', state: { gender: 'male' } }}>
+                  <SectionBoxes>
+                    <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                      <GridDataContainer item xs>
+                        <Typography style={{ lineHeight: '1.1em' }} align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Para el</Typography>
+                        <Hidden xsDown>
+                          <Typography variant='subtitle1' align='center'>Moda con bordados mexicanos</Typography>
+                        </Hidden>
+                        <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                          <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
+                        </Box>
+                      </GridDataContainer>
+                      <Picture src={man} />
+                    </GridCard>
+                  </SectionBoxes>
+                </Link>
+              </Grid>
+              <Grid item xs={6}>
+                <Link to={{ pathname: '/articulos', state: { category: 'accesorio' } }}>
+                  <SectionBoxes>
+                    <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                      <GridDataContainer item xs>
+                        <Typography style={{ lineHeight: '1.1em' }} align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Joyeria y accesorios</Typography>
+                        <Hidden xsDown>
+                          <Typography variant='subtitle1' align='center'>Detalles y piezas personalizables con estilo mexicano</Typography>
+                        </Hidden>
+                        <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                          <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
+                        </Box>
+                      </GridDataContainer>
+                      <Picture src={jewelry} />
+                    </GridCard>
+                  </SectionBoxes>
+                </Link>
+              </Grid>
 
-        <Box mb={5} mt={{ xs: 2, md: 5 }}>
-          <Grid container spacing={responsive({ xs: 1, md: 2, lg: 4 })}>
-            <Grid item xs={12}>
-              <Typography variant='h4'>
-                Elige tus piezas favoritas
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Link to={{ pathname: '/articulos', state: { gender: 'female' } }}>
-                <SectionBoxes>
-                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <GridDataContainer item xs>
-                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Para ellas</Typography>
-                      <Hidden xsDown>
-                        <Typography variant='subtitle1' align='center'>Viste con blusas, huipiles, vestidos y ropa artesanal</Typography>
-                      </Hidden>
-                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
-                      </Box>
-                    </GridDataContainer>
-                    <Picture src={woman} />
-                  </GridCard>
-                </SectionBoxes>
-              </Link>
-            </Grid>
-            <Grid item xs={6}>
-              <Link to={{ pathname: '/articulos', state: { gender: 'male' } }}>
-                <SectionBoxes>
-                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <GridDataContainer item xs>
-                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Para el</Typography>
-                      <Hidden xsDown>
-                        <Typography variant='subtitle1' align='center'>Moda con bordados mexicanos</Typography>
-                      </Hidden>
-                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
-                      </Box>
-                    </GridDataContainer>
-                    <Picture src={man} />
-                  </GridCard>
-                </SectionBoxes>
-              </Link>
-            </Grid>
-            <Grid item xs={6}>
-              <Link to={{ pathname: '/articulos', state: { category: 'accesorio' } }}>
-                <SectionBoxes>
-                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <GridDataContainer item xs>
-                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Joyeria y accesorios</Typography>
-                      <Hidden xsDown>
-                        <Typography variant='subtitle1' align='center'>Detalles y piezas personalizables con estilo mexicano</Typography>
-                      </Hidden>
-                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
-                      </Box>
-                    </GridDataContainer>
-                    <Picture src={jewelry} />
-                  </GridCard>
-                </SectionBoxes>
-              </Link>
-            </Grid>
+              <Grid item xs={6}>
+                <Link to={{ pathname: '/articulos', state: { category: 'calzado' } }}>
+                  <SectionBoxes>
+                    <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                      <GridDataContainer item xs>
+                        <Typography style={{ lineHeight: '1.1em' }} align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Calzado</Typography>
+                        <Typography variant='subtitle1' align='center'> </Typography>
+                        <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                          <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
+                        </Box>
+                      </GridDataContainer>
+                      <Picture src={calzado} />
+                    </GridCard>
+                  </SectionBoxes>
+                </Link>
+              </Grid>
 
-            <Grid item xs={6}>
-              <Link to={{ pathname: '/articulos', state: { category: 'calzado' } }}>
-                <SectionBoxes>
-                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <GridDataContainer item xs>
-                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Calzado</Typography>
-                      <Typography variant='subtitle1' align='center'> </Typography>
-                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
-                      </Box>
-                    </GridDataContainer>
-                    <Picture src={calzado} />
-                  </GridCard>
-                </SectionBoxes>
-              </Link>
-            </Grid>
+              <Grid item xs={6}>
+                <Link to={{ pathname: '/articulos', state: { category: 'pottery' } }}>
+                  <SectionBoxes>
+                    <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                      <GridDataContainer item xs>
+                        <Typography style={{ lineHeight: '1.1em' }} align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Alfarería</Typography>
+                        <Typography variant='subtitle1' align='center'> </Typography>
+                        <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                          <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
+                        </Box>
+                      </GridDataContainer>
+                      <Picture src={pottery} />
+                    </GridCard>
+                  </SectionBoxes>
+                </Link>
+              </Grid>
 
-            <Grid item xs={6}>
-              <Link to={{ pathname: '/articulos', state: { category: 'pottery' } }}>
-                <SectionBoxes>
-                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <GridDataContainer item xs>
-                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Alfarería</Typography>
-                      <Typography variant='subtitle1' align='center'> </Typography>
-                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
-                      </Box>
-                    </GridDataContainer>
-                    <Picture src={pottery} />
-                  </GridCard>
-                </SectionBoxes>
-              </Link>
-            </Grid>
+              <Grid item xs={6}>
+                <Link to={{ pathname: '/articulos', state: { category: 'design' } }}>
+                  <SectionBoxes>
+                    <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
+                      <GridDataContainer item xs>
+                        <Typography style={{ lineHeight: '1.1em' }} align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Diseños únicos y personalizados</Typography>
+                        <Typography variant='subtitle1' align='center'> </Typography>
+                        <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
+                          <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
+                        </Box>
+                      </GridDataContainer>
+                      <Picture src={design} />
+                    </GridCard>
+                  </SectionBoxes>
+                </Link>
+              </Grid>
 
-            <Grid item xs={6}>
-              <Link to={{ pathname: '/articulos', state: { category: 'design' } }}>
-                <SectionBoxes>
-                  <GridCard container alignItems={responsive({ xs: 'stretch', md: 'center' })} direction={responsive({ xs: 'column-reverse', md: 'row' })}>
-                    <GridDataContainer item xs>
-                      <Typography align='center' variant={responsive({ xs: 'subtitle1', md: 'h5' })}>Diseños únicos y personalizados</Typography>
-                      <Typography variant='subtitle1' align='center'> </Typography>
-                      <Box mt={responsive({ xs: 1, md: 2, lg: 4 })} mb={responsive({ xs: 1, md: 2, lg: 4 })}>
-                        <ButtonStyled variant={responsive({ xs: 'outlined', md: 'contained' })} color='primary'>Ver mas</ButtonStyled>
-                      </Box>
-                    </GridDataContainer>
-                    <Picture src={design} />
-                  </GridCard>
-                </SectionBoxes>
-              </Link>
-            </Grid>
-
-            <Grid item xs={12}>
-              <PaperStyled id='contacto'>
-                <Box p={responsive({ xs: 2, sm: 4, md: 6, lg: 10 })}>
-                  <Grid container spacing={5} justify='flex-start'>
-                    <Grid item xs={12} md={7} lg={5}>
-                      <Box mb={2}>
-                        <Typography color='primary' variant='h4'>Contactanos</Typography>
-                      </Box>
-                      <Typography variant='body1'>
-                        Cualquier duda o sugerencia contáctanos por cualquiera de nuestros medios disponibles.
-                      </Typography>
-                      <Box mt={3}>
-                        <List>
-                          <LinkOut href={`https://wa.me/+521${contact.whatsapp}`} target='_blank'>
-                            <ListItem>
-                              <ListItemAvatar>
-                                <IconsCOntainerStyled>
-                                  <WhatsApp />
-                                </IconsCOntainerStyled>
-                              </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary={contact.whatsapp} />
-                            </ListItem>
-                          </LinkOut>
-                          <LinkOut href={`mailto:${contact.email}`}>
-                            <ListItem>
-                              <ListItemAvatar>
-                                <IconsCOntainerStyled>
-                                  <Email />
-                                </IconsCOntainerStyled>
-                              </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary={contact.email} />
-                            </ListItem>
-                          </LinkOut>
-                          <LinkOut href={`tel:${contact.number}`}>
-                            <ListItem>
-                              <ListItemAvatar>
-                                <IconsCOntainerStyled>
-                                  <Phone />
-                                </IconsCOntainerStyled>
-                              </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary={contact.number} />
-                            </ListItem>
-                          </LinkOut>
-                          <LinkOut href={contact.facebookPage} target='_blank'>
-                            <ListItem>
-                              <ListItemAvatar>
-                                <IconsCOntainerStyled>
-                                  <Facebook />
-                                </IconsCOntainerStyled>
-                              </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary='Pagina en Facebook' />
-                            </ListItem>
-                          </LinkOut>
-                          <LinkOut href={contact.instagram} target='_blank'>
-                            <ListItem>
-                              <ListItemAvatar>
-                                <IconsCOntainerStyled>
-                                  <Instagram />
-                                </IconsCOntainerStyled>
-                              </ListItemAvatar>
-                              <ListItemText style={{ color: '#3483fa' }} primary='Instagram' />
-                            </ListItem>
-                          </LinkOut>
-                        </List>
-                      </Box>
+              <Grid item xs={12}>
+                <PaperStyled id='contacto'>
+                  <Box p={responsive({ xs: 2, sm: 4, md: 6, lg: 10 })}>
+                    <Grid container spacing={5} justify='flex-start'>
+                      <Grid item xs={12} md={7} lg={5}>
+                        <Box mb={2}>
+                          <Typography color='primary' variant='h4'>Contactanos</Typography>
+                        </Box>
+                        <Typography variant='body1'>
+                          Cualquier duda o sugerencia contáctanos por cualquiera de nuestros medios disponibles.
+                        </Typography>
+                        <Box mt={3}>
+                          <List>
+                            <LinkOut href={`https://wa.me/+521${contact.whatsapp}`} target='_blank'>
+                              <ListItem>
+                                <ListItemAvatar>
+                                  <IconsCOntainerStyled>
+                                    <WhatsApp />
+                                  </IconsCOntainerStyled>
+                                </ListItemAvatar>
+                                <ListItemText style={{ color: '#3483fa' }} primary={contact.whatsapp} />
+                              </ListItem>
+                            </LinkOut>
+                            <LinkOut href={`mailto:${contact.email}`}>
+                              <ListItem>
+                                <ListItemAvatar>
+                                  <IconsCOntainerStyled>
+                                    <Email />
+                                  </IconsCOntainerStyled>
+                                </ListItemAvatar>
+                                <ListItemText style={{ color: '#3483fa' }} primary={contact.email} />
+                              </ListItem>
+                            </LinkOut>
+                            <LinkOut href={`tel:${contact.number}`}>
+                              <ListItem>
+                                <ListItemAvatar>
+                                  <IconsCOntainerStyled>
+                                    <Phone />
+                                  </IconsCOntainerStyled>
+                                </ListItemAvatar>
+                                <ListItemText style={{ color: '#3483fa' }} primary={contact.number} />
+                              </ListItem>
+                            </LinkOut>
+                            <LinkOut href={contact.facebookPage} target='_blank'>
+                              <ListItem>
+                                <ListItemAvatar>
+                                  <IconsCOntainerStyled>
+                                    <Facebook />
+                                  </IconsCOntainerStyled>
+                                </ListItemAvatar>
+                                <ListItemText style={{ color: '#3483fa' }} primary='Pagina en Facebook' />
+                              </ListItem>
+                            </LinkOut>
+                            <LinkOut href={contact.instagram} target='_blank'>
+                              <ListItem>
+                                <ListItemAvatar>
+                                  <IconsCOntainerStyled>
+                                    <Instagram />
+                                  </IconsCOntainerStyled>
+                                </ListItemAvatar>
+                                <ListItemText style={{ color: '#3483fa' }} primary='Instagram' />
+                              </ListItem>
+                            </LinkOut>
+                          </List>
+                        </Box>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Box>
-                <Hidden smUp>
-                  <Box mb={10} />
-                </Hidden>
-              </PaperStyled>
+                  </Box>
+                  <Hidden smUp>
+                    <Box mb={10} />
+                  </Hidden>
+                </PaperStyled>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        </ResponsiveFontsSize>
       </Container>
     </Layout>
   )

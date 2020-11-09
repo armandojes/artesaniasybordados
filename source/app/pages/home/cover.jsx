@@ -5,7 +5,7 @@ import SwipeableViews from 'react-swipeable-views'
 
 // covers
 import FirstCover from './firstCover'
-import SecondCover from './secondaCover'
+// import SecondCover from './secondaCover'
 import styled from 'styled-components'
 
 const Heaigth = styled.div`
@@ -31,9 +31,9 @@ const Mayor = props => {
       <Heaigth>
         <FirstCover />
       </Heaigth>
-      <Heaigth>
+      {/* <Heaigth>
         <SecondCover />
-      </Heaigth>
+      </Heaigth> */}
     </AutoPlaySwipeableViews>
 
   )

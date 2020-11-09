@@ -9,6 +9,7 @@ import { MoreVert } from '@material-ui/icons'
 export const Text = styled.div`
   font-size: ${props => props.fontSize ? props.fontSize : '1em'};
   text-align: ${props => props.align || 'left'};
+  line-height: 1.4em;
 `
 export const Paper = styled.div`
   padding: 10px;
@@ -73,3 +74,26 @@ export const Menu = props => {
     </div>
   )
 }
+
+// M a i n   C o m p o n e n t s
+export const ResponsiveFontsSize = styled.div`
+  font-size: 1rem;
+  @media screen and (max-width:1750px) {
+    font-size: .95rem;
+  }
+  @media screen and (max-width:1600px) {
+    font-size: .85rem;
+  }
+  @media screen and (max-width:1500px) {
+    font-size: .80rem;
+  }
+  @media screen and (max-width:1300px) {
+    font-size: .75rem;
+  }
+  @media screen and (max-width:1200px) {
+    font-size: .75rem;
+  }
+  @media screen and (max-width:1100px) {
+    font-size: .7rem;
+  }
+`

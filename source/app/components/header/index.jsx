@@ -33,7 +33,7 @@ const Header = () => {
             </Grid>
             <Hidden smDown>
               <div>
-                <Link to='/'><ButtonStyled variant='text'>hooted</ButtonStyled></Link>
+                <Link to='/'><ButtonStyled variant='text'>Inicio</ButtonStyled></Link>
                 <Link to='/articulos'><ButtonStyled variant='text'>Galeria</ButtonStyled></Link>
                 <Link to='/acerca-de-nosotros'><ButtonStyled variant='text'>Acerca de nosotros</ButtonStyled></Link>
                 <HashLink to='/#contacto'><ButtonStyled variant='text'>Contáctanos</ButtonStyled></HashLink>

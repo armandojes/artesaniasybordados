@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import styled from 'styled-components'
 import Container from 'components/container'
@@ -25,7 +26,8 @@ const Title = styled.div`
     font-size: 2em;
   }
   @media screen and (max-width:600px) {
-    font-size: 1.7em;
+    font-size: 1.5em;
+    text-align: center;
   }
 `
 const Logo = styled.img`
@@ -47,15 +49,15 @@ const FirstCover = props => {
   return (
     <Fullwidth style={{ position: 'relative' }}>
       <Container>
-        <Logo src={logoSrc} />
+        {/* <Logo src={logoSrc} /> */}
         <Title>
-          Precios especiales a <br /> mayoristas
+          Genuinos productos <br /> hechos por manos artesanos.
         </Title>
-        <Box mt={3}>
+        {/* <Box mt={3} textAlign={isMobile ? 'center' : 'left'}>
           <Link to='/#contacto'>
             <Button variant='contained' color='primary' size={isMobile ? 'medium' : 'large'}>Contactanos</Button>
           </Link>
-        </Box>
+        </Box> */}
       </Container>
     </Fullwidth>
   )
