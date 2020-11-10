@@ -10,7 +10,7 @@
     "build:front": "webpack --config webpack/client.js",
     "watch:front": "webpack-dev-server --config webpack/client.js",
     "all": "set NODE_ENV=development&& concurrently  \"npm run build:localserver\" \"npm run watch:front\" \"nodemon build/server\"",
-    "deploy": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front&& vercel --prod",
+    "deploy:production": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front&& vercel --prod",
     "deploy:d": "set NODE_ENV=production&& npm run build:serverrender&& npm run build:api&& npm run build:front&& vercel ",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

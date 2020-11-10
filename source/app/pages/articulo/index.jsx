@@ -41,6 +41,11 @@ const Article = props => {
     }
   }, [state.loading])
 
+  // scrollTotop
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   return (
     <Layout>
       <Container $page>
