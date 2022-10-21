@@ -1,7 +1,6 @@
 .vercel/
 node_modules/
 public/
-package-lock.json
 /api/
 npm-debug.log
 /build/

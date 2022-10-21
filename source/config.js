@@ -21,7 +21,7 @@ const firebaseConfigDevelop = {
 }
 
 export const domains = {
-  production: 'https://artesaniasybordados.com.mx'
+  production: 'https://artstest.vercel.app'
 }
 
 export const firebaseConfig = isProduction ? firebaseConfigProduction : firebaseConfigDevelop
