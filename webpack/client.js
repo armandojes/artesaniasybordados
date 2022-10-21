@@ -11,7 +11,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'app.js',
-    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artesaniasybordados.com.mx/public/'
+    publicPath: env === 'development' ? `http://${ip.address()}:8080/public/` : 'https://artstest.vercel.app/public/'
   },
   mode: isDevelopment ? 'development' : 'production',
   module: {

@@ -1,7 +1,9 @@
 node_modules/
 source/
+.storybook/
 .gitignore
 package.json
 package-lock.json
 webpack
 jsconfig.json
+.eslintrc
